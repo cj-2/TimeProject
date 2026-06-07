@@ -1,4 +1,5 @@
 ﻿using TimeProject.Domain.Repositories;
+using TimeProject.Infrastructure.Database;
 
 namespace TimeProject.Infrastructure.Interfaces;
 
@@ -18,6 +19,8 @@ public interface IUnitOfWork
     IMinuteRepository MinuteRepository { get; }
     IStatisticRepository StatisticRepository { get; }
 
+    CustomDbContext Context { get; }
+    
     void SaveChanges();
     Task SaveChangesAsync();
 }

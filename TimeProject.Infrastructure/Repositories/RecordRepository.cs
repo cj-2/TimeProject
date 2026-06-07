@@ -82,13 +82,12 @@ public class RecordRepository(CustomDbContext db) : IRecordRepository
         return query
             .Select(e => new SearchRecordItem(e.RecordId, e.Code, e.Name))
             .Take(10)
-            .ToList<SearchRecordItem>();
+            .ToList();
     }
 
     public IRecord Create(IRecord entity)
     {
         db.Records.Add((Record)entity);
-        db.SaveChanges();
         return entity;
     }
 

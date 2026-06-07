@@ -21,6 +21,8 @@ public class UnitOfWork(
     IStatisticRepository statisticRepository)
     : IUnitOfWork, IDisposable, IAsyncDisposable
 {
+    public CustomDbContext Context { get; } = db;
+    
     public IUserRepository UserRepository { get; } = userRepository;
     public IUserPasswordRepository UserPasswordRepository { get; } = userPasswordRepository;
     public IUserProviderRepository UserProviderRepository { get; } = userProviderRepository;
@@ -34,24 +36,24 @@ public class UnitOfWork(
     public IPeriodRepository PeriodRepository { get; } = periodRepository;
     public IMinuteRepository MinuteRepository { get; } = minuteRepository;
     public IStatisticRepository StatisticRepository { get; } = statisticRepository;
-
+    
     public void SaveChanges()
     {
-        db.SaveChanges();
+        Context.SaveChanges();
     }
 
     public async Task SaveChangesAsync()
     {
-        await db.SaveChangesAsync();
+        await Context.SaveChangesAsync();
     }
 
     public void Dispose()
     {
-        db.Dispose();
+        Context.Dispose();
     }
 
     public async ValueTask DisposeAsync()
     {
-        await db.DisposeAsync();
+        await Context.DisposeAsync();
     }
 }

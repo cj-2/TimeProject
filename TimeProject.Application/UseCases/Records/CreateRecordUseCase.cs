@@ -2,43 +2,43 @@
 using TimeProject.Domain.Dtos.Periods;
 using TimeProject.Domain.Dtos.Records;
 using TimeProject.Infrastructure.Database.Entities;
-using TimeProject.Domain.Repositories;
 using TimeProject.Domain.UseCases.Periods;
 using TimeProject.Domain.UseCases.Records;
 using TimeProject.Domain.Shared;
-using TimeProject.Infrastructure.Database;
 using TimeProject.Infrastructure.Errors;
+using TimeProject.Infrastructure.Interfaces;
 using TimeProject.Infrastructure.ObjectValues.Periods;
 using TimeProject.Infrastructure.Utils.Interfaces;
 
 namespace TimeProject.Application.UseCases.Records;
 
 public class CreateRecordUseCase(
-    IRecordRepository repository,
+    IUnitOfWork unitOfWork,
     IRecordMapDataUtil mapDataUtil,
-    ICategoryRepository categoryRepository,
-    ICreatePeriodByListUseCase createPeriodByListUseCase,
-    CustomDbContext db)
+    ICreatePeriodByListUseCase createPeriodByListUseCase)
     : ICreateRecordUseCase
 {
     public ICustomResult<IRecordOutDto> Handle(ICreateRecordData data, IList<IPeriodData>? periods, int userId)
     {
         var result = new CustomResult<IRecordOutDto>();
-        var transaction = db.Database.BeginTransaction();
 
         if (data.CategoryId != null)
         {
-            var category = categoryRepository.FindById((int)data.CategoryId, userId);
-            if (category == null) return result.SetError(RecordMessageErrors.CategoryNotFound);
+            var category = unitOfWork.CategoryRepository.FindById((int)data.CategoryId, userId);
+            if (category == null)
+            {
+                return result.SetError(RecordMessageErrors.CategoryNotFound);
+            }
         }
 
         if (string.IsNullOrEmpty(data.Code) == false)
         {
-            var trByCode = repository.FindByCode(data.Code!, userId);
+            var trByCode = unitOfWork.RecordRepository.FindByCode(data.Code!, userId);
             if (trByCode != null) return result.SetError(RecordMessageErrors.CodeAlreadyInUse);
         }
 
-        var record = repository
+        var transaction = unitOfWork.Context.Database.BeginTransaction();
+        var record = unitOfWork.RecordRepository
             .Create(new Record
                 {
                     UserId = userId,
@@ -50,6 +50,8 @@ public class CreateRecordUseCase(
                 }
             );
 
+        unitOfWork.SaveChanges();
+
         try
         {
             if (periods != null)
@@ -58,7 +60,7 @@ public class CreateRecordUseCase(
                     .Handle(
                         new PeriodListDto
                         {
-                            Periods = periods, 
+                            Periods = periods,
                             Type = data.SessionType,
                             From = data.SessionFrom
                         },
