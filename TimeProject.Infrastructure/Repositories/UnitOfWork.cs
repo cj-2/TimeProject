@@ -1,5 +1,6 @@
 ﻿using TimeProject.Domain.Repositories;
 using TimeProject.Infrastructure.Database;
+using TimeProject.Infrastructure.Interfaces;
 
 namespace TimeProject.Infrastructure.Repositories;
 

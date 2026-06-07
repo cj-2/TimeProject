@@ -4,6 +4,7 @@ using TimeProject.Domain.Repositories;
 using TimeProject.Domain.UseCases.Users;
 using TimeProject.Domain.Shared;
 using TimeProject.Infrastructure.Errors;
+using TimeProject.Infrastructure.Interfaces;
 
 namespace TimeProject.Application.UseCases.Users;
 

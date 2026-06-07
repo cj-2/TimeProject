@@ -1,4 +1,6 @@
-﻿namespace TimeProject.Domain.Repositories;
+﻿using TimeProject.Domain.Repositories;
+
+namespace TimeProject.Infrastructure.Interfaces;
 
 public interface IUnitOfWork
 {
