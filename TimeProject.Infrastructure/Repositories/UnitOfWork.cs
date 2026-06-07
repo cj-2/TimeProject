@@ -27,7 +27,7 @@ public class UnitOfWork(
     public IUserPasswordRepository UserPasswordRepository { get; } = userPasswordRepository;
     public IUserProviderRepository UserProviderRepository { get; } = userProviderRepository;
     public IUserAccessLogRepository UserAccessLogRepository { get; } = userAccessLogRepository;
-    public IConfirmCodeRepository IConfirmCodeRepository { get; } = confirmCodeRepository;
+    public IConfirmCodeRepository ConfirmCodeRepository { get; } = confirmCodeRepository;
     public ICategoryRepository CategoryRepository { get; } = categoryRepository;
     public ISessionRepository SessionRepository { get; } = sessionRepository;
     public IRecordRepository RecordRepository { get; } = recordRepository;

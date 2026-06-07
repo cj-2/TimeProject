@@ -9,7 +9,7 @@ public interface IUnitOfWork
     IUserPasswordRepository UserPasswordRepository { get; }
     IUserProviderRepository UserProviderRepository { get; }
     IUserAccessLogRepository UserAccessLogRepository { get; }
-    IConfirmCodeRepository IConfirmCodeRepository { get; }
+    IConfirmCodeRepository ConfirmCodeRepository { get; }
     ICategoryRepository CategoryRepository { get; }
     ISessionRepository SessionRepository { get; }
     IRecordRepository RecordRepository { get; }
