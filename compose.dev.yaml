@@ -1,0 +1,36 @@
+﻿name: time_project_dev
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: database
+    environment:
+      POSTGRES_DB: TimeProjectDb
+      POSTGRES_USER: tp_admin
+      POSTGRES_PASSWORD: 12345678
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./database/scripts_test:/docker-entrypoint-initdb.d
+    restart: unless-stopped
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U tp_admin -d TimeProjectDb" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  apis:
+    image: time_project_api
+    container_name: api
+    build:
+      context: .
+      dockerfile: TimeProject.APIs/Dockerfile
+    ports:
+      - 5050:8080
+      - 5051:8081
+    environment:
+      - ConnectionStrings__PostgresConnection=Host=postgres;Port=5432;Database=TimeProjectDb;User Id=tp_admin;Password=12345678;
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
