@@ -1,9 +1,9 @@
 ﻿using RestSharp;
+using TimeProject.Application.Interfaces.UseCases.CustomLogs;
+using TimeProject.Application.Interfaces.UseCases.Logins;
+using TimeProject.Application.Interfaces.UseCases.Users;
 using TimeProject.Domain.Entities;
 using TimeProject.Infrastructure.Database.Entities;
-using TimeProject.Domain.UseCases.CustomLogs;
-using TimeProject.Domain.UseCases.Logins;
-using TimeProject.Domain.UseCases.Users;
 using TimeProject.Domain.Dtos.Auths;
 using TimeProject.Domain.Dtos.Users;
 using TimeProject.Domain.Shared;
@@ -25,9 +25,9 @@ public class LoginGoogleUseCase(
 {
     private readonly RestClient _client = new("https://www.googleapis.com/oauth2/v1/userinfo");
 
-    public async Task<ICustomResult<IJwtResult>> Handle(ILoginGoogleDto dto, IUserAccessLog ac)
+    public async Task<ICustomResult<JwtResult>> Handle(ILoginGoogleDto dto, IUserAccessLog ac)
     {
-        var result = new CustomResult<IJwtResult>();
+        var result = new CustomResult<JwtResult>();
 
         try
         {

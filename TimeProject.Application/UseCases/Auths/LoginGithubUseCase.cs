@@ -1,13 +1,14 @@
 ﻿using Octokit;
+using TimeProject.Application.Interfaces.UseCases.CustomLogs;
+using TimeProject.Application.Interfaces.UseCases.Logins;
+using TimeProject.Application.Interfaces.UseCases.Users;
 using TimeProject.Domain.Dtos.Auths;
 using TimeProject.Domain.Entities;
 using TimeProject.Domain.Shared;
-using TimeProject.Domain.UseCases.CustomLogs;
-using TimeProject.Domain.UseCases.Logins;
-using TimeProject.Domain.UseCases.Users;
 using TimeProject.Infrastructure.Errors;
 using TimeProject.Infrastructure.Interfaces;
 using TimeProject.Infrastructure.ObjectValues;
+using TimeProject.Infrastructure.ObjectValues.Auths;
 using TimeProject.Infrastructure.ObjectValues.Users;
 
 namespace TimeProject.Application.UseCases.Auths;
@@ -20,9 +21,9 @@ public class LoginGithubUseCase(
 )
     : ILoginGithubUseCase
 {
-    public async Task<ICustomResult<IJwtResult>> Handle(ILoginGithubDto dto, IUserAccessLog ac)
+    public async Task<ICustomResult<JwtResult>> Handle(ILoginGithubDto dto, IUserAccessLog ac)
     {
-        var result = new CustomResult<IJwtResult>();
+        var result = new CustomResult<JwtResult>();
 
         try
         {

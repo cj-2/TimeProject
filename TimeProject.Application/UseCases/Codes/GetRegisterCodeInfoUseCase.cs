@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
+using TimeProject.Application.Interfaces.UseCases.Codes;
 using TimeProject.Infrastructure.ObjectValues;
 using TimeProject.Domain.Entities;
 using TimeProject.Infrastructure.Database.Entities.Enums;
 using TimeProject.Domain.Repositories;
-using TimeProject.Domain.UseCases.Codes;
 using TimeProject.Domain.Dtos.Codes;
 using TimeProject.Domain.Entities.Enums;
 using TimeProject.Domain.Shared;

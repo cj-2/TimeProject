@@ -1,7 +1,7 @@
+using TimeProject.Application.Interfaces.UseCases.Statistics;
 using TimeProject.Infrastructure.ObjectValues;
 using TimeProject.Domain.Entities;
 using TimeProject.Domain.Repositories;
-using TimeProject.Domain.UseCases.Statistics;
 using TimeProject.Domain.Dtos.Statistics;
 using TimeProject.Domain.Entities.Enums;
 using TimeProject.Domain.Shared;

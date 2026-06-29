@@ -2,13 +2,13 @@
 using Microsoft.AspNetCore.Mvc;
 using TimeProject.APIs.Controllers.Shared;
 using TimeProject.Domain.ObjectValues;
-using TimeProject.Domain.UseCases.Users;
 using TimeProject.Domain.Dtos.Users;
 using TimeProject.Infrastructure.ObjectValues.General;
 using TimeProject.Infrastructure.ObjectValues;
 using TimeProject.Infrastructure.ObjectValues.Users;
 using TimeProject.Infrastructure.Utils;
 using TimeProject.APIs.Controllers.Attributes;
+using TimeProject.Application.Interfaces.UseCases.Users;
 
 namespace TimeProject.APIs.Controllers;
 
@@ -33,7 +33,7 @@ public class UserController(
 
     [HttpPost]
     [UserChallenge]
-    public ActionResult<ICreateUserResult> Create([FromBody] CreateUserDto dto)
+    public ActionResult<CreateUserResult> Create([FromBody] CreateUserDto dto)
     {
         var result =  createUserUseCase.Handle(dto);
         result.ActionName = nameof(Create);

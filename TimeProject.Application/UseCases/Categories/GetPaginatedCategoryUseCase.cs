@@ -1,6 +1,6 @@
-﻿using TimeProject.Domain.ObjectValues;
+﻿using TimeProject.Application.Interfaces.UseCases.Categories;
+using TimeProject.Domain.ObjectValues;
 using TimeProject.Domain.Repositories;
-using TimeProject.Domain.UseCases.Categories;
 using TimeProject.Infrastructure.Utils.Interfaces;
 using TimeProject.Domain.Dtos.Categories;
 using TimeProject.Domain.Shared;

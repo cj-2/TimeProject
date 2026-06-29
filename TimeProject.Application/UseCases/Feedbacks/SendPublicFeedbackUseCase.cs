@@ -1,6 +1,6 @@
-﻿using TimeProject.Infrastructure.Interfaces;
+﻿using TimeProject.Application.Interfaces.UseCases.Feedbacks;
+using TimeProject.Infrastructure.Interfaces;
 using TimeProject.Infrastructure.ObjectValues;
-using TimeProject.Domain.UseCases.Feedbacks;
 using TimeProject.Domain.Dtos.Feedbacks;
 using TimeProject.Domain.Shared;
 using TimeProject.Infrastructure.Factories;

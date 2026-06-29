@@ -1,7 +1,7 @@
-﻿using TimeProject.Infrastructure.Database.Entities;
+﻿using TimeProject.Application.Interfaces.UseCases.Users;
+using TimeProject.Infrastructure.Database.Entities;
 using TimeProject.Domain.ObjectValues;
 using TimeProject.Domain.Repositories;
-using TimeProject.Domain.UseCases.Users;
 using TimeProject.Infrastructure.Utils.Interfaces;
 using TimeProject.Domain.Dtos.Users;
 using TimeProject.Domain.Shared;
@@ -19,9 +19,9 @@ public class CreateUserUseCase(
     ICreateOrUpdateUserPasswordUseCase createUserPasswordUseCase
 ) : ICreateUserUseCase
 {
-    public ICustomResult<ICreateUserResult> Handle(ICreateUserDto dto)
+    public ICustomResult<CreateUserResult> Handle(ICreateUserDto dto)
     {
-        var result = new CustomResult<ICreateUserResult>();
+        var result = new CustomResult<CreateUserResult>();
         var emailAvailable = unitOfWork.UserRepository.EmailIsAvailable(dto.Email);
 
         if (emailAvailable == false) return result.SetError(UserMessageErrors.EmailAlreadyInUse);

@@ -1,7 +1,7 @@
-﻿using TimeProject.Domain.ObjectValues;
+﻿using TimeProject.Application.Interfaces.UseCases.Periods;
+using TimeProject.Domain.ObjectValues;
 using TimeProject.Domain.Dtos.Periods;
 using TimeProject.Domain.Repositories;
-using TimeProject.Domain.UseCases.Periods;
 using TimeProject.Infrastructure.Utils.Interfaces;
 using TimeProject.Domain.Shared;
 using TimeProject.Infrastructure.Database.Entities;

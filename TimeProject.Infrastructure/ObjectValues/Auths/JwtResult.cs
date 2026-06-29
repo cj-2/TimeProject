@@ -2,7 +2,7 @@ using TimeProject.Domain.Dtos.Auths;
 
 namespace TimeProject.Infrastructure.ObjectValues.Auths;
 
-public class JwtResult : IJwtResult
+public class JwtResult
 {
     public string Token { get; set; } = string.Empty;
     public DateTime ValidFrom { get; set; }

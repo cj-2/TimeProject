@@ -1,13 +1,14 @@
-﻿using TimeProject.Infrastructure.ObjectValues;
+﻿using TimeProject.Application.Interfaces.UseCases.CustomLogs;
+using TimeProject.Application.Interfaces.UseCases.Logins;
+using TimeProject.Application.Interfaces.UseCases.Users;
+using TimeProject.Infrastructure.ObjectValues;
 using TimeProject.Domain.Entities;
 using TimeProject.Infrastructure.Database.Entities;
-using TimeProject.Domain.UseCases.CustomLogs;
-using TimeProject.Domain.UseCases.Logins;
-using TimeProject.Domain.UseCases.Users;
 using TimeProject.Domain.Dtos.Auths;
 using TimeProject.Domain.Shared;
 using TimeProject.Infrastructure.Errors;
 using TimeProject.Infrastructure.Interfaces;
+using TimeProject.Infrastructure.ObjectValues.Auths;
 
 namespace TimeProject.Application.UseCases.Auths;
 
@@ -18,9 +19,9 @@ public class LoginUseCase(
 )
     : ILoginUseCase
 {
-    public ICustomResult<IJwtResult> Handle(ILoginDto dto, IUserAccessLog accessLog)
+    public ICustomResult<JwtResult> Handle(ILoginDto dto, IUserAccessLog accessLog)
     {
-        var result = new CustomResult<IJwtResult>();
+        var result = new CustomResult<JwtResult>();
 
         var findUserPasswordResult = getUserPasswordByEmailUseCase.Handle(dto.Email);
         if (findUserPasswordResult.HasError) return result.SetError(findUserPasswordResult.Message);

@@ -1,7 +1,7 @@
-﻿using TimeProject.Infrastructure.ObjectValues;
+﻿using TimeProject.Application.Interfaces.UseCases.Records;
+using TimeProject.Infrastructure.ObjectValues;
 using TimeProject.Domain.Dtos.Records;
 using TimeProject.Domain.Repositories;
-using TimeProject.Domain.UseCases.Records;
 using TimeProject.Domain.Shared;
 using TimeProject.Infrastructure.Errors;
 using TimeProject.Infrastructure.Utils.Interfaces;

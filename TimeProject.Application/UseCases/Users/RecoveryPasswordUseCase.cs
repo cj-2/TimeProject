@@ -1,6 +1,6 @@
-﻿using TimeProject.Infrastructure.ObjectValues;
-using TimeProject.Domain.UseCases.Codes;
-using TimeProject.Domain.UseCases.Users;
+﻿using TimeProject.Application.Interfaces.UseCases.Codes;
+using TimeProject.Application.Interfaces.UseCases.Users;
+using TimeProject.Infrastructure.ObjectValues;
 using TimeProject.Domain.Dtos.Users;
 using TimeProject.Domain.Shared;
 using TimeProject.Infrastructure.ObjectValues.Users;

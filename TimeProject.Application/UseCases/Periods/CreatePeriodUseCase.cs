@@ -1,10 +1,10 @@
-﻿using TimeProject.Infrastructure.ObjectValues;
+﻿using TimeProject.Application.Interfaces.UseCases.Periods;
+using TimeProject.Application.Interfaces.UseCases.Records;
+using TimeProject.Infrastructure.ObjectValues;
 using TimeProject.Domain.Entities;
 using TimeProject.Domain.Dtos.Periods;
 using TimeProject.Infrastructure.Database.Entities;
 using TimeProject.Domain.Repositories;
-using TimeProject.Domain.UseCases.Periods;
-using TimeProject.Domain.UseCases.Records;
 using TimeProject.Infrastructure.Utils.Interfaces;
 using TimeProject.Domain.Shared;
 using TimeProject.Infrastructure.Errors;
