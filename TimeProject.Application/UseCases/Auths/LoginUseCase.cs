@@ -18,7 +18,7 @@ public class LoginUseCase(
 )
     : ILoginUseCase
 {
-    public ICustomResult<IJwtResult> Handle(ILoginDto dto, IUserAccessLog ac)
+    public ICustomResult<IJwtResult> Handle(ILoginDto dto, IUserAccessLog accessLog)
     {
         var result = new CustomResult<IJwtResult>();
 
@@ -30,8 +30,8 @@ public class LoginUseCase(
         var passwordMatch = BCrypt.Net.BCrypt.Verify(dto.Password, data.UserPassword.Password);
         if (!passwordMatch) return result.SetError(AuthMessageErrors.WrongEmailOrPassword);
 
-        ac.UserId = (int)data.User.UserId!;
-        createUserAccessLogUseCase.Handle(ac);
+        accessLog.UserId = data.User.UserId;
+        createUserAccessLogUseCase.Handle(accessLog);
 
         return result.SetData(jwtHandler.Generate(data.User));
     }

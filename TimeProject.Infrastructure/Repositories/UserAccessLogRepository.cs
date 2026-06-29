@@ -17,11 +17,10 @@ public class UserAccessLogRepository(CustomDbContext db) : IUserAccessLogReposit
 
     public IUserAccessLog? GetLastAccessByUserId(int id)
     {
-        var maxAccessAt = db.UserAccessLogs
+        return db.UserAccessLogs
             .Where(e => e.UserId == id)
-            .Max(e => e.AccessedAt);
-
-        return db.UserAccessLogs.FirstOrDefault(e => e.UserId == id && e.AccessedAt == maxAccessAt);
+            .OrderByDescending(e => e.AccessedAt)
+            .FirstOrDefault();
     }
 
     public IList<IUserAccessLog> GetLastAccessByUserIdList(IEnumerable<int> idList)
