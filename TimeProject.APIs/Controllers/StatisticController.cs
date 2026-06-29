@@ -14,21 +14,21 @@ public class StatisticController(IGetRangeDaysStatisticUseCase getRangeDaysStati
 {
     [HttpGet]
     [Route("day")]
-    public ActionResult<RangeStatistic> Day([FromQuery] DateTimeOffset? date)
+    public ActionResult<RangeStatisticOutDto> Day([FromQuery] DateTimeOffset? date)
     {
         return HandleResponse(getRangeDaysStatisticUseCase.Handle(UserClaimsUtil.Id(User), date));
     }
 
     [HttpGet]
     [Route("{recordId:int}/day")]
-    public ActionResult<RangeStatistic> Day(int recordId, [FromQuery] DateTimeOffset? date)
+    public ActionResult<RangeStatisticOutDto> Day(int recordId, [FromQuery] DateTimeOffset? date)
     {
         return HandleResponse(getRangeDaysStatisticUseCase.Handle(UserClaimsUtil.Id(User), date, null, recordId));
     }
 
     [HttpGet]
     [Route("range")]
-    public ActionResult<RangeStatisticsWithDays> Range([FromQuery] DateTimeOffset start, [FromQuery] DateTimeOffset end)
+    public ActionResult<RangeStatisticsWithDaysOutDto> Range([FromQuery] DateTimeOffset start, [FromQuery] DateTimeOffset end)
     {
         return HandleResponse(getRangeDaysStatisticUseCase.Handle(UserClaimsUtil.Id(User), start, end));
     }

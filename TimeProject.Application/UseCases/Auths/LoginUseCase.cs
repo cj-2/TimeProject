@@ -17,9 +17,9 @@ public class LoginUseCase(
 )
     : ILoginUseCase
 {
-    public ICustomResult<JwtResult> Handle(LoginDto dto, IUserAccessLog accessLog)
+    public ICustomResult<JwtDto> Handle(LoginDto dto, IUserAccessLog accessLog)
     {
-        var result = new CustomResult<JwtResult>();
+        var result = new CustomResult<JwtDto>();
 
         var findUserPasswordResult = getUserPasswordByEmailUseCase.Handle(dto.Email);
         if (findUserPasswordResult.HasError) return result.SetError(findUserPasswordResult.Message);

@@ -21,9 +21,9 @@ public class LoginGithubUseCase(
 )
     : ILoginGithubUseCase
 {
-    public async Task<ICustomResult<JwtResult>> Handle(LoginGithubDto dto, IUserAccessLog ac)
+    public async Task<ICustomResult<JwtDto>> Handle(LoginGithubDto dto, IUserAccessLog ac)
     {
-        var result = new CustomResult<JwtResult>();
+        var result = new CustomResult<JwtDto>();
 
         try
         {

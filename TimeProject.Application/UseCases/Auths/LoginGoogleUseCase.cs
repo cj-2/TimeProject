@@ -23,16 +23,16 @@ public class LoginGoogleUseCase(
 {
     private readonly RestClient _client = new("https://www.googleapis.com/oauth2/v1/userinfo");
 
-    public async Task<ICustomResult<JwtResult>> Handle(LoginGoogleDto dto, IUserAccessLog ac)
+    public async Task<ICustomResult<JwtDto>> Handle(LoginGoogleDto dto, IUserAccessLog ac)
     {
-        var result = new CustomResult<JwtResult>();
+        var result = new CustomResult<JwtDto>();
 
         try
         {
             var request = new RestRequest();
             request.AddHeader("Authorization", $"Bearer {dto.AccessToken}");
 
-            var userFromProvider = (await _client.ExecuteAsync<LoginGoogleResponse>(request)).Data;
+            var userFromProvider = (await _client.ExecuteAsync<LoginGoogleResponseDto>(request)).Data;
 
             if (userFromProvider is null) return result.SetError(AuthMessageErrors.AuthProviderError);
 

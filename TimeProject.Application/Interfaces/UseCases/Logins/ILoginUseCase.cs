@@ -6,5 +6,5 @@ namespace TimeProject.Application.Interfaces.UseCases.Logins;
 
 public interface ILoginUseCase
 {
-    ICustomResult<JwtResult> Handle(LoginDto dto, IUserAccessLog accessLog);
+    ICustomResult<JwtDto> Handle(LoginDto dto, IUserAccessLog accessLog);
 }

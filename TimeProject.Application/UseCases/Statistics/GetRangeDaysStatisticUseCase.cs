@@ -20,21 +20,21 @@ public class GetRangeDaysStatisticUseCase(
 )
     : IGetRangeDaysStatisticUseCase
 {
-    public ICustomResult<RangeStatistic> Handle(int userId,
+    public ICustomResult<RangeStatisticOutDto> Handle(int userId,
         DateTimeOffset? start = null,
         DateTimeOffset? end = null,
         int? recordId = null,
         bool skipRangeProgress = false)
     {
-        return new CustomResult<RangeStatistic>().SetData(
-            (_handle(userId, start, end, recordId, skipRangeProgress)).Statistic
+        return new CustomResult<RangeStatisticOutDto>().SetData(
+            (_handle(userId, start, end, recordId, skipRangeProgress)).StatisticOutDto
         );
     }
 
-    public ICustomResult<RangeStatisticsWithDays> Handle(int userId, DateTimeOffset start, DateTimeOffset end)
+    public ICustomResult<RangeStatisticsWithDaysOutDto> Handle(int userId, DateTimeOffset start, DateTimeOffset end)
     {
         var daysFromRange = new List<DateTimeOffset> { start };
-        var daysStatistics = new List<RangeStatistic>();
+        var daysStatistics = new List<RangeStatisticOutDto>();
 
         var periods = new List<Period>();
         var minutes = new List<Minute>();
@@ -59,9 +59,9 @@ public class GetRangeDaysStatisticUseCase(
             periods.AddRange(result.Periods.OfType<Period>());
             minutes.AddRange(result.Minutes.OfType<Minute>());
             sessions.AddRange(result.Sessions.OfType<Session>());
-            daysStatistics.Add(result.Statistic);
+            daysStatistics.Add(result.StatisticOutDto);
 
-            if (result.Statistic.TotalInMinutes > 0) activeDaysCount++;
+            if (result.StatisticOutDto.TotalInMinutes > 0) activeDaysCount++;
         }
 
         var rangeStatistics = MakeRangeStatisticDatas(
@@ -73,7 +73,7 @@ public class GetRangeDaysStatisticUseCase(
             new List<Record>(),
             daysCount,
             activeDaysCount
-        ).Statistic;
+        ).StatisticOutDto;
 
         rangeStatistics.RecordRangeProgress = MakeRangeProgress(
             GetRecordsByRange(userId, periods, minutes),
@@ -82,14 +82,14 @@ public class GetRangeDaysStatisticUseCase(
         );
 
 
-        return new CustomResult<RangeStatisticsWithDays>().SetData(new RangeStatisticsWithDays
+        return new CustomResult<RangeStatisticsWithDaysOutDto>().SetData(new RangeStatisticsWithDaysOutDto
         {
             Total = rangeStatistics,
             Days = daysStatistics.OrderByDescending(e => e.StartDay).ToList()
         });
     }
 
-    private RangeStatisticsData _handle(
+    private RangeStatistics _handle(
         int userId,
         DateTimeOffset? start = null,
         DateTimeOffset? end = null,
@@ -137,7 +137,7 @@ public class GetRangeDaysStatisticUseCase(
         );
     }
 
-    private RangeStatisticsData MakeRangeStatisticDatas(
+    private RangeStatistics MakeRangeStatisticDatas(
         DateTimeOffset start,
         DateTimeOffset end,
         List<Period> periods,
@@ -178,12 +178,12 @@ public class GetRangeDaysStatisticUseCase(
         var avarageTimeSpan = TimeSpan.FromHours(hoursAvarege);
 
 
-        return new RangeStatisticsData
+        return new RangeStatistics
         {
             Periods = periods.OfType<IPeriod>().ToList(),
             Minutes = minutes.OfType<IMinute>().ToList(),
             Sessions = sessions.OfType<ISession>().ToList(),
-            Statistic = new RangeStatistic
+            StatisticOutDto = new RangeStatisticOutDto
             {
                 StartDay = start,
                 EndDay = end,

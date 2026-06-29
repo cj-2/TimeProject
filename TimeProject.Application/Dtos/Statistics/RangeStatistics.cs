@@ -2,9 +2,9 @@
 
 namespace TimeProject.Application.Dtos.Statistics;
 
-public class RangeStatisticsData
+public class RangeStatistics
 {
-    public RangeStatistic Statistic { get; set; } = new RangeStatistic();
+    public RangeStatisticOutDto StatisticOutDto { get; set; } = new RangeStatisticOutDto();
     public IList<IPeriod> Periods { get; set; } = [];
     public IList<IMinute> Minutes { get; set; } = [];
     public IList<ISession> Sessions { get; set; } = [];

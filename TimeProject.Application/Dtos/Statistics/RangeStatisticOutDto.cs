@@ -1,7 +1,7 @@
 
 namespace TimeProject.Application.Dtos.Statistics;
 
-public class RangeStatistic
+public class RangeStatisticOutDto
 {
     public DateTimeOffset StartDay { get; set; }
     public DateTimeOffset EndDay { get; set; }
