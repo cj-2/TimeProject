@@ -2,9 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using TimeProject.APIs.Controllers.Shared;
 using TimeProject.Application.Interfaces.UseCases.Records;
-using TimeProject.Domain.Dtos.Periods;
 using TimeProject.Domain.ObjectValues;
-using TimeProject.Domain.Dtos.Records;
 using TimeProject.Infrastructure.ObjectValues.General;
 using TimeProject.Infrastructure.ObjectValues.Records;
 using TimeProject.Infrastructure.Utils;
@@ -25,14 +23,14 @@ public class RecordController(
 ) : CustomController
 {
     [HttpGet]
-    public ActionResult<IPagination<IRecordOutDto>> Index([FromQuery] PaginationQuery paginationQuery)
+    public ActionResult<IPagination<RecordOutDto>> Index([FromQuery] PaginationQuery paginationQuery)
     {
         return HandleResponse(getPaginatedRecordUseCase.Handle(paginationQuery, UserClaimsUtil.Id(User)));
     }
 
     [HttpGet]
     [Route("history/{recordId:int}")]
-    public ActionResult<IPagination<IRecordHistoryDayOutDto>> HistoryIndex([FromRoute] int recordId,
+    public ActionResult<IPagination<RecordHistoryDayOutDto>> HistoryIndex([FromRoute] int recordId,
         [FromQuery] PaginationQuery paginationQuery)
     {
         return HandleResponse(
@@ -47,23 +45,23 @@ public class RecordController(
     }
 
     [HttpPost]
-    public ActionResult<IRecordOutDto> Create([FromBody] CreateRecordDto dto)
+    public ActionResult<RecordOutDto> Create([FromBody] CreateRecordDto dto)
     {
-        var result = createRecordUseCase.Handle(dto, dto.Periods?.ToList<IPeriodData>(), UserClaimsUtil.Id(User));
+        var result = createRecordUseCase.Handle(dto, dto.Periods?.ToList(), UserClaimsUtil.Id(User));
         result.ActionName = nameof(Create);
         return HandleResponse(result);
     }
 
     [HttpPut]
     [Route("{id:int}")]
-    public ActionResult<IRecordOutDto> Update(int id, [FromBody] UpdateRecordDto dto)
+    public ActionResult<RecordOutDto> Update(int id, [FromBody] UpdateRecordDto dto)
     {
         return HandleResponse(updateRecordUseCase.Handle(id, dto, UserClaimsUtil.Id(User)));
     }
 
     [HttpGet]
     [Route("{code}")]
-    public ActionResult<IRecordOutDto> Get(string code)
+    public ActionResult<RecordOutDto> Get(string code)
     {
         return HandleResponse(getRecordByCodeUseCase.Handle(code, UserClaimsUtil.Id(User)));
     }

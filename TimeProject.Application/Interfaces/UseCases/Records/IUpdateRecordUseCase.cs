@@ -1,9 +1,9 @@
-﻿using TimeProject.Domain.Dtos.Records;
-using TimeProject.Domain.Shared;
+﻿using TimeProject.Domain.Shared;
+using TimeProject.Infrastructure.ObjectValues.Records;
 
 namespace TimeProject.Application.Interfaces.UseCases.Records;
 
 public interface IUpdateRecordUseCase
 {
-    ICustomResult<IRecordOutDto> Handle(int id, IUpdateRecordDto dto, int userId);
+    ICustomResult<RecordOutDto> Handle(int id, UpdateRecordDto dto, int userId);
 }

@@ -1,9 +1,7 @@
-﻿using TimeProject.Domain.Dtos.Statistics;
+﻿namespace TimeProject.Infrastructure.ObjectValues.Statistics;
 
-namespace TimeProject.Infrastructure.ObjectValues.Statistics;
-
-public class RangeStatisticsWithDays : IRangeStatisticsWithDays
+public class RangeStatisticsWithDays
 {
-    public IRangeStatistic Total { get; set; } = new RangeStatistic();
-    public IList<IRangeStatistic> Days { get; set; } = [];
+    public RangeStatistic Total { get; set; } = new();
+    public IList<RangeStatistic> Days { get; set; } = [];
 }

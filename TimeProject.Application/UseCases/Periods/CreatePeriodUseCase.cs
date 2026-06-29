@@ -2,12 +2,12 @@
 using TimeProject.Application.Interfaces.UseCases.Records;
 using TimeProject.Infrastructure.ObjectValues;
 using TimeProject.Domain.Entities;
-using TimeProject.Domain.Dtos.Periods;
 using TimeProject.Infrastructure.Database.Entities;
 using TimeProject.Domain.Repositories;
 using TimeProject.Infrastructure.Utils.Interfaces;
 using TimeProject.Domain.Shared;
 using TimeProject.Infrastructure.Errors;
+using TimeProject.Infrastructure.ObjectValues.Records;
 
 namespace TimeProject.Application.UseCases.Periods;
 
@@ -18,7 +18,7 @@ public class CreatePeriodUseCase(
     IPeriodValidateUtil periodValidateUtil
 ) : ICreatePeriodUseCase
 {
-    public ICustomResult<IPeriod> Handle(ICreatePeriodData data, int userId)
+    public ICustomResult<IPeriod> Handle(CreatePeriodDto data, int userId)
     {
         var result = new CustomResult<IPeriod>();
 

@@ -2,9 +2,9 @@
 using TimeProject.Infrastructure.ObjectValues;
 using TimeProject.Domain.Repositories;
 using TimeProject.Infrastructure.Utils.Interfaces;
-using TimeProject.Domain.Dtos.Users;
 using TimeProject.Domain.Shared;
 using TimeProject.Infrastructure.Errors;
+using TimeProject.Infrastructure.ObjectValues.Users;
 
 namespace TimeProject.Application.UseCases.Users;
 
@@ -14,9 +14,9 @@ public class GetUserUseCase(
     IUserMapDataUtil mapper
 ) : IGetUserUseCase
 {
-    public ICustomResult<IUserOutDto> Handle(int id)
+    public ICustomResult<UserOutDto> Handle(int id)
     {
-        var result = new CustomResult<IUserOutDto>();
+        var result = new CustomResult<UserOutDto>();
         var user = userRepository.FindById(id);
 
         if (user == null)

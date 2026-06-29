@@ -1,7 +1,6 @@
 ﻿using TimeProject.Application.Interfaces.UseCases.Codes;
 using TimeProject.Application.Interfaces.UseCases.Users;
 using TimeProject.Infrastructure.ObjectValues;
-using TimeProject.Domain.Dtos.Users;
 using TimeProject.Domain.Shared;
 using TimeProject.Infrastructure.ObjectValues.Users;
 
@@ -13,7 +12,7 @@ public class RecoveryPasswordUseCase(
     IValidateConfirmCodeUseCase validateConfirmCodeUseCase
 ) : IRecoveryPasswordUseCase
 {
-    public ICustomResult<bool> Handle(IRecoveryPasswordDto dto)
+    public ICustomResult<bool> Handle(RecoveryPasswordDto dto)
     {
         var result = new CustomResult<bool>();
 

@@ -1,11 +1,11 @@
-﻿using TimeProject.Domain.Dtos.Users;
-using TimeProject.Domain.ObjectValues;
+﻿using TimeProject.Domain.ObjectValues;
 using TimeProject.Domain.Shared;
+using TimeProject.Infrastructure.ObjectValues.Users;
 
 namespace TimeProject.Application.Interfaces.UseCases.Users;
 
 public interface IUpdateUserUseCase
 {
-    ICustomResult<IUserOutDto> Handle(int id, IUpdateUserDto dto);
-    ICustomResult<IUserOutDto> Handle(int id, IUpdateUserDto dto, IUpdateUserOptions config);
+    ICustomResult<UserOutDto> Handle(int id, UpdateUserDto dto);
+    ICustomResult<UserOutDto> Handle(int id, UpdateUserDto dto, IUpdateUserOptions config);
 }

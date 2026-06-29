@@ -1,8 +1,6 @@
-﻿using TimeProject.Domain.Dtos.Users;
+﻿namespace TimeProject.Infrastructure.ObjectValues.Users;
 
-namespace TimeProject.Infrastructure.ObjectValues.Users;
-
-public class CreateRegisterCodeDto : ICreateRegisterCodeDto
+public class CreateRegisterCodeDto
 {
     public string? Email { get; set; }
 }

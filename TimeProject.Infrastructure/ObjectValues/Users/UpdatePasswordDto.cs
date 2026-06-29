@@ -1,9 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using TimeProject.Domain.Dtos.Users;
 
 namespace TimeProject.Infrastructure.ObjectValues.Users;
 
-public class UpdatePasswordDto : IUpdatePasswordDto
+public class UpdatePasswordDto
 {
     [MinLength(8)]
     [MaxLength(48)]

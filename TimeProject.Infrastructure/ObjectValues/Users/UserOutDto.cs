@@ -1,10 +1,9 @@
-﻿using TimeProject.Domain.Dtos.Users;
-using TimeProject.Domain.Entities.Enums;
+﻿using TimeProject.Domain.Entities.Enums;
 using TimeProject.Infrastructure.Database.Entities.Enums;
 
 namespace TimeProject.Infrastructure.ObjectValues.Users;
 
-public class UserOutDto : IUserOutDto
+public class UserOutDto
 {
     public int UserId { get; set; }
     public string Name { get; set; } = string.Empty;

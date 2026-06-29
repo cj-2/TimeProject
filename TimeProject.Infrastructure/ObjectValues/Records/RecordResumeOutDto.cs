@@ -1,8 +1,6 @@
-﻿using TimeProject.Domain.Dtos.Records;
+﻿namespace TimeProject.Infrastructure.ObjectValues.Records;
 
-namespace TimeProject.Infrastructure.ObjectValues.Records;
-
-public class RecordResumeOutDto : IRecordResumeOutDto
+public class RecordResumeOutDto
 {
     public string Formatted { get; set; }
     public double Seconds { get; set; }

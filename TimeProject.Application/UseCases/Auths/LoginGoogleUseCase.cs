@@ -3,9 +3,6 @@ using TimeProject.Application.Interfaces.UseCases.CustomLogs;
 using TimeProject.Application.Interfaces.UseCases.Logins;
 using TimeProject.Application.Interfaces.UseCases.Users;
 using TimeProject.Domain.Entities;
-using TimeProject.Infrastructure.Database.Entities;
-using TimeProject.Domain.Dtos.Auths;
-using TimeProject.Domain.Dtos.Users;
 using TimeProject.Domain.Shared;
 using TimeProject.Infrastructure.Errors;
 using TimeProject.Infrastructure.Interfaces;
@@ -25,7 +22,7 @@ public class LoginGoogleUseCase(
 {
     private readonly RestClient _client = new("https://www.googleapis.com/oauth2/v1/userinfo");
 
-    public async Task<ICustomResult<JwtResult>> Handle(ILoginGoogleDto dto, IUserAccessLog ac)
+    public async Task<ICustomResult<JwtResult>> Handle(LoginGoogleDto dto, IUserAccessLog ac)
     {
         var result = new CustomResult<JwtResult>();
 
@@ -52,7 +49,7 @@ public class LoginGoogleUseCase(
 
             var createUserResult = createUserByGoogleUserUseCase
                 .Handle(
-                    new CreateUserOAtuhDto
+                    new CreateUserOAuthDto
                         { Name = userFromProvider.Name, UserProviderId = userFromProvider.Id },
                     userFromProvider.Email
                 );

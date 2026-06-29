@@ -2,7 +2,6 @@
 using TimeProject.Application.Interfaces.UseCases.CustomLogs;
 using TimeProject.Application.Interfaces.UseCases.Logins;
 using TimeProject.Application.Interfaces.UseCases.Users;
-using TimeProject.Domain.Dtos.Auths;
 using TimeProject.Domain.Entities;
 using TimeProject.Domain.Shared;
 using TimeProject.Infrastructure.Errors;
@@ -21,7 +20,7 @@ public class LoginGithubUseCase(
 )
     : ILoginGithubUseCase
 {
-    public async Task<ICustomResult<JwtResult>> Handle(ILoginGithubDto dto, IUserAccessLog ac)
+    public async Task<ICustomResult<JwtResult>> Handle(LoginGithubDto dto, IUserAccessLog ac)
     {
         var result = new CustomResult<JwtResult>();
 
@@ -47,7 +46,7 @@ public class LoginGithubUseCase(
 
             var createUserResult = createUserByGhUserUseCase
                 .Handle(
-                    new CreateUserOAtuhDto
+                    new CreateUserOAuthDto
                         { Name = userFromProvider.Name, UserProviderId = userFromProvider.Id.ToString() },
                     emailList.Select(e => new EmailGh(e.Email, e.Primary, e.Verified))
                 );

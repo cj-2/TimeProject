@@ -1,9 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using TimeProject.Domain.Dtos.Auths;
 
 namespace TimeProject.Infrastructure.ObjectValues.Auths;
 
-public class LoginDto : ILoginDto
+public class LoginDto
 {
     [Required] [EmailAddress] public string Email { get; set; } = string.Empty;
 

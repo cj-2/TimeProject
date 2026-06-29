@@ -1,9 +1,9 @@
-﻿using TimeProject.Domain.Dtos.Users;
-using TimeProject.Domain.Shared;
+﻿using TimeProject.Domain.Shared;
+using TimeProject.Infrastructure.ObjectValues.Users;
 
 namespace TimeProject.Application.Interfaces.UseCases.Users;
 
 public interface IRecoveryPasswordUseCase
 {
-    ICustomResult<bool> Handle(IRecoveryPasswordDto dto);
+    ICustomResult<bool> Handle(RecoveryPasswordDto dto);
 }

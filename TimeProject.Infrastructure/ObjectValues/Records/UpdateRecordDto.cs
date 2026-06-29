@@ -1,9 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using TimeProject.Domain.Dtos.Records;
 
 namespace TimeProject.Infrastructure.ObjectValues.Records;
 
-public class UpdateRecordDto : IUpdateRecordDto
+public class UpdateRecordDto
 {
     [MaxLength(120)] public string? Title { get; set; }
     [MaxLength(240)] public string? Description { get; set; }

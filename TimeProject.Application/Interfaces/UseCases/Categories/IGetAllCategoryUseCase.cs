@@ -1,9 +1,9 @@
-﻿using TimeProject.Domain.Dtos.Categories;
-using TimeProject.Domain.Shared;
+﻿using TimeProject.Domain.Shared;
+using TimeProject.Infrastructure.ObjectValues.Categories;
 
 namespace TimeProject.Application.Interfaces.UseCases.Categories;
 
 public interface IGetAllCategoryUseCase
 {
-    ICustomResult<IList<ICategoryOutDto>> Handle(int userId, bool onlyWithData);
+    ICustomResult<IList<CategoryOutDto>> Handle(int userId, bool onlyWithData);
 }

@@ -1,10 +1,8 @@
-﻿using TimeProject.Domain.Dtos.Codes;
-using TimeProject.Domain.Entities.Enums;
-using TimeProject.Infrastructure.Database.Entities.Enums;
+﻿using TimeProject.Domain.Entities.Enums;
 
 namespace TimeProject.Infrastructure.ObjectValues.Codes;
 
-public class ConfirmCodeOutDto : IConfirmCodeOutDto
+public class ConfirmCodeOutDto
 {
     public DateTime ExpireDate { get; set; }
     public bool IsUsed { get; set; }

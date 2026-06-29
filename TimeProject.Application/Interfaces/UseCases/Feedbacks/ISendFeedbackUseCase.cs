@@ -1,9 +1,9 @@
-﻿using TimeProject.Domain.Dtos.Feedbacks;
-using TimeProject.Domain.Shared;
+﻿using TimeProject.Domain.Shared;
+using TimeProject.Infrastructure.ObjectValues.Feedbacks;
 
 namespace TimeProject.Application.Interfaces.UseCases.Feedbacks;
 
 public interface ISendFeedbackUseCase
 {
-    ICustomResult<bool> Handle(IFeedbackDto feedbackDto, string name, string email, bool isVerified);
+    ICustomResult<bool> Handle(FeedbackDto dto, string name, string email, bool isVerified);
 }

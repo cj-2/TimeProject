@@ -4,7 +4,6 @@ using TimeProject.Application.Interfaces.UseCases.Users;
 using TimeProject.Infrastructure.ObjectValues;
 using TimeProject.Domain.Entities;
 using TimeProject.Infrastructure.Database.Entities;
-using TimeProject.Domain.Dtos.Auths;
 using TimeProject.Domain.Shared;
 using TimeProject.Infrastructure.Errors;
 using TimeProject.Infrastructure.Interfaces;
@@ -19,7 +18,7 @@ public class LoginUseCase(
 )
     : ILoginUseCase
 {
-    public ICustomResult<JwtResult> Handle(ILoginDto dto, IUserAccessLog accessLog)
+    public ICustomResult<JwtResult> Handle(LoginDto dto, IUserAccessLog accessLog)
     {
         var result = new CustomResult<JwtResult>();
 

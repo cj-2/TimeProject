@@ -1,9 +1,8 @@
 ﻿using TimeProject.Domain.Entities;
-using TimeProject.Domain.Dtos.Periods;
 
 namespace TimeProject.Infrastructure.ObjectValues.Records;
 
-public class RecordHistoryDay : IRecordHistoryDay
+public class RecordHistoryDayDto
 {
     public DateTime Date { get; set; }
     public DateTime InitDate { get; set; }

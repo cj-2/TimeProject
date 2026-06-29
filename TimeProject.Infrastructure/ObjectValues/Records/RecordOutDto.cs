@@ -1,10 +1,9 @@
-﻿using TimeProject.Domain.Entities;
-using TimeProject.Domain.Dtos.Categories;
-using TimeProject.Domain.Dtos.Records;
+﻿
+using TimeProject.Infrastructure.ObjectValues.Categories;
 
 namespace TimeProject.Infrastructure.ObjectValues.Records;
 
-public class RecordOutDto : IRecordOutDto
+public class RecordOutDto
 {
     public int RecordId { get; set; }
     public string? Name { get; set; }
@@ -12,9 +11,9 @@ public class RecordOutDto : IRecordOutDto
     public string Code { get; set; } = string.Empty;
     public string? ExternalLink { get; set; }
 
-    public ICategoryOutDto? Category { get; set; }
+    public CategoryOutDto? Category { get; set; }
     public string? CategoryName => Category?.Name;
     public int? CategoryId { get; set; }
 
-    public IRecordResumeOutDto? Resume { get; set; }
+    public RecordResumeOutDto? Resume { get; set; }
 }

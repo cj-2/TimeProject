@@ -2,17 +2,16 @@
 using TimeProject.Infrastructure.ObjectValues;
 using TimeProject.Domain.Entities;
 using TimeProject.Infrastructure.Database.Entities;
-using TimeProject.Domain.Repositories;
-using TimeProject.Domain.Dtos.Users;
 using TimeProject.Domain.Shared;
 using TimeProject.Infrastructure.Errors;
 using TimeProject.Infrastructure.Interfaces;
+using TimeProject.Infrastructure.ObjectValues.Users;
 
 namespace TimeProject.Application.UseCases.Users;
 
 public class CreateUserByGoogleUserUseCase(IUnitOfWork unitOfWork) : ICreateUserByGoogleUserUseCase
 {
-    public ICustomResult<IUser> Handle(ICreateUserOAtuhDto dto, string email)
+    public ICustomResult<IUser> Handle(CreateUserOAuthDto dto, string email)
     {
         var result = new CustomResult<IUser>();
 

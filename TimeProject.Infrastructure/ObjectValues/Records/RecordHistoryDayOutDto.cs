@@ -1,16 +1,16 @@
 ﻿using TimeProject.Domain.Entities;
-using TimeProject.Domain.Dtos.Periods;
-using TimeProject.Domain.Dtos.Records;
+using TimeProject.Infrastructure.ObjectValues.Periods;
+using TimeProject.Infrastructure.ObjectValues.Sessions;
 using TimeProject.Infrastructure.Utils;
 
 namespace TimeProject.Infrastructure.ObjectValues.Records;
 
-public class RecordHistoryDayOutDto : IRecordHistoryDayOutDto
+public class RecordHistoryDayOutDto
 {
     public DateTime Date { get; set; }
 
-    public IEnumerable<IPeriodOutDto>? Periods { get; set; }
-    public IEnumerable<ISessionOutDto>? Sessions { get; set; }
+    public IEnumerable<PeriodOutDto>? Periods { get; set; }
+    public IEnumerable<SessionOutDto>? Sessions { get; set; }
     public IEnumerable<IMinute>? Minutes { get; set; }
 
     private TimeSpan TimeSpanPeriods => TimeFormatUtil.TimeSpanFromPeriods(Periods);

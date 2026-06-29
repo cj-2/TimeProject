@@ -1,6 +1,5 @@
 using TimeProject.Application.Interfaces.UseCases.Records;
 using TimeProject.Domain.ObjectValues;
-using TimeProject.Domain.Dtos.Records;
 using TimeProject.Domain.Repositories;
 using TimeProject.Domain.Shared;
 using TimeProject.Infrastructure.Errors;
@@ -16,16 +15,14 @@ public class GetRecordHistoryUseCase(
     IUserRepository userRepository,
     IRecordMapDataUtil mapDataUtil) : IGetRecordHistoryUseCase
 {
-    public ICustomResult<IPagination<IRecordHistoryDayOutDto>> Handle(
-        int recordId,
+    public ICustomResult<IPagination<RecordHistoryDayOutDto>> Handle(int recordId,
         int userId,
-        IPaginationQuery paginationQuery
-    )
+        IPaginationQuery paginationQuery)
     {
         var user = userRepository.FindById(userId);
         if (user == null)
         {
-            return new CustomResult<IPagination<IRecordHistoryDayOutDto>>().SetError(UserMessageErrors.NotFound);
+            return new CustomResult<IPagination<RecordHistoryDayOutDto>>().SetError(UserMessageErrors.NotFound);
         }
 
         // É passado um int referente ao UTC entre -12 e 13, para que consigamos saber as datas do UTC do usuário.
@@ -35,7 +32,7 @@ public class GetRecordHistoryUseCase(
             .Skip((paginationQuery.Page - 1) * paginationQuery.PerPage)
             .Take(paginationQuery.PerPage);
 
-        var historyDays = new List<RecordHistoryDay>();
+        var historyDays = new List<RecordHistoryDayDto>();
 
         foreach (var dateItem in dates)
         {
@@ -49,7 +46,7 @@ public class GetRecordHistoryUseCase(
 
             if (tpList.Count == 0 && tsList.Count == 0 && tmList.Count == 0) continue;
 
-            historyDays.Add(new RecordHistoryDay
+            historyDays.Add(new RecordHistoryDayDto
             {
                 Date = initDate,
                 InitDate = initDate,
@@ -60,9 +57,9 @@ public class GetRecordHistoryUseCase(
             });
         }
 
-        return new CustomResult<IPagination<IRecordHistoryDayOutDto>>
+        return new CustomResult<IPagination<RecordHistoryDayOutDto>>
         {
-            Data = Pagination<IRecordHistoryDayOutDto>
+            Data = Pagination<RecordHistoryDayOutDto>
                 .Handle(mapDataUtil.Handle(historyDays), paginationQuery, distinctDates.Count)
         };
     }

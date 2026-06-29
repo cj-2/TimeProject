@@ -1,9 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using TimeProject.Domain.Dtos.Users;
 
 namespace TimeProject.Infrastructure.ObjectValues.Users;
 
-public class UpdateUserDto : IUpdateUserDto
+public class UpdateUserDto
 {
     [MinLength(2)] [MaxLength(120)] public string? Name { get; set; }
     [EmailAddress] [MaxLength(64)] public string? Email { get; set; }

@@ -1,9 +1,8 @@
-﻿using TimeProject.Domain.Dtos.Periods;
-using TimeProject.Infrastructure.Utils;
+﻿using TimeProject.Infrastructure.Utils;
 
 namespace TimeProject.Infrastructure.ObjectValues.Periods;
 
-public class PeriodOutDto : IPeriodOutDto
+public class PeriodOutDto
 {
     public int PeriodId { get; set; }
     public DateTimeOffset Start { get; set; }

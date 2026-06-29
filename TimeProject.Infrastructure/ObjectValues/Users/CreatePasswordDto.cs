@@ -1,9 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using TimeProject.Domain.Dtos.Users;
 
 namespace TimeProject.Infrastructure.ObjectValues.Users;
 
-public class CreatePasswordDto : ICreatePasswordDto
+public class CreatePasswordDto
 {
     [MinLength(8)]
     [MaxLength(48)]

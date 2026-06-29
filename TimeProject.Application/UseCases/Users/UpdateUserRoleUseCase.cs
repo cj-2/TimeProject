@@ -1,21 +1,19 @@
 ﻿using TimeProject.Application.Interfaces.UseCases.Users;
 using TimeProject.Infrastructure.ObjectValues;
-using TimeProject.Infrastructure.Database.Entities.Enums;
-using TimeProject.Domain.Repositories;
 using TimeProject.Infrastructure.Utils.Interfaces;
-using TimeProject.Domain.Dtos.Users;
 using TimeProject.Domain.Entities.Enums;
 using TimeProject.Domain.Shared;
 using TimeProject.Infrastructure.Errors;
 using TimeProject.Infrastructure.Interfaces;
+using TimeProject.Infrastructure.ObjectValues.Users;
 
 namespace TimeProject.Application.UseCases.Users;
 
 public class UpdateUserRoleUseCase(IUnitOfWork unitOfWork, IUserMapDataUtil mapper) : IUpdateUserRoleUseCase
 {
-    public ICustomResult<IUserOutDto> Handle(int id, IUpdateRoleDto dto)
+    public ICustomResult<UserOutDto> Handle(int id, UpdateRoleDto dto)
     {
-        var result = new CustomResult<IUserOutDto>();
+        var result = new CustomResult<UserOutDto>();
         var user = unitOfWork.UserRepository.FindById(id);
 
         if (user == null)

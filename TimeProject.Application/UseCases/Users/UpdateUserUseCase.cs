@@ -1,9 +1,7 @@
 ﻿using TimeProject.Application.Interfaces.UseCases.Users;
 using TimeProject.Infrastructure.ObjectValues;
 using TimeProject.Domain.ObjectValues;
-using TimeProject.Domain.Repositories;
 using TimeProject.Infrastructure.Utils.Interfaces;
-using TimeProject.Domain.Dtos.Users;
 using TimeProject.Domain.Shared;
 using TimeProject.Infrastructure.Errors;
 using TimeProject.Infrastructure.Interfaces;
@@ -13,19 +11,19 @@ namespace TimeProject.Application.UseCases.Users;
 
 public class UpdateUserUseCase(IUnitOfWork unitOfWork, IUserMapDataUtil mapper) : IUpdateUserUseCase
 {
-    public ICustomResult<IUserOutDto> Handle(int id, IUpdateUserDto dto)
+    public ICustomResult<UserOutDto> Handle(int id, UpdateUserDto dto)
     {
         return _update(id, dto, null);
     }
 
-    public ICustomResult<IUserOutDto> Handle(int id, IUpdateUserDto dto, IUpdateUserOptions config)
+    public ICustomResult<UserOutDto> Handle(int id, UpdateUserDto dto, IUpdateUserOptions config)
     {
         return _update(id, dto, config);
     }
 
-    private ICustomResult<IUserOutDto> _update(int id, IUpdateUserDto dto, IUpdateUserOptions? config)
+    private ICustomResult<UserOutDto> _update(int id, UpdateUserDto dto, IUpdateUserOptions? config)
     {
-        var result = new CustomResult<IUserOutDto>();
+        var result = new CustomResult<UserOutDto>();
         var user = unitOfWork.UserRepository.FindById(id);
 
         if (user == null) return result.SetError(UserMessageErrors.NotFound);

@@ -1,8 +1,6 @@
-﻿using TimeProject.Domain.Dtos.Periods;
+﻿namespace TimeProject.Infrastructure.ObjectValues.Records;
 
-namespace TimeProject.Infrastructure.ObjectValues.Records;
-
-public class CreatePeriodDto : ICreatePeriodData
+public class CreatePeriodDto
 {
     public int RecordId { get; set; }
     public DateTimeOffset Start { get; set; }

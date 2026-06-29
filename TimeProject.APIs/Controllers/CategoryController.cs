@@ -4,7 +4,6 @@ using TimeProject.APIs.Controllers.Shared;
 using TimeProject.Application.Interfaces.UseCases.Categories;
 using TimeProject.Domain.Entities;
 using TimeProject.Domain.ObjectValues;
-using TimeProject.Domain.Dtos.Categories;
 using TimeProject.Infrastructure.ObjectValues.General;
 using TimeProject.Infrastructure.ObjectValues.Categories;
 using TimeProject.Infrastructure.Utils;
@@ -24,20 +23,20 @@ public class CategoryController(
     : CustomController
 {
     [HttpGet]
-    public ActionResult<IPagination<ICategoryOutDto>> Index([FromQuery] PaginationQuery paginationQuery)
+    public ActionResult<IPagination<CategoryOutDto>> Index([FromQuery] PaginationQuery paginationQuery)
     {
         return HandleResponse( getPaginatedCategoryUseCase.Handle(paginationQuery, UserClaimsUtil.Id(User)));
     }
 
     [HttpGet]
     [Route("all")]
-    public ActionResult<IList<ICategoryOutDto>> Index([FromQuery] bool onlyWithData)
+    public ActionResult<IList<CategoryOutDto>> Index([FromQuery] bool onlyWithData)
     {
         return HandleResponse(getAllCategoryUseCase.Handle(UserClaimsUtil.Id(User), onlyWithData));
     }
 
     [HttpPost]
-    public ActionResult<ICategoryOutDto> Create([FromBody] CategoryDto dto)
+    public ActionResult<CategoryOutDto> Create([FromBody] CategoryDto dto)
     {
         var result =  createCategoryUseCase.Handle(dto, UserClaimsUtil.Id(User));
         result.ActionName = nameof(Create);

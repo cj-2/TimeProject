@@ -1,9 +1,9 @@
-﻿using TimeProject.Domain.Dtos.Categories;
-using TimeProject.Domain.Shared;
+﻿using TimeProject.Domain.Shared;
+using TimeProject.Infrastructure.ObjectValues.Categories;
 
 namespace TimeProject.Application.Interfaces.UseCases.Categories;
 
 public interface ICreateCategoryUseCase
 {
-    ICustomResult<ICategoryOutDto> Handle(ICategoryDto dto, int userId);
+    ICustomResult<CategoryOutDto> Handle(CategoryDto dto, int userId);
 }

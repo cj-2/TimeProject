@@ -1,9 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using TimeProject.Domain.Dtos.Feedbacks;
 
 namespace TimeProject.Infrastructure.ObjectValues.Feedbacks;
 
-public class PublicFeedbackDto : FeedbackDto, IPublicFeedbackDto
+public class PublicFeedbackDto : FeedbackDto
 {
     [Required] public string Name { get; set; } = "";
     [Required] public string Email { get; set; } = "";

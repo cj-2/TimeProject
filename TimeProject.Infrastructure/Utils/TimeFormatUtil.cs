@@ -1,14 +1,13 @@
 ﻿using TimeProject.Domain.Entities;
-using TimeProject.Domain.Dtos.Periods;
-using TimeProject.Domain.Dtos.Records;
 using TimeProject.Infrastructure.Database.Entities;
-using TimeProject.Infrastructure.ObjectValues;
+using TimeProject.Infrastructure.ObjectValues.Periods;
+using TimeProject.Infrastructure.ObjectValues.Sessions;
 
 namespace TimeProject.Infrastructure.Utils;
 
 public static class TimeFormatUtil
 {
-    public static TimeSpan TimeSpanFromPeriods(IEnumerable<IPeriodOutDto>? periods)
+    public static TimeSpan TimeSpanFromPeriods(IEnumerable<PeriodOutDto>? periods)
     {
         if (periods == null) return TimeSpan.Zero;
 
@@ -35,7 +34,7 @@ public static class TimeFormatUtil
         return timeMinutes.Aggregate(total, (current, tm) => current.Add(new TimeSpan(0, tm.Total, 0)));
     }
 
-    public static TimeSpan TimeSpanFromSessions(IEnumerable<ISessionOutDto>? sessions)
+    public static TimeSpan TimeSpanFromSessions(IEnumerable<SessionOutDto>? sessions)
     {
         if (sessions == null) return TimeSpan.Zero;
         var total = TimeSpan.Zero;
@@ -75,7 +74,7 @@ public static class TimeFormatUtil
         return string.IsNullOrEmpty(result) ? "0s" : result;
     }
 
-    public static string StringFromPeriods(IEnumerable<IPeriodOutDto>? periods)
+    public static string StringFromPeriods(IEnumerable<PeriodOutDto>? periods)
     {
         if (periods == null) return "0s";
 

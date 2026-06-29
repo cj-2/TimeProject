@@ -4,7 +4,6 @@ using TimeProject.APIs.Controllers.Shared;
 using TimeProject.Application.Interfaces.UseCases.Periods;
 using TimeProject.Domain.Entities;
 using TimeProject.Domain.ObjectValues;
-using TimeProject.Domain.Dtos.Periods;
 using TimeProject.Infrastructure.ObjectValues.General;
 using TimeProject.Infrastructure.ObjectValues.Periods;
 using TimeProject.Infrastructure.ObjectValues.Records;
@@ -26,7 +25,7 @@ public class PeriodController(
 {
     [HttpGet]
     [Route("{recordId:int}")]
-    public ActionResult<IPagination<IPeriodOutDto>> Index(int recordId, [FromQuery] PaginationQuery paginationQuery)
+    public ActionResult<IPagination<PeriodOutDto>> Index(int recordId, [FromQuery] PaginationQuery paginationQuery)
     {
         return HandleResponse(
             getPaginatedPeriodUseCase.Handle(recordId, UserClaimsUtil.Id(User), paginationQuery));

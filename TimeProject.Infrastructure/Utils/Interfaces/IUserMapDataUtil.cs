@@ -1,11 +1,10 @@
 ﻿using TimeProject.Domain.Entities;
-using TimeProject.Infrastructure.Database.Entities;
-using TimeProject.Domain.Dtos.Users;
+using TimeProject.Infrastructure.ObjectValues.Users;
 
 namespace TimeProject.Infrastructure.Utils.Interfaces;
 
 public interface IUserMapDataUtil
 {
-    IUserOutDto Handle(IUser entity);
-    IEnumerable<IUserOutDto> Handle(IEnumerable<IUser> entity);
+    UserOutDto Handle(IUser entity);
+    IEnumerable<UserOutDto> Handle(IEnumerable<IUser> entity);
 }

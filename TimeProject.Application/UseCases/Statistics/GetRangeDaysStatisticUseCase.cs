@@ -2,7 +2,6 @@ using TimeProject.Application.Interfaces.UseCases.Statistics;
 using TimeProject.Infrastructure.ObjectValues;
 using TimeProject.Domain.Entities;
 using TimeProject.Domain.Repositories;
-using TimeProject.Domain.Dtos.Statistics;
 using TimeProject.Domain.Entities.Enums;
 using TimeProject.Domain.Shared;
 using TimeProject.Infrastructure.Database.Entities;
@@ -20,23 +19,21 @@ public class GetRangeDaysStatisticUseCase(
 )
     : IGetRangeDaysStatisticUseCase
 {
-    public ICustomResult<IRangeStatistic> Handle(
-        int userId,
+    public ICustomResult<RangeStatistic> Handle(int userId,
         DateTimeOffset? start = null,
         DateTimeOffset? end = null,
         int? recordId = null,
-        bool skipRangeProgress = false
-    )
+        bool skipRangeProgress = false)
     {
-        return new CustomResult<IRangeStatistic>().SetData(
+        return new CustomResult<RangeStatistic>().SetData(
             (_handle(userId, start, end, recordId, skipRangeProgress)).Statistic
         );
     }
 
-    public ICustomResult<IRangeStatisticsWithDays> Handle(int userId, DateTimeOffset start, DateTimeOffset end)
+    public ICustomResult<RangeStatisticsWithDays> Handle(int userId, DateTimeOffset start, DateTimeOffset end)
     {
         var daysFromRange = new List<DateTimeOffset> { start };
-        var daysStatistics = new List<IRangeStatistic>();
+        var daysStatistics = new List<RangeStatistic>();
 
         var periods = new List<Period>();
         var minutes = new List<Minute>();
@@ -61,7 +58,7 @@ public class GetRangeDaysStatisticUseCase(
             periods.AddRange(result.Periods.OfType<Period>());
             minutes.AddRange(result.Minutes.OfType<Minute>());
             sessions.AddRange(result.Sessions.OfType<Session>());
-            daysStatistics.Add((RangeStatistic)result.Statistic);
+            daysStatistics.Add(result.Statistic);
 
             if (result.Statistic.TotalInMinutes > 0) activeDaysCount++;
         }
@@ -84,7 +81,7 @@ public class GetRangeDaysStatisticUseCase(
         );
 
 
-        return new CustomResult<IRangeStatisticsWithDays>().SetData(new RangeStatisticsWithDays
+        return new CustomResult<RangeStatisticsWithDays>().SetData(new RangeStatisticsWithDays
         {
             Total = rangeStatistics,
             Days = daysStatistics.OrderByDescending(e => e.StartDay).ToList()
@@ -229,13 +226,13 @@ public class GetRangeDaysStatisticUseCase(
         };
     }
 
-    private IList<IRecordRangeProgress> MakeRangeProgress(
+    private IList<RecordRangeProgress> MakeRangeProgress(
         List<Record> records,
         List<Period> allPeriods,
         List<Minute> allMinutes
     )
     {
-        var rangeProgressList = new List<IRecordRangeProgress>();
+        var rangeProgressList = new List<RecordRangeProgress>();
 
         foreach (var record in records)
         {

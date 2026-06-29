@@ -1,10 +1,10 @@
 ﻿using TimeProject.Domain.Entities;
-using TimeProject.Domain.Dtos.Categories;
+using TimeProject.Infrastructure.ObjectValues.Categories;
 
 namespace TimeProject.Infrastructure.Utils.Interfaces;
 
 public interface ICategoryMapDataUtil
 {
-    IList<ICategoryOutDto> Handle(IList<ICategory> entities);
-    ICategoryOutDto Handle(ICategory entity);
+    IList<CategoryOutDto> Handle(IList<ICategory> entities);
+    CategoryOutDto Handle(ICategory entity);
 }

@@ -1,6 +1,6 @@
-﻿using TimeProject.Domain.Dtos.Periods;
-using TimeProject.Domain.Shared;
+﻿using TimeProject.Domain.Shared;
 using TimeProject.Infrastructure.Errors;
+using TimeProject.Infrastructure.ObjectValues.Periods;
 using TimeProject.Infrastructure.Utils.Interfaces;
 
 namespace TimeProject.Infrastructure.Utils;
@@ -17,9 +17,9 @@ public class PeriodValidateUtil : IPeriodValidateUtil
             customResult.SetError(PeriodMessageErrors.EndDateIsBiggerThenStartDate);
     }
 
-    public bool HasMinSize(IPeriodData data)
+    public bool HasMinSize(PeriodDto dto)
     {
-        var time = data.End.Subtract(data.Start);
+        var time = dto.End.Subtract(dto.Start);
         return time.TotalSeconds > 2;
     }
 }

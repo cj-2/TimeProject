@@ -2,9 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using TimeProject.APIs.Controllers.Shared;
 using TimeProject.Domain.ObjectValues;
-using TimeProject.Domain.Dtos.Users;
 using TimeProject.Infrastructure.ObjectValues.General;
-using TimeProject.Infrastructure.ObjectValues;
 using TimeProject.Infrastructure.ObjectValues.Users;
 using TimeProject.Infrastructure.Utils;
 using TimeProject.APIs.Controllers.Attributes;
@@ -26,14 +24,14 @@ public class UserController(
 {
     [HttpGet]
     [Authorize(Policy = "IsAdmin")]
-    public ActionResult<IPagination<IUserOutDto>> Index([FromQuery] PaginationQuery paginationQuery)
+    public ActionResult<IPagination<UserOutDto>> Index([FromQuery] PaginationQuery paginationQuery)
     {
         return HandleResponse(getPaginatedUserUseCase.Handle(paginationQuery));
     }
 
     [HttpPost]
     [UserChallenge]
-    public ActionResult<CreateUserResult> Create([FromBody] CreateUserDto dto)
+    public ActionResult<CreateUserOutDto> Create([FromBody] CreateUserDto dto)
     {
         var result =  createUserUseCase.Handle(dto);
         result.ActionName = nameof(Create);
@@ -42,14 +40,14 @@ public class UserController(
 
     [HttpPut("{id:int}")]
     [Authorize(Policy = "IsActive")]
-    public ActionResult<IUserOutDto> Update([FromRoute] int id, [FromBody] UpdateUserDto dto)
+    public ActionResult<UserOutDto> Update([FromRoute] int id, [FromBody] UpdateUserDto dto)
     {
         return HasAuthorization(id) ? HandleResponse(updateUserUseCase.Handle(id, dto)) : Forbid();
     }
 
     [HttpPut("role/{id:int}")]
     [Authorize(Policy = "IsAdmin")]
-    public ActionResult<IUserOutDto> UpdateRole([FromRoute] int id, [FromBody] UpdateRoleDto dto)
+    public ActionResult<UserOutDto> UpdateRole([FromRoute] int id, [FromBody] UpdateRoleDto dto)
     {
         return HandleResponse(updateUserRoleUseCase.Handle(id, dto));
     }
@@ -70,14 +68,14 @@ public class UserController(
 
     [HttpGet("{id:int}")]
     [Authorize(Policy = "IsActive")]
-    public ActionResult<IUserOutDto> Get(int id)
+    public ActionResult<UserOutDto> Get(int id)
     {
         return HasAuthorization(id) ? HandleResponse(getUserUseCase.Handle(id)) : Forbid();
     }
 
     [HttpGet("myself")]
     [Authorize(Policy = "IsActive")]
-    public ActionResult<IUserOutDto> Myself()
+    public ActionResult<UserOutDto> Myself()
     {
         return HandleResponse(getUserUseCase.Handle(UserClaimsUtil.Id(User)));
     }

@@ -1,8 +1,6 @@
-﻿using TimeProject.Domain.Dtos.Categories;
+﻿namespace TimeProject.Infrastructure.ObjectValues.Categories;
 
-namespace TimeProject.Infrastructure.ObjectValues.Categories;
-
-public class CategoryOutDto : ICategoryOutDto
+public class CategoryOutDto
 {
     public int CategoryId { get; set; }
     public string Name { get; set; } = string.Empty;

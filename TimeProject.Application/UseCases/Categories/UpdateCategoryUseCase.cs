@@ -2,15 +2,15 @@
 using TimeProject.Infrastructure.ObjectValues;
 using TimeProject.Domain.Entities;
 using TimeProject.Domain.Repositories;
-using TimeProject.Domain.Dtos.Categories;
 using TimeProject.Domain.Shared;
 using TimeProject.Infrastructure.Errors;
+using TimeProject.Infrastructure.ObjectValues.Categories;
 
 namespace TimeProject.Application.UseCases.Categories;
 
 public class UpdateCategoryUseCase(ICategoryRepository repository) : IUpdateCategoryUseCase
 {
-    public ICustomResult<ICategory> Handle(int id, ICategoryDto dto, int userId)
+    public ICustomResult<ICategory> Handle(int id, CategoryDto dto, int userId)
     {
         var result = new CustomResult<ICategory>();
         var category = repository.FindById(id);

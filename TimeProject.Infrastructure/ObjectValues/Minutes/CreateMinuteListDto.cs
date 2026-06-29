@@ -1,9 +1,8 @@
 using System.ComponentModel.DataAnnotations;
-using TimeProject.Domain.Dtos.Minutes;
 
 namespace TimeProject.Infrastructure.ObjectValues.Minutes;
 
-public class CreateMinuteListDto : ICreateMinuteListDto
+public class CreateMinuteListDto
 {
     public int? CategoryId { get; set; }
     public int? RecordId { get; set; }

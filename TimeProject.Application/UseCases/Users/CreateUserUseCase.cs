@@ -1,9 +1,6 @@
 ﻿using TimeProject.Application.Interfaces.UseCases.Users;
 using TimeProject.Infrastructure.Database.Entities;
-using TimeProject.Domain.ObjectValues;
-using TimeProject.Domain.Repositories;
 using TimeProject.Infrastructure.Utils.Interfaces;
-using TimeProject.Domain.Dtos.Users;
 using TimeProject.Domain.Shared;
 using TimeProject.Infrastructure.Errors;
 using TimeProject.Infrastructure.Interfaces;
@@ -19,9 +16,9 @@ public class CreateUserUseCase(
     ICreateOrUpdateUserPasswordUseCase createUserPasswordUseCase
 ) : ICreateUserUseCase
 {
-    public ICustomResult<CreateUserResult> Handle(ICreateUserDto dto)
+    public ICustomResult<CreateUserOutDto> Handle(CreateUserDto dto)
     {
-        var result = new CustomResult<CreateUserResult>();
+        var result = new CustomResult<CreateUserOutDto>();
         var emailAvailable = unitOfWork.UserRepository.EmailIsAvailable(dto.Email);
 
         if (emailAvailable == false) return result.SetError(UserMessageErrors.EmailAlreadyInUse);
@@ -41,7 +38,7 @@ public class CreateUserUseCase(
 
         unitOfWork.SaveChanges();
         
-        result.Data = new CreateUserResult
+        result.Data = new CreateUserOutDto
         {
             User = mapper.Handle(entity),
             Jwt = jwtHandler.Generate(entity)

@@ -1,11 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using TimeProject.Domain.Dtos.Records;
 using TimeProject.Domain.Entities.Enums;
 using TimeProject.Infrastructure.ObjectValues.Periods;
 
 namespace TimeProject.Infrastructure.ObjectValues.Records;
 
-public class CreateRecordDto : ICreateRecordData
+public class CreateRecordDto
 {
     [MaxLength(120)] public string? Name { get; set; }
     [MaxLength(240)] public string? Description { get; set; }

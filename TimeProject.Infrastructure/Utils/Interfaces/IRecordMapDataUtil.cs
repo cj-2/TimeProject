@@ -1,14 +1,13 @@
 using TimeProject.Domain.Entities;
-using TimeProject.Domain.Dtos.Periods;
-using TimeProject.Domain.Dtos.Records;
+using TimeProject.Infrastructure.ObjectValues.Records;
 
 namespace TimeProject.Infrastructure.Utils.Interfaces;
 
 public interface IRecordMapDataUtil
 {
-    IEnumerable<IRecordHistoryDayOutDto> Handle(IEnumerable<IRecordHistoryDay> entity);
+    IEnumerable<RecordHistoryDayOutDto> Handle(IEnumerable<RecordHistoryDayDto> entity);
 
-    IRecordOutDto Handle(IRecord entity);
+    RecordOutDto Handle(IRecord entity);
 
-    IEnumerable<IRecordOutDto> Handle(IEnumerable<IRecord> entities);
+    IEnumerable<RecordOutDto> Handle(IEnumerable<IRecord> entities);
 }

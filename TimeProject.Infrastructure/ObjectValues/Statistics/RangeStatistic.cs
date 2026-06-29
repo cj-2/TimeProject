@@ -1,8 +1,7 @@
-using TimeProject.Domain.Dtos.Statistics;
 
 namespace TimeProject.Infrastructure.ObjectValues.Statistics;
 
-public class RangeStatistic : IRangeStatistic
+public class RangeStatistic
 {
     public DateTimeOffset StartDay { get; set; }
     public DateTimeOffset EndDay { get; set; }
@@ -41,5 +40,5 @@ public class RangeStatistic : IRangeStatistic
     public int MinuteCount { get; set; }
     public int ManualCount { get; set; }
 
-    public IList<IRecordRangeProgress>? RecordRangeProgress { get; set; }
+    public IList<RecordRangeProgress>? RecordRangeProgress { get; set; }
 }

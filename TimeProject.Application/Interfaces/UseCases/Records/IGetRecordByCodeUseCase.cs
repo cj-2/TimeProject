@@ -1,9 +1,9 @@
-using TimeProject.Domain.Dtos.Records;
 using TimeProject.Domain.Shared;
+using TimeProject.Infrastructure.ObjectValues.Records;
 
 namespace TimeProject.Application.Interfaces.UseCases.Records;
 
 public interface IGetRecordByCodeUseCase
 {
-    ICustomResult<IRecordOutDto> Handle(string code, int userId);
+    ICustomResult<RecordOutDto> Handle(string code, int userId);
 }

@@ -2,11 +2,11 @@
 using TimeProject.Application.Interfaces.UseCases.Records;
 using TimeProject.Infrastructure.ObjectValues;
 using TimeProject.Domain.Entities;
-using TimeProject.Domain.Dtos.Periods;
 using TimeProject.Domain.Repositories;
 using TimeProject.Infrastructure.Utils.Interfaces;
 using TimeProject.Domain.Shared;
 using TimeProject.Infrastructure.Errors;
+using TimeProject.Infrastructure.ObjectValues.Periods;
 
 namespace TimeProject.Application.UseCases.Periods;
 
@@ -16,18 +16,18 @@ public class UpdatePeriodUseCase(
     IPeriodValidateUtil periodValidateUtil
 ) : IUpdatePeriodUseCase
 {
-    public ICustomResult<IPeriod> Handle(int id, IPeriodData data, int userId)
+    public ICustomResult<IPeriod> Handle(int id, PeriodDto dto, int userId)
     {
         var result = new CustomResult<IPeriod>();
 
-        periodValidateUtil.ValidateStartAndEnd(data.Start, data.End, result);
+        periodValidateUtil.ValidateStartAndEnd(dto.Start, dto.End, result);
         if (result.HasError) return result;
 
         var period = repository.FindById(id, userId);
         if (period == null) return result.SetError(PeriodMessageErrors.NotFound);
 
-        period.Start = data.Start;
-        period.End = data.End;
+        period.Start = dto.Start;
+        period.End = dto.End;
 
         repository.Update(period);
         

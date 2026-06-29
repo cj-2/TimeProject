@@ -1,6 +1,4 @@
 using AutoMapper;
-using TimeProject.Domain.Entities;
-using TimeProject.Domain.Dtos.Periods;
 using TimeProject.Infrastructure.Database.Entities;
 using TimeProject.Infrastructure.ObjectValues.Periods;
 using TimeProject.Infrastructure.Utils.Interfaces;

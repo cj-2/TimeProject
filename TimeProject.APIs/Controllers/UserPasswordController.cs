@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using TimeProject.APIs.Controllers.Shared;
 using TimeProject.Application.Interfaces.UseCases.Users;
-using TimeProject.Domain.Dtos.Users;
 using TimeProject.Infrastructure.ObjectValues.Users;
 
 namespace TimeProject.APIs.Controllers;

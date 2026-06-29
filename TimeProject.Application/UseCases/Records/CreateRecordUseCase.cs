@@ -1,13 +1,12 @@
 ﻿using TimeProject.Application.Interfaces.UseCases.Periods;
 using TimeProject.Application.Interfaces.UseCases.Records;
 using TimeProject.Infrastructure.ObjectValues;
-using TimeProject.Domain.Dtos.Periods;
-using TimeProject.Domain.Dtos.Records;
 using TimeProject.Infrastructure.Database.Entities;
 using TimeProject.Domain.Shared;
 using TimeProject.Infrastructure.Errors;
 using TimeProject.Infrastructure.Interfaces;
 using TimeProject.Infrastructure.ObjectValues.Periods;
+using TimeProject.Infrastructure.ObjectValues.Records;
 using TimeProject.Infrastructure.Utils.Interfaces;
 
 namespace TimeProject.Application.UseCases.Records;
@@ -18,22 +17,22 @@ public class CreateRecordUseCase(
     ICreatePeriodByListUseCase createPeriodByListUseCase)
     : ICreateRecordUseCase
 {
-    public ICustomResult<IRecordOutDto> Handle(ICreateRecordData data, IList<IPeriodData>? periods, int userId)
+    public ICustomResult<RecordOutDto> Handle(CreateRecordDto dto, IList<PeriodDto>? periods, int userId)
     {
-        var result = new CustomResult<IRecordOutDto>();
+        var result = new CustomResult<RecordOutDto>();
 
-        if (data.CategoryId != null)
+        if (dto.CategoryId != null)
         {
-            var category = unitOfWork.CategoryRepository.FindById((int)data.CategoryId, userId);
+            var category = unitOfWork.CategoryRepository.FindById((int)dto.CategoryId, userId);
             if (category == null)
             {
                 return result.SetError(RecordMessageErrors.CategoryNotFound);
             }
         }
 
-        if (string.IsNullOrEmpty(data.Code) == false)
+        if (string.IsNullOrEmpty(dto.Code) == false)
         {
-            var trByCode = unitOfWork.RecordRepository.FindByCode(data.Code!, userId);
+            var trByCode = unitOfWork.RecordRepository.FindByCode(dto.Code!, userId);
             if (trByCode != null) return result.SetError(RecordMessageErrors.CodeAlreadyInUse);
         }
 
@@ -42,11 +41,11 @@ public class CreateRecordUseCase(
             .Create(new Record
                 {
                     UserId = userId,
-                    CategoryId = data.CategoryId,
-                    Name = data.Name,
-                    Description = data.Description,
-                    Code = string.IsNullOrEmpty(data.Code) == false ? data.Code! : Guid.NewGuid().ToString(),
-                    ExternalLink = data.ExternalLink
+                    CategoryId = dto.CategoryId,
+                    Name = dto.Name,
+                    Description = dto.Description,
+                    Code = string.IsNullOrEmpty(dto.Code) == false ? dto.Code! : Guid.NewGuid().ToString(),
+                    ExternalLink = dto.ExternalLink
                 }
             );
 
@@ -61,8 +60,8 @@ public class CreateRecordUseCase(
                         new PeriodListDto
                         {
                             Periods = periods,
-                            Type = data.SessionType,
-                            From = data.SessionFrom
+                            Type = dto.SessionType,
+                            From = dto.SessionFrom
                         },
                         record.RecordId, userId);
 

@@ -1,9 +1,9 @@
-﻿using TimeProject.Domain.Dtos.Users;
-using TimeProject.Domain.Shared;
+﻿using TimeProject.Domain.Shared;
+using TimeProject.Infrastructure.ObjectValues.Users;
 
 namespace TimeProject.Application.Interfaces.UseCases.Users;
 
 public interface IUpdateUserRoleUseCase
 {
-    ICustomResult<IUserOutDto> Handle(int id, IUpdateRoleDto dto);
+    ICustomResult<UserOutDto> Handle(int id, UpdateRoleDto dto);
 }

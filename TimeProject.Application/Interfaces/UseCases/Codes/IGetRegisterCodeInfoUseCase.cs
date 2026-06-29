@@ -1,9 +1,9 @@
-﻿using TimeProject.Domain.Dtos.Codes;
-using TimeProject.Domain.Shared;
+﻿using TimeProject.Domain.Shared;
+using TimeProject.Infrastructure.ObjectValues.Codes;
 
 namespace TimeProject.Application.Interfaces.UseCases.Codes;
 
 public interface IGetRegisterCodeInfoUseCase
 {
-    ICustomResult<IConfirmCodeOutDto> Handle(int userId);
+    ICustomResult<ConfirmCodeOutDto> Handle(int userId);
 }

@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using TimeProject.APIs.Controllers.Shared;
 using TimeProject.Application.Interfaces.UseCases.Codes;
-using TimeProject.Domain.Dtos.Codes;
+using TimeProject.Infrastructure.ObjectValues.Codes;
 using TimeProject.Infrastructure.Utils;
 
 namespace TimeProject.APIs.Controllers;
@@ -14,7 +14,7 @@ public class ConfirmCodeController(IGetRegisterCodeInfoUseCase getRegisterCodeIn
     [HttpGet]
     [Route("register/info")]
     [Authorize]
-    public ActionResult<IConfirmCodeOutDto> HasVerifyCodeActive()
+    public ActionResult<ConfirmCodeOutDto> HasVerifyCodeActive()
     {
         return HandleResponse(getRegisterCodeInfoUseCase.Handle(UserClaimsUtil.Id(User)));
     }

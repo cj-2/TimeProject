@@ -1,7 +1,6 @@
 ﻿using TimeProject.Application.Interfaces.UseCases.Users;
 using TimeProject.Infrastructure.ObjectValues;
 using TimeProject.Domain.Repositories;
-using TimeProject.Domain.Dtos.Users;
 using TimeProject.Domain.Shared;
 using TimeProject.Infrastructure.Errors;
 using TimeProject.Infrastructure.Interfaces;
@@ -11,7 +10,7 @@ namespace TimeProject.Application.UseCases.Users;
 
 public class DisableUserUseCase(IUnitOfWork unitOfWork) : IDisableUserUseCase
 {
-    public ICustomResult<bool> Handle(int id, IDisableUserDto dto)
+    public ICustomResult<bool> Handle(int id, DisableUserDto dto)
     {
         var result = new CustomResult<bool>();
         var user = unitOfWork.UserRepository.FindById(id);

@@ -1,9 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using TimeProject.Domain.Dtos.Users;
 
 namespace TimeProject.Infrastructure.ObjectValues.Users;
 
-public class CreateUserDto : ICreateUserDto
+public class CreateUserDto
 {
     [MinLength(2)] [MaxLength(120)] public string Name { get; set; } = string.Empty;
     [EmailAddress] [MaxLength(64)] public string Email { get; set; } = string.Empty;

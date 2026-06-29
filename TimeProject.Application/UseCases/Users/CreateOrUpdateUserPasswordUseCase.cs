@@ -1,28 +1,27 @@
 ﻿using TimeProject.Application.Interfaces.UseCases.Users;
 using TimeProject.Infrastructure.ObjectValues;
 using TimeProject.Infrastructure.Database.Entities;
-using TimeProject.Domain.Repositories;
-using TimeProject.Domain.Dtos.Users;
 using TimeProject.Domain.Shared;
 using TimeProject.Infrastructure.Errors;
 using TimeProject.Infrastructure.Interfaces;
+using TimeProject.Infrastructure.ObjectValues.Users;
 
 namespace TimeProject.Application.UseCases.Users;
 
 public class CreateOrUpdateUserPasswordUseCase(IUnitOfWork unitOfWork)
     : ICreateOrUpdateUserPasswordUseCase
 {
-    public ICustomResult<bool> Handle(int userId, ICreatePasswordDto dto, bool saveChanges = true)
+    public ICustomResult<bool> Handle(int userId, CreatePasswordDto dto, bool saveChanges = true)
     {
         return _handle(userId, dto.Password, saveChanges: saveChanges);
     }
 
-    public ICustomResult<bool> Handle(int userId, IUpdatePasswordDto dto, bool saveChanges = true)
+    public ICustomResult<bool> Handle(int userId, UpdatePasswordDto dto, bool saveChanges = true)
     {
         return _handle(userId, dto.Password, dto.OldPassword, saveChanges: saveChanges);
     }
 
-    public ICustomResult<bool> Handle(int userId, IUpdateByAdminPasswordDto dto, bool saveChanges = true)
+    public ICustomResult<bool> Handle(int userId, UpdateByAdminPasswordDto dto, bool saveChanges = true)
     {
         return _handle(userId, dto.Password, "", true, saveChanges: saveChanges);
     }
