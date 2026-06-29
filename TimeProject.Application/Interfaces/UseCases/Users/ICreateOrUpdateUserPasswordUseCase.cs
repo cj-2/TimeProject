@@ -1,5 +1,5 @@
-﻿using TimeProject.Domain.Shared;
-using TimeProject.Infrastructure.ObjectValues.Users;
+﻿using TimeProject.Application.Dtos.Users;
+using TimeProject.Application.Interfaces.Shared;
 
 namespace TimeProject.Application.Interfaces.UseCases.Users;
 

@@ -1,5 +1,5 @@
-﻿using TimeProject.Domain.Shared;
-using TimeProject.Infrastructure.ObjectValues.Codes;
+﻿using TimeProject.Application.Dtos.Codes;
+using TimeProject.Application.Interfaces.Shared;
 
 namespace TimeProject.Application.Interfaces.UseCases.Codes;
 

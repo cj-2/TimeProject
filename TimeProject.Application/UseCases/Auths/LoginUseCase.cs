@@ -1,13 +1,12 @@
-﻿using TimeProject.Application.Interfaces.UseCases.CustomLogs;
+﻿using TimeProject.Application.Dtos.Auths;
+using TimeProject.Application.Interfaces.Handlers;
+using TimeProject.Application.Interfaces.Shared;
+using TimeProject.Application.Interfaces.UseCases.CustomLogs;
 using TimeProject.Application.Interfaces.UseCases.Logins;
 using TimeProject.Application.Interfaces.UseCases.Users;
-using TimeProject.Infrastructure.ObjectValues;
+using TimeProject.Application.Shared;
 using TimeProject.Domain.Entities;
-using TimeProject.Infrastructure.Database.Entities;
-using TimeProject.Domain.Shared;
 using TimeProject.Infrastructure.Errors;
-using TimeProject.Infrastructure.Interfaces;
-using TimeProject.Infrastructure.ObjectValues.Auths;
 
 namespace TimeProject.Application.UseCases.Auths;
 

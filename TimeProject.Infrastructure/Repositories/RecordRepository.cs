@@ -6,8 +6,7 @@ using TimeProject.Infrastructure.Database.Entities;
 using TimeProject.Domain.ObjectValues;
 using TimeProject.Domain.Repositories;
 using TimeProject.Infrastructure.Database;
-using TimeProject.Infrastructure.ObjectValues.General;
-using TimeProject.Infrastructure.ObjectValues;
+using TimeProject.Infrastructure.Shared;
 
 namespace TimeProject.Infrastructure.Repositories;
 
@@ -62,7 +61,7 @@ public class RecordRepository(CustomDbContext db) : IRecordRepository
             .Include(r => r.Resume)
             .ToList();
 
-        return new IndexRepositoryResult<IRecord>
+        return new IndexRepositoryResult<IRecord>()
         {
             Count = count,
             Entities = entities

@@ -1,13 +1,13 @@
-﻿using TimeProject.Application.Interfaces.UseCases.Periods;
+﻿using TimeProject.Application.Dtos.Periods;
+using TimeProject.Application.Dtos.Records;
+using TimeProject.Application.Interfaces.Shared;
+using TimeProject.Application.Interfaces.UseCases.Periods;
 using TimeProject.Application.Interfaces.UseCases.Records;
-using TimeProject.Infrastructure.ObjectValues;
+using TimeProject.Application.Interfaces.Utils;
+using TimeProject.Application.Shared;
 using TimeProject.Infrastructure.Database.Entities;
-using TimeProject.Domain.Shared;
 using TimeProject.Infrastructure.Errors;
 using TimeProject.Infrastructure.Interfaces;
-using TimeProject.Infrastructure.ObjectValues.Periods;
-using TimeProject.Infrastructure.ObjectValues.Records;
-using TimeProject.Infrastructure.Utils.Interfaces;
 
 namespace TimeProject.Application.UseCases.Records;
 

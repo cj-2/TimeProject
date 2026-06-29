@@ -1,5 +1,5 @@
-﻿using TimeProject.Domain.Shared;
-using TimeProject.Infrastructure.ObjectValues.Feedbacks;
+﻿using TimeProject.Application.Dtos.Feedbacks;
+using TimeProject.Application.Interfaces.Shared;
 
 namespace TimeProject.Application.Interfaces.UseCases.Feedbacks;
 

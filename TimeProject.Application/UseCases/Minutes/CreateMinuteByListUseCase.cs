@@ -1,12 +1,12 @@
-﻿using TimeProject.Application.Interfaces.UseCases.Minutes;
+﻿using TimeProject.Application.Dtos.Minutes;
+using TimeProject.Application.Interfaces.Shared;
+using TimeProject.Application.Interfaces.UseCases.Minutes;
 using TimeProject.Application.Interfaces.UseCases.Records;
-using TimeProject.Infrastructure.ObjectValues;
+using TimeProject.Application.Shared;
 using TimeProject.Domain.Entities;
 using TimeProject.Infrastructure.Database.Entities;
 using TimeProject.Domain.Repositories;
-using TimeProject.Domain.Shared;
 using TimeProject.Infrastructure.Errors;
-using TimeProject.Infrastructure.ObjectValues.Minutes;
 
 namespace TimeProject.Application.UseCases.Minutes;
 

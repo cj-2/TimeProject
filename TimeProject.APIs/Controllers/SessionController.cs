@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using TimeProject.APIs.Controllers.Shared;
 using TimeProject.Application.Interfaces.UseCases.Sessions;
-using TimeProject.Infrastructure.Utils;
+using TimeProject.Application.Utils;
 
 namespace TimeProject.APIs.Controllers;
 

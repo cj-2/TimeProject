@@ -1,10 +1,10 @@
 using FluentAssertions;
 using Moq;
+using TimeProject.Application.Dtos.Statistics;
 using TimeProject.Domain.Entities;
 using TimeProject.Infrastructure.Database.Entities;
 using TimeProject.Domain.Entities.Enums;
 using TimeProject.Domain.Repositories;
-using TimeProject.Infrastructure.ObjectValues.Statistics;
 
 namespace TimeProject.UnitTests.UseCases;
 

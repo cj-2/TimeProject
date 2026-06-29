@@ -1,5 +1,5 @@
-﻿using TimeProject.Domain.Shared;
-using TimeProject.Infrastructure.ObjectValues.Categories;
+﻿using TimeProject.Application.Dtos.Categories;
+using TimeProject.Application.Interfaces.Shared;
 
 namespace TimeProject.Application.Interfaces.UseCases.Categories;
 

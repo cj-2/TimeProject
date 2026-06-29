@@ -1,10 +1,10 @@
-﻿using TimeProject.Application.Interfaces.UseCases.Users;
-using TimeProject.Infrastructure.ObjectValues;
+﻿using TimeProject.Application.Dtos.Users;
+using TimeProject.Application.Interfaces.Shared;
+using TimeProject.Application.Interfaces.UseCases.Users;
+using TimeProject.Application.Interfaces.Utils;
+using TimeProject.Application.Shared;
 using TimeProject.Domain.Repositories;
-using TimeProject.Infrastructure.Utils.Interfaces;
-using TimeProject.Domain.Shared;
 using TimeProject.Infrastructure.Errors;
-using TimeProject.Infrastructure.ObjectValues.Users;
 
 namespace TimeProject.Application.UseCases.Users;
 

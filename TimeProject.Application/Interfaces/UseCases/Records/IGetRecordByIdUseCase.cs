@@ -1,5 +1,5 @@
+using TimeProject.Application.Interfaces.Shared;
 using TimeProject.Domain.Entities;
-using TimeProject.Domain.Shared;
 
 namespace TimeProject.Application.Interfaces.UseCases.Records;
 

@@ -1,9 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using TimeProject.Application.Interfaces.Shared;
 using TimeProject.Application.Interfaces.UseCases.Records;
-using TimeProject.Infrastructure.ObjectValues;
+using TimeProject.Application.Shared;
 using TimeProject.Domain.Entities;
-using TimeProject.Infrastructure.Database.Entities;
-using TimeProject.Domain.Shared;
 using TimeProject.Infrastructure.Database;
 
 namespace TimeProject.Application.UseCases.Records;

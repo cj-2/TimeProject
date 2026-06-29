@@ -1,9 +1,7 @@
-﻿using TimeProject.Application.Interfaces.UseCases.CustomLogs;
-using TimeProject.Infrastructure.ObjectValues;
+﻿using TimeProject.Application.Interfaces.Shared;
+using TimeProject.Application.Interfaces.UseCases.CustomLogs;
+using TimeProject.Application.Shared;
 using TimeProject.Domain.Entities;
-using TimeProject.Infrastructure.Database.Entities;
-using TimeProject.Domain.Repositories;
-using TimeProject.Domain.Shared;
 using TimeProject.Infrastructure.Interfaces;
 
 namespace TimeProject.Application.UseCases.CustomLogs;

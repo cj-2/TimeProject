@@ -1,5 +1,5 @@
-using TimeProject.Domain.Shared;
-using TimeProject.Infrastructure.ObjectValues.Statistics;
+using TimeProject.Application.Dtos.Statistics;
+using TimeProject.Application.Interfaces.Shared;
 
 namespace TimeProject.Application.Interfaces.UseCases.Statistics;
 

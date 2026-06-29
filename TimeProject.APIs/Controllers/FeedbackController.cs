@@ -2,9 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using TimeProject.APIs.Controllers.Attributes;
 using TimeProject.APIs.Controllers.Shared;
+using TimeProject.Application.Dtos.Feedbacks;
 using TimeProject.Application.Interfaces.UseCases.Feedbacks;
-using TimeProject.Infrastructure.ObjectValues.Feedbacks;
-using TimeProject.Infrastructure.Utils;
+using TimeProject.Application.Utils;
 
 namespace TimeProject.APIs.Controllers;
 

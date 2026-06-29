@@ -1,5 +1,8 @@
 using Microsoft.Extensions.Options;
 using TimeProject.APIs.Controllers.Middlewares;
+using TimeProject.Application.Dtos.Users;
+using TimeProject.Application.Handlers;
+using TimeProject.Application.Interfaces.Handlers;
 using TimeProject.Application.Interfaces.UseCases.Categories;
 using TimeProject.Application.Interfaces.UseCases.Codes;
 using TimeProject.Application.Interfaces.UseCases.CustomLogs;
@@ -11,6 +14,8 @@ using TimeProject.Application.Interfaces.UseCases.Records;
 using TimeProject.Application.Interfaces.UseCases.Sessions;
 using TimeProject.Application.Interfaces.UseCases.Statistics;
 using TimeProject.Application.Interfaces.UseCases.Users;
+using TimeProject.Application.Interfaces.Utils;
+using TimeProject.Application.Mapping;
 using TimeProject.Application.UseCases.Auths;
 using TimeProject.Application.UseCases.Categories;
 using TimeProject.Application.UseCases.Codes;
@@ -22,17 +27,13 @@ using TimeProject.Application.UseCases.Periods;
 using TimeProject.Application.UseCases.Records;
 using TimeProject.Application.UseCases.Sessions;
 using TimeProject.Application.UseCases.Users;
+using TimeProject.Application.Utils;
 using TimeProject.Domain.ObjectValues;
 using TimeProject.Domain.Repositories;
-using TimeProject.Infrastructure.Handlers;
 using TimeProject.Infrastructure.Integrations;
 using TimeProject.Infrastructure.Interfaces;
-using TimeProject.Infrastructure.Mapping;
-using TimeProject.Infrastructure.ObjectValues.Users;
 using TimeProject.Infrastructure.Repositories;
 using TimeProject.Infrastructure.Settings;
-using TimeProject.Infrastructure.Utils;
-using TimeProject.Infrastructure.Utils.Interfaces;
 
 namespace TimeProject.APIs.Configurations;
 
@@ -104,7 +105,7 @@ public static class ServicesConfiguration
         services.AddScoped<IGetUserUseCase, GetUserUseCase>();
         services.AddScoped<IGetUserByEmailUseCase, GetUserByEmailUseCase>();
         services.AddScoped<IGetUserPasswordByEmailUseCase, GetUserPasswordByEmailUseCase>();
-        services.AddScoped<IGetUserByOAtuhProviderIdUseCase, GetUserByOAtuhProviderIdUseCase>();
+        services.AddScoped<IGetUserByOAtuhProviderIdUseCase, GetUserByOAuthProviderIdUseCase>();
         services.AddScoped<IDeleteUserUseCase, DeleteUserUseCase>();
         services.AddScoped<IGetPaginatedUserUseCase, GetPaginatedUserUseCase>();
         // services.AddScoped<ISetIsVerifiedUserUseCase, SetIsVerifiedUserUseCase>();

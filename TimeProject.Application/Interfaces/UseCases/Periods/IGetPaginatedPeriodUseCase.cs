@@ -1,6 +1,6 @@
-﻿using TimeProject.Domain.ObjectValues;
-using TimeProject.Domain.Shared;
-using TimeProject.Infrastructure.ObjectValues.Periods;
+﻿using TimeProject.Application.Dtos.Periods;
+using TimeProject.Application.Interfaces.Shared;
+using TimeProject.Domain.ObjectValues;
 
 namespace TimeProject.Application.Interfaces.UseCases.Periods;
 

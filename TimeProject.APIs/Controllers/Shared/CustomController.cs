@@ -1,10 +1,10 @@
 ﻿using System.Net;
 using Microsoft.AspNetCore.Mvc;
+using TimeProject.Application.Interfaces.Shared;
+using TimeProject.Application.Utils;
 using TimeProject.Domain.Entities.Enums;
 using TimeProject.Infrastructure.Database.Entities;
 using TimeProject.Infrastructure.Database.Entities.Enums;
-using TimeProject.Domain.Shared;
-using TimeProject.Infrastructure.Utils;
 
 namespace TimeProject.APIs.Controllers.Shared;
 

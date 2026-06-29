@@ -2,8 +2,8 @@
 using TimeProject.APIs.Controllers.Shared;
 using TimeProject.Infrastructure.Database.Entities;
 using TimeProject.Infrastructure.Database.Entities.Enums;
-using TimeProject.Infrastructure.ObjectValues.Auths;
 using TimeProject.APIs.Controllers.Attributes;
+using TimeProject.Application.Dtos.Auths;
 using TimeProject.Application.Interfaces.UseCases.Logins;
 using TimeProject.Domain.Entities.Enums;
 

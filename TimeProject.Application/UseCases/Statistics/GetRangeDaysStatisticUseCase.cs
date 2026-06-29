@@ -1,13 +1,14 @@
+using TimeProject.Application.Dtos.Statistics;
+using TimeProject.Application.Interfaces.Shared;
 using TimeProject.Application.Interfaces.UseCases.Statistics;
-using TimeProject.Infrastructure.ObjectValues;
+using TimeProject.Application.Interfaces.Utils;
+using TimeProject.Application.Shared;
+using TimeProject.Application.Utils;
 using TimeProject.Domain.Entities;
 using TimeProject.Domain.Repositories;
 using TimeProject.Domain.Entities.Enums;
-using TimeProject.Domain.Shared;
 using TimeProject.Infrastructure.Database.Entities;
-using TimeProject.Infrastructure.ObjectValues.Statistics;
 using TimeProject.Infrastructure.Utils;
-using TimeProject.Infrastructure.Utils.Interfaces;
 
 namespace TimeProject.Application.UseCases.Statistics;
 
@@ -153,13 +154,13 @@ public class GetRangeDaysStatisticUseCase(
         var pomodoroSessions = sessions.Where(e => e.Type == SessionType.Pomodoro).ToList();
         var breakSessions = sessions.Where(e => e.Type == SessionType.Break).ToList();
 
-        var manualPeriodsTimeSpan = TimeFormatUtil.TimeSpanFromPeriods(manualPeriods);
-        var allPeriodsTimeSpan = TimeFormatUtil.TimeSpanFromPeriods(periods);
-        var minutesTimeSpan = TimeFormatUtil.TimeSpanFromMinutes(minutes);
+        var manualPeriodsTimeSpan = manualPeriods.TimeSpanFromPeriods();
+        var allPeriodsTimeSpan = periods.TimeSpanFromPeriods();
+        var minutesTimeSpan = minutes.TimeSpanFromMinutes();
 
         var totalTimeSpan = allPeriodsTimeSpan.Add(minutesTimeSpan);
         var totalManualTimeSpan = manualPeriodsTimeSpan.Add(minutesTimeSpan);
-        var totalSessionTimeSpan = TimeFormatUtil.TimeSpanFromSessions(sessions);
+        var totalSessionTimeSpan = sessions.TimeSpanFromSessions();
 
         var rangeProgress = MakeRangeProgress(records, periods, minutes);
 
@@ -187,24 +188,24 @@ public class GetRangeDaysStatisticUseCase(
                 StartDay = start,
                 EndDay = end,
 
-                TotalHours = TimeFormatUtil.StringFromTimeSpan(totalTimeSpan),
-                ManualHours = TimeFormatUtil.StringFromTimeSpan(totalManualTimeSpan),
-                MinuteHours = TimeFormatUtil.StringFromTimeSpan(minutesTimeSpan),
-                ManualPeriodHours = TimeFormatUtil.StringFromPeriods(manualPeriods),
+                TotalHours = totalTimeSpan.StringFromTimeSpan(),
+                ManualHours = totalManualTimeSpan.StringFromTimeSpan(),
+                MinuteHours = minutesTimeSpan.StringFromTimeSpan(),
+                ManualPeriodHours = manualPeriods.StringFromPeriods(),
 
                 TotalInHours = totalTimeSpan.TotalHours,
                 TotalInMinutes = totalTimeSpan.TotalMinutes,
 
                 AverageInHours = hoursAvarege,
                 AverageInMinutes = minutesAvarege,
-                AverageHours = TimeFormatUtil.StringFromTimeSpan(avarageTimeSpan),
+                AverageHours = avarageTimeSpan.StringFromTimeSpan(),
 
                 DaysCount = daysCount,
                 ActiveDaysCount = activeDaysCount,
 
-                TimerHours = TimeFormatUtil.StringFromSessions(timerSessions),
-                PomodoroHours = TimeFormatUtil.StringFromSessions(pomodoroSessions),
-                BreakHours = TimeFormatUtil.StringFromSessions(breakSessions),
+                TimerHours = timerSessions.StringFromSessions(),
+                PomodoroHours = pomodoroSessions.StringFromSessions(),
+                BreakHours = breakSessions.StringFromSessions(),
 
                 TotalTimeSpan = totalTimeSpan,
                 ManualPeriodsTimeSpan = manualPeriodsTimeSpan,
@@ -237,17 +238,16 @@ public class GetRangeDaysStatisticUseCase(
         foreach (var record in records)
         {
             var periods = allPeriods.Where(e => e.RecordId == record.RecordId);
-
             var minutes = allMinutes.Where(e => e.RecordId == record.RecordId);
 
-            var periodsTimeSpan = TimeFormatUtil.TimeSpanFromPeriods(periods);
-            var minutesTimeSpan = TimeFormatUtil.TimeSpanFromMinutes(minutes);
+            var periodsTimeSpan = periods.TimeSpanFromPeriods();
+            var minutesTimeSpan = minutes.TimeSpanFromMinutes();
             var totalHoursTimeSpan = periodsTimeSpan.Add(minutesTimeSpan);
 
             rangeProgressList.Add(new RecordRangeProgress
             {
                 Record = mapDataUtil.Handle(record),
-                TotalHours = TimeFormatUtil.StringFromTimeSpan(totalHoursTimeSpan),
+                TotalHours = totalHoursTimeSpan.StringFromTimeSpan(),
                 TotalTimeSpan = totalHoursTimeSpan
             });
         }

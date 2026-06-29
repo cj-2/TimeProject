@@ -1,4 +1,4 @@
-﻿using TimeProject.Domain.Shared;
+﻿using TimeProject.Application.Interfaces.Shared;
 
 namespace TimeProject.Application.Interfaces.UseCases.Records;
 

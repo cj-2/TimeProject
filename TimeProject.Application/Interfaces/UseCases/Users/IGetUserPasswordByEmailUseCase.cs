@@ -1,9 +1,9 @@
-﻿using TimeProject.Domain.ObjectValues;
-using TimeProject.Domain.Shared;
+﻿using TimeProject.Application.Dtos.Users;
+using TimeProject.Application.Interfaces.Shared;
 
 namespace TimeProject.Application.Interfaces.UseCases.Users;
 
 public interface IGetUserPasswordByEmailUseCase
 {
-    ICustomResult<IGetUserPasswordByEmailResult> Handle(string email);
+    ICustomResult<GetUserPasswordByEmailOutDto> Handle(string email);
 }

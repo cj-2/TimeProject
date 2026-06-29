@@ -43,8 +43,8 @@ public class RecordResumeRepository(CustomDbContext dbContext) : IRecordResumeRe
             .OrderBy(e => e.Date)
             .ToList();
 
-        var timeSpan = TimeFormatUtil.TimeSpanFromPeriods(periods).Add(TimeFormatUtil.TimeSpanFromMinutes(timeMinutes));
-        var formattedTime = TimeFormatUtil.StringFromTimeSpan(timeSpan);
+        var timeSpan = periods.TimeSpanFromPeriods().Add(TimeFormatEntitiesUtil.TimeSpanFromMinutes(timeMinutes));
+        var formattedTime = TimeFormatEntitiesUtil.StringFromTimeSpan(timeSpan);
 
         var firstList = new List<DateTimeOffset>();
         var lastList = new List<DateTimeOffset>();

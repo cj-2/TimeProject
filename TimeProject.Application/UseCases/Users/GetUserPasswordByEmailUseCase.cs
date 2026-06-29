@@ -1,19 +1,19 @@
-﻿using TimeProject.Application.Interfaces.UseCases.Users;
-using TimeProject.Infrastructure.ObjectValues;
+﻿using TimeProject.Application.Dtos.Users;
+using TimeProject.Application.Interfaces.Shared;
+using TimeProject.Application.Interfaces.UseCases.Users;
+using TimeProject.Application.Shared;
 using TimeProject.Domain.ObjectValues;
 using TimeProject.Domain.Repositories;
-using TimeProject.Domain.Shared;
 using TimeProject.Infrastructure.Errors;
-using TimeProject.Infrastructure.ObjectValues.Users;
 
 namespace TimeProject.Application.UseCases.Users;
 
 public class GetUserPasswordByEmailUseCase(IUserPasswordRepository repository, IUserRepository userRepository)
     : IGetUserPasswordByEmailUseCase
 {
-    public ICustomResult<IGetUserPasswordByEmailResult> Handle(string email)
+    public ICustomResult<GetUserPasswordByEmailOutDto> Handle(string email)
     {
-        var result = new CustomResult<IGetUserPasswordByEmailResult>();
+        var result = new CustomResult<GetUserPasswordByEmailOutDto>();
 
         var user = userRepository.FindByEmail(email);
         if (user == null) return result.SetError(UserMessageErrors.NotFound);
@@ -21,7 +21,7 @@ public class GetUserPasswordByEmailUseCase(IUserPasswordRepository repository, I
         var userPassword = repository.FindByUserId(user.UserId);
         return userPassword == null
             ? result.SetError(UserMessageErrors.PasswordNotAllowed)
-            : result.SetData(new GetUserPasswordByEmailResult
+            : result.SetData(new GetUserPasswordByEmailOutDto
                 { UserPassword = userPassword, User = user });
     }
 }

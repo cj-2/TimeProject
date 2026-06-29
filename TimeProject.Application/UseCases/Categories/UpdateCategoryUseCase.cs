@@ -1,10 +1,10 @@
-﻿using TimeProject.Application.Interfaces.UseCases.Categories;
-using TimeProject.Infrastructure.ObjectValues;
+﻿using TimeProject.Application.Dtos.Categories;
+using TimeProject.Application.Interfaces.Shared;
+using TimeProject.Application.Interfaces.UseCases.Categories;
+using TimeProject.Application.Shared;
 using TimeProject.Domain.Entities;
 using TimeProject.Domain.Repositories;
-using TimeProject.Domain.Shared;
 using TimeProject.Infrastructure.Errors;
-using TimeProject.Infrastructure.ObjectValues.Categories;
 
 namespace TimeProject.Application.UseCases.Categories;
 

@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TimeProject.APIs.Controllers.Shared;
+using TimeProject.Application.Dtos.General;
+using TimeProject.Application.Dtos.Records;
 using TimeProject.Application.Interfaces.UseCases.Records;
+using TimeProject.Application.Utils;
 using TimeProject.Domain.ObjectValues;
-using TimeProject.Infrastructure.ObjectValues.General;
-using TimeProject.Infrastructure.ObjectValues.Records;
-using TimeProject.Infrastructure.Utils;
 
 namespace TimeProject.APIs.Controllers;
 
