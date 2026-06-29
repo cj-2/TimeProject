@@ -5,8 +5,8 @@ using TimeProject.APIs.Controllers.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// const string customCorsName = "_customCors";
-// builder.services.AddCorsConfiguration(customCorsName);
+const string customCorsName = "_customCors";
+builder.Services.AddCorsConfiguration(customCorsName);
 
 builder.Services
     .AddServicesConfiguration(builder.Configuration)
@@ -39,7 +39,7 @@ else
     app.UseExceptionHandler("/error");
 }
 
-// app.UseCors(customCorsName);
+app.UseCors(customCorsName);
 app.UseHttpsRedirection();
 app.UseAuthorization();
 
