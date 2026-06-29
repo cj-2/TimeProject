@@ -1,4 +1,5 @@
-﻿using TimeProject.Application.Dtos.Periods;
+﻿using TimeProject.Application.Dtos.Minutes;
+using TimeProject.Application.Dtos.Periods;
 using TimeProject.Application.Dtos.Sessions;
 using TimeProject.Application.Utils;
 using TimeProject.Domain.Entities;
@@ -12,7 +13,7 @@ public class RecordHistoryDayOutDto
 
     public IEnumerable<PeriodOutDto>? Periods { get; set; }
     public IEnumerable<SessionOutDto>? Sessions { get; set; }
-    public IEnumerable<IMinute>? Minutes { get; set; }
+    public IEnumerable<MinuteOutDto>? Minutes { get; set; }
 
     private TimeSpan TimeSpanPeriods => Periods.TimeSpanFromPeriods();
     private TimeSpan TimeSpanSessions => Sessions.TimeSpanFromSessions();

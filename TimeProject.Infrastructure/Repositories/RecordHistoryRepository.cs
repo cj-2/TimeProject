@@ -38,6 +38,7 @@ public class RecordHistoryRepository(CustomDbContext db) : IRecordHistoryReposit
                 e.SessionId == null
                 && e.Start >= initDate
                 && e.Start < endDate
+                && e.Start < e.End
             )
             .OrderBy(period => period.Start)
             .ToList();
@@ -67,7 +68,7 @@ public class RecordHistoryRepository(CustomDbContext db) : IRecordHistoryReposit
     private IQueryable<IPeriod> PeriodQuery(int recordId, int userId)
     {
         return db.Periods
-            .Where(e => e.UserId == userId && e.RecordId == recordId)
+            .Where(e => e.UserId == userId && e.RecordId == recordId && e.Start < e.End)
             .AsQueryable();
     }
 

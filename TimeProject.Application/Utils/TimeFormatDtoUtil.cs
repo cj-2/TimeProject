@@ -1,4 +1,5 @@
-﻿using TimeProject.Application.Dtos.Periods;
+﻿using TimeProject.Application.Dtos.Minutes;
+using TimeProject.Application.Dtos.Periods;
 using TimeProject.Application.Dtos.Sessions;
 using TimeProject.Infrastructure.Database.Entities;
 using TimeProject.Infrastructure.Utils;
@@ -27,6 +28,13 @@ public static class TimeFormatDtoUtil
         }
 
         return total;
+    }
+    
+    public static TimeSpan TimeSpanFromMinutes(this IEnumerable<MinuteOutDto>? timeMinutes)
+    {
+        if (timeMinutes == null) return TimeSpan.Zero;
+        var total = TimeSpan.Zero;
+        return timeMinutes.Aggregate(total, (current, tm) => current.Add(new TimeSpan(0, tm.Total, 0)));
     }
 
     public static string StringFromPeriods(this IEnumerable<PeriodOutDto>? periods)

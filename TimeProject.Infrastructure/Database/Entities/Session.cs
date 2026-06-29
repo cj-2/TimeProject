@@ -7,7 +7,7 @@ public class Session : ISession
 {
     public int SessionId { get; set; }
     public SessionType Type { get; set; }
-    public DateTime Date { get; set; }
+    public DateTimeOffset Date { get; set; }
     public string? From { get; set; } = string.Empty;
     public int? RecordId { get; set; }
     public int? CategoryId { get; set; }

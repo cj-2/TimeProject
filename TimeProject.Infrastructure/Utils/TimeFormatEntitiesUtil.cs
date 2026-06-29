@@ -23,7 +23,6 @@ public static class TimeFormatEntitiesUtil
         return timeMinutes.Aggregate(total, (current, tm) => current.Add(new TimeSpan(0, tm.Total, 0)));
     }
     
-
     public static TimeSpan TimeSpanFromSessions(this IEnumerable<ISession>? recordSessions)
     {
         var total = TimeSpan.Zero;

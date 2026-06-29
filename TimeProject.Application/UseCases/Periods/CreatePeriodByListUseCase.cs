@@ -49,7 +49,8 @@ public class CreatePeriodByListUseCase(
                     RecordId = recordId,
                     UserId = userId,
                     Type = dto.Type ?? SessionType.Default,
-                    From = dto.From
+                    From = dto.From,
+                    Date = dto.Periods.First().Start
                 }
             );
 
