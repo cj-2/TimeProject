@@ -1,9 +1,8 @@
-﻿using TimeProject.Domain.Entities;
-using TimeProject.Domain.Entities.Enums;
+﻿using TimeProject.Domain.Entities.Enums;
 
-namespace TimeProject.Infrastructure.Database.Entities;
+namespace TimeProject.Domain.Entities;
 
-public class User : IUser
+public class User
 {
     public int UserId { get; set; }
     public string Name { get; set; } = null!;

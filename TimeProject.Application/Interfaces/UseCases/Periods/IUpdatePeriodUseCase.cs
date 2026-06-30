@@ -6,5 +6,5 @@ namespace TimeProject.Application.Interfaces.UseCases.Periods;
 
 public interface IUpdatePeriodUseCase
 {
-    ICustomResult<IPeriod> Handle(int id, PeriodDto dto, int userId);
+    ICustomResult<Period> Handle(int id, PeriodDto dto, int userId);
 }

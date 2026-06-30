@@ -12,13 +12,13 @@ public class RecordMapDataUtil(IMapper mapper) : IRecordMapDataUtil
         return mapper.Map<IEnumerable<RecordHistoryDayDto>, IEnumerable<RecordHistoryDayOutDto>>(entity);
     }
 
-    public RecordOutDto Handle(IRecord entity)
+    public RecordOutDto Handle(Record entity)
     {
-        return mapper.Map<IRecord, RecordOutDto>(entity);
+        return mapper.Map<Record, RecordOutDto>(entity);
     }
 
-    public IEnumerable<RecordOutDto> Handle(IEnumerable<IRecord> entities)
+    public IEnumerable<RecordOutDto> Handle(IEnumerable<Record> entities)
     {
-        return mapper.Map<IEnumerable<IRecord>, IEnumerable<RecordOutDto>>(entities);
+        return mapper.Map<IEnumerable<Record>, IEnumerable<RecordOutDto>>(entities);
     }
 }

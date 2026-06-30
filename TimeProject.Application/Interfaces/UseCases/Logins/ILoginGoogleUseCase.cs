@@ -6,5 +6,5 @@ namespace TimeProject.Application.Interfaces.UseCases.Logins;
 
 public interface ILoginGoogleUseCase
 {
-    Task<ICustomResult<JwtDto>> Handle(LoginGoogleDto dto, IUserAccessLog ac);
+    Task<ICustomResult<JwtDto>> Handle(LoginGoogleDto dto, UserAccessLog ac);
 }

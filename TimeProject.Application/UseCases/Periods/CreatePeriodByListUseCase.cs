@@ -6,7 +6,6 @@ using TimeProject.Application.Interfaces.Utils;
 using TimeProject.Application.Shared;
 using TimeProject.Domain.Entities;
 using TimeProject.Domain.Entities.Enums;
-using TimeProject.Infrastructure.Database.Entities;
 using TimeProject.Domain.Repositories;
 
 namespace TimeProject.Application.UseCases.Periods;
@@ -18,9 +17,9 @@ public class CreatePeriodByListUseCase(
     IPeriodValidateUtil periodValidateUtil
 ) : ICreatePeriodByListUseCase
 {
-    public ICustomResult<IList<IPeriod>> Handle(PeriodListDto dto, int recordId, int userId)
+    public ICustomResult<IList<Period>> Handle(PeriodListDto dto, int recordId, int userId)
     {
-        var result = new CustomResult<IList<IPeriod>>();
+        var result = new CustomResult<IList<Period>>();
         List<Period> list = [];
 
         foreach (var period in dto.Periods)
@@ -57,7 +56,7 @@ public class CreatePeriodByListUseCase(
 
         list.ForEach(i => { i.SessionId = session.SessionId; });
 
-        var data = repository.CreateByList(list.ToList<IPeriod>());
+        var data = repository.CreateByList(list);
         syncRecordResumeUseCase.Handle(recordId);
 
         return result.SetData(data);

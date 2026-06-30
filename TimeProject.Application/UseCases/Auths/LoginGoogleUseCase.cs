@@ -23,7 +23,7 @@ public class LoginGoogleUseCase(
 {
     private readonly RestClient _client = new("https://www.googleapis.com/oauth2/v1/userinfo");
 
-    public async Task<ICustomResult<JwtDto>> Handle(LoginGoogleDto dto, IUserAccessLog ac)
+    public async Task<ICustomResult<JwtDto>> Handle(LoginGoogleDto dto, UserAccessLog ac)
     {
         var result = new CustomResult<JwtDto>();
 

@@ -8,10 +8,10 @@ namespace TimeProject.Application.UseCases.CustomLogs;
 
 public class CreateUserAccessLogUseCase(IUnitOfWork unitOfWork) : ICreateUserAccessLogUseCase
 {
-    public ICustomResult<IUserAccessLog> Handle(IUserAccessLog entity)
+    public ICustomResult<UserAccessLog> Handle(UserAccessLog entity)
     {
         var result = unitOfWork.UserAccessLogRepository.Create(entity);
         unitOfWork.SaveChanges();
-        return new CustomResult<IUserAccessLog>().SetData(result);
+        return new CustomResult<UserAccessLog>().SetData(result);
     }
 }

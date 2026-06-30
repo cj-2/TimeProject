@@ -1,9 +1,8 @@
-﻿using TimeProject.Domain.Entities;
-using TimeProject.Domain.Entities.Enums;
+﻿using TimeProject.Domain.Entities.Enums;
 
-namespace TimeProject.Infrastructure.Database.Entities;
+namespace TimeProject.Domain.Entities;
 
-public class ConfirmCode : IConfirmCode
+public class ConfirmCode
 {
     public string CodeId { get; set; } = null!;
     public ConfirmCodeType Type { get; set; }

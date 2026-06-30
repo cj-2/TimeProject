@@ -2,7 +2,6 @@ using FluentAssertions;
 using Moq;
 using TimeProject.Application.Dtos.Statistics;
 using TimeProject.Domain.Entities;
-using TimeProject.Infrastructure.Database.Entities;
 using TimeProject.Domain.Entities.Enums;
 using TimeProject.Domain.Repositories;
 
@@ -28,11 +27,11 @@ public class GetRangeDaysStatisticUseCaseTests
         _staticRepository
             .Setup(v => v
                 .GetPeriodsByRange(userId, It.IsAny<DateTime>(), It.IsAny<DateTime>(), null))
-            .Returns(periods.OfType<IPeriod>().ToList());
+            .Returns(periods);
 
         _staticRepository
             .Setup(v => v.GetSessionsByRange(userId, It.IsAny<DateTime>(), It.IsAny<DateTime>(), null))
-            .Returns(recordSessions.OfType<ISession>().ToList());
+            .Returns(recordSessions);
     }
 
     private static List<Period> CreateRecordPeriodList(DateTime today, int userId, int recordId)

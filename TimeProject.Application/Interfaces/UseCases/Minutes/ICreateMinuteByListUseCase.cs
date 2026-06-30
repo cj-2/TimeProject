@@ -6,5 +6,5 @@ namespace TimeProject.Application.Interfaces.UseCases.Minutes;
 
 public interface ICreateMinuteByListUseCase
 {
-    ICustomResult<IList<IMinute>> Handle(CreateMinuteListDto dto, int userId);
+    ICustomResult<IList<Minute>> Handle(CreateMinuteListDto dto, int userId);
 }

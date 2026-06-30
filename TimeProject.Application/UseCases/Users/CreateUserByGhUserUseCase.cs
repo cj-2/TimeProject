@@ -3,7 +3,6 @@ using TimeProject.Application.Interfaces.Shared;
 using TimeProject.Application.Interfaces.UseCases.Users;
 using TimeProject.Application.Shared;
 using TimeProject.Domain.Entities;
-using TimeProject.Infrastructure.Database.Entities;
 using TimeProject.Infrastructure.Errors;
 using TimeProject.Infrastructure.Interfaces;
 
@@ -11,9 +10,9 @@ namespace TimeProject.Application.UseCases.Users;
 
 public class CreateUserByGhUserUseCase(IUnitOfWork unitOfWork) : ICreateUserByGhUserUseCase
 {
-    public ICustomResult<IUser> Handle(CreateUserOAuthDto dto, IEnumerable<EmailGh> emails)
+    public ICustomResult<User> Handle(CreateUserOAuthDto dto, IEnumerable<EmailGh> emails)
     {
-        var result = new CustomResult<IUser>();
+        var result = new CustomResult<User>();
 
         if (string.IsNullOrEmpty(dto.UserProviderId))
             return result.SetError(UserMessageErrors.OAuthWithoutProviderId);

@@ -1,11 +1,9 @@
 ﻿using System.Net;
-using TimeProject.Domain.Entities;
 using TimeProject.Domain.Entities.Enums;
-using TimeProject.Infrastructure.Database.Entities.Enums;
 
-namespace TimeProject.Infrastructure.Database.Entities;
+namespace TimeProject.Domain.Entities;
 
-public class UserAccessLog : IUserAccessLog
+public class UserAccessLog
 {
     public int LogId { get; set; }
     public IPAddress? ClientIp { get; set; }

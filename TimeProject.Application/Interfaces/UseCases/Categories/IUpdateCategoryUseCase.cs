@@ -6,5 +6,5 @@ namespace TimeProject.Application.Interfaces.UseCases.Categories;
 
 public interface IUpdateCategoryUseCase
 {
-    ICustomResult<ICategory> Handle(int id, CategoryDto dto, int userId);
+    ICustomResult<Category> Handle(int id, CategoryDto dto, int userId);
 }

@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using TimeProject.Domain.Entities;
-using TimeProject.Infrastructure.Database.Entities;
 using TimeProject.Domain.ObjectValues;
 using TimeProject.Domain.Repositories;
 using TimeProject.Infrastructure.Database;
@@ -12,7 +11,7 @@ namespace TimeProject.Infrastructure.Repositories;
 
 public class RecordRepository(CustomDbContext db) : IRecordRepository
 {
-    public IIndexRepositoryResult<IRecord> Index(IPaginationQuery paginationQuery, int userId)
+    public IIndexRepositoryResult<Record> Index(IPaginationQuery paginationQuery, int userId)
     {
         var query = db.Records.AsQueryable();
 
@@ -61,7 +60,7 @@ public class RecordRepository(CustomDbContext db) : IRecordRepository
             .Include(r => r.Resume)
             .ToList();
 
-        return new IndexRepositoryResult<IRecord>()
+        return new IndexRepositoryResult<Record>()
         {
             Count = count,
             Entities = entities
@@ -84,13 +83,13 @@ public class RecordRepository(CustomDbContext db) : IRecordRepository
             .ToList();
     }
 
-    public IRecord Create(IRecord entity)
+    public Record Create(Record entity)
     {
         db.Records.Add((Record)entity);
         return entity;
     }
 
-    public IRecord Update(IRecord entity)
+    public Record Update(Record entity)
     {
         var record = (Record)entity;
         db.Records.Update(record);
@@ -98,7 +97,7 @@ public class RecordRepository(CustomDbContext db) : IRecordRepository
         return record;
     }
 
-    public IRecord? Details(string code, int userId)
+    public Record? Details(string code, int userId)
     {
         return db.Records
             .Include(r => r.Category)
@@ -106,27 +105,27 @@ public class RecordRepository(CustomDbContext db) : IRecordRepository
             .FirstOrDefault(record => record.Code == code && record.UserId == userId);
     }
 
-    public bool Delete(IRecord entity)
+    public bool Delete(Record entity)
     {
         db.Records.Remove((Record)entity);
         db.SaveChanges();
         return true;
     }
 
-    public IRecord? FindById(int id, int userId)
+    public Record? FindById(int id, int userId)
     {
         return db.Records
             .FirstOrDefault(record => record.RecordId == id && record.UserId == userId);
     }
 
-    public IEnumerable<IRecord> FindByIdList(IEnumerable<int> idList, int userId)
+    public IEnumerable<Record> FindByIdList(IEnumerable<int> idList, int userId)
     {
         return db.Records.Where(e => idList.Contains(e.RecordId))
                 .Include(e => e.Category)
                 .Include(e => e.Resume);
     }
 
-    public IRecord? FindByCode(string code, int userId)
+    public Record? FindByCode(string code, int userId)
     {
         return db.Records
             .FirstOrDefault(record => record.Code == code && record.UserId == userId);

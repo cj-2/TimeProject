@@ -1,8 +1,6 @@
-﻿using TimeProject.Domain.Entities;
+﻿namespace TimeProject.Domain.Entities;
 
-namespace TimeProject.Infrastructure.Database.Entities;
-
-public class Period : IPeriod
+public class Period
 {
     public int PeriodId { get; set; }
     public DateTimeOffset Start { get; set; }

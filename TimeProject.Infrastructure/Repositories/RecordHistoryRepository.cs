@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using TimeProject.Domain.Entities;
 using TimeProject.Domain.Repositories;
-using TimeProject.Infrastructure.Database.Entities;
 using TimeProject.Infrastructure.Database;
 
 namespace TimeProject.Infrastructure.Repositories;
@@ -30,7 +29,7 @@ public class RecordHistoryRepository(CustomDbContext db) : IRecordHistoryReposit
             .ToList();
     }
 
-    public IList<IPeriod> GetPeriodsWithoutSession(int recordId, int userId,
+    public IList<Period> GetPeriodsWithoutSession(int recordId, int userId,
         DateTime initDate, DateTime endDate)
     {
         return PeriodQuery(recordId, userId)
@@ -44,7 +43,7 @@ public class RecordHistoryRepository(CustomDbContext db) : IRecordHistoryReposit
             .ToList();
     }
 
-    public IList<IMinute> GetMinutes(int recordId, int userId, DateTime initDate,
+    public IList<Minute> GetMinutes(int recordId, int userId, DateTime initDate,
         DateTime endDate)
     {
         return MinuteQuery(recordId, userId)
@@ -53,7 +52,7 @@ public class RecordHistoryRepository(CustomDbContext db) : IRecordHistoryReposit
             .ToList();
     }
 
-    public IList<ISession> GetSessions(int recordId, int userId, DateTime initDate,
+    public IList<Session> GetSessions(int recordId, int userId, DateTime initDate,
         DateTime endDate)
     {
         return SessionQuery(recordId, userId)
@@ -62,17 +61,17 @@ public class RecordHistoryRepository(CustomDbContext db) : IRecordHistoryReposit
                 && e.Periods!.FirstOrDefault()!.Start < endDate
             )
             .Include(e => e.Periods!.OrderBy(period => period.Start))
-            .ToList<ISession>();
+            .ToList();
     }
 
-    private IQueryable<IPeriod> PeriodQuery(int recordId, int userId)
+    private IQueryable<Period> PeriodQuery(int recordId, int userId)
     {
         return db.Periods
             .Where(e => e.UserId == userId && e.RecordId == recordId && e.Start < e.End)
             .AsQueryable();
     }
 
-    private IQueryable<IMinute> MinuteQuery(int recordId, int userId)
+    private IQueryable<Minute> MinuteQuery(int recordId, int userId)
     {
         return db.Minutes
             .Where(e => e.UserId == userId && e.RecordId == recordId)

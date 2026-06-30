@@ -8,5 +8,5 @@ public record EmailGh(string Email, bool Primary, bool Verified);
 
 public interface ICreateUserByGhUserUseCase
 {
-    ICustomResult<IUser> Handle(CreateUserOAuthDto dto, IEnumerable<EmailGh> emails);
+    ICustomResult<User> Handle(CreateUserOAuthDto dto, IEnumerable<EmailGh> emails);
 }

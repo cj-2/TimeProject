@@ -17,7 +17,7 @@ public class LoginUseCase(
 )
     : ILoginUseCase
 {
-    public ICustomResult<JwtDto> Handle(LoginDto dto, IUserAccessLog accessLog)
+    public ICustomResult<JwtDto> Handle(LoginDto dto, UserAccessLog accessLog)
     {
         var result = new CustomResult<JwtDto>();
 

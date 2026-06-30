@@ -5,7 +5,6 @@ using TimeProject.Application.Interfaces.UseCases.Records;
 using TimeProject.Application.Interfaces.Utils;
 using TimeProject.Application.Shared;
 using TimeProject.Domain.Entities;
-using TimeProject.Infrastructure.Database.Entities;
 using TimeProject.Domain.Repositories;
 using TimeProject.Infrastructure.Errors;
 
@@ -18,9 +17,9 @@ public class CreatePeriodUseCase(
     IPeriodValidateUtil periodValidateUtil
 ) : ICreatePeriodUseCase
 {
-    public ICustomResult<IPeriod> Handle(CreatePeriodDto data, int userId)
+    public ICustomResult<Period> Handle(CreatePeriodDto data, int userId)
     {
-        var result = new CustomResult<IPeriod>();
+        var result = new CustomResult<Period>();
 
         periodValidateUtil.ValidateStartAndEnd(data.Start, data.End, result);
         if (result.HasError) return result;

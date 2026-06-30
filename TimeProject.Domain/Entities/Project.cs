@@ -1,8 +1,6 @@
-﻿using TimeProject.Domain.Entities;
+﻿namespace TimeProject.Domain.Entities;
 
-namespace TimeProject.Infrastructure.Database.Entities;
-
-public class Project : IProject
+public class Project
 {
     public int ProjectId { get; set; }
     public string Name { get; set; } = string.Empty;

@@ -15,13 +15,13 @@ namespace TimeProject.Application.UseCases.Auths;
 
 public class LoginGithubUseCase(
     IJwtHandler jwtHandler,
-    IGetUserByOAtuhProviderIdUseCase getUserByOAtuhProviderIdUseCase,
+    IGetUserByOAtuhProviderIdUseCase getUserByOAuthProviderIdUseCase,
     ICreateUserByGhUserUseCase createUserByGhUserUseCase,
     ICreateUserAccessLogUseCase createUserAccessLogUseCase
 )
     : ILoginGithubUseCase
 {
-    public async Task<ICustomResult<JwtDto>> Handle(LoginGithubDto dto, IUserAccessLog ac)
+    public async Task<ICustomResult<JwtDto>> Handle(LoginGithubDto dto, UserAccessLog ac)
     {
         var result = new CustomResult<JwtDto>();
 
@@ -34,7 +34,7 @@ public class LoginGithubUseCase(
 
             var userFromProvider = await client.User.Current();
             var getUserByPIdResult =
-                getUserByOAtuhProviderIdUseCase.Handle("github", userFromProvider.Id.ToString());
+                getUserByOAuthProviderIdUseCase.Handle("github", userFromProvider.Id.ToString());
 
             if (getUserByPIdResult is { Data: not null })
             {

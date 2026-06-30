@@ -1,7 +1,7 @@
 ﻿using TimeProject.Application.Interfaces.Shared;
 using TimeProject.Application.Interfaces.UseCases.Users;
 using TimeProject.Application.Shared;
-using TimeProject.Infrastructure.Database.Entities;
+using TimeProject.Domain.Entities;
 using TimeProject.Infrastructure.Errors;
 using TimeProject.Infrastructure.Interfaces;
 

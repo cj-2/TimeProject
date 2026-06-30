@@ -1,5 +1,4 @@
 ﻿using TimeProject.Domain.Entities;
-using TimeProject.Infrastructure.Database.Entities;
 using TimeProject.Domain.Repositories;
 using TimeProject.Infrastructure.Database;
 
@@ -7,15 +6,15 @@ namespace TimeProject.Infrastructure.Repositories;
 
 public class UserPasswordRepository(CustomDbContext db) : IUserPasswordRepository
 {
-    public bool Create(IUserPassword entity)
+    public bool Create(UserPassword entity)
     {
-        db.UserPasswords.Add((UserPassword)entity);
+        db.UserPasswords.Add(entity);
         return true;
     }
 
-    public bool Update(IUserPassword entity)
+    public bool Update(UserPassword entity)
     {
-        db.UserPasswords.Update((UserPassword)entity);
+        db.UserPasswords.Update(entity);
         return true;
     }
 
@@ -24,11 +23,11 @@ public class UserPasswordRepository(CustomDbContext db) : IUserPasswordRepositor
         var entity = FindByUserId(id);
         if (entity == null) return true;
 
-        db.UserPasswords.Remove((UserPassword)entity);
+        db.UserPasswords.Remove(entity);
         return true;
     }
 
-    public IUserPassword? FindByUserId(int userId)
+    public UserPassword? FindByUserId(int userId)
     {
         return db.UserPasswords.FirstOrDefault(i => i.UserId == userId);
     }

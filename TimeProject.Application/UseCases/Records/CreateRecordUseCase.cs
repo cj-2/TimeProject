@@ -5,7 +5,7 @@ using TimeProject.Application.Interfaces.UseCases.Periods;
 using TimeProject.Application.Interfaces.UseCases.Records;
 using TimeProject.Application.Interfaces.Utils;
 using TimeProject.Application.Shared;
-using TimeProject.Infrastructure.Database.Entities;
+using TimeProject.Domain.Entities;
 using TimeProject.Infrastructure.Errors;
 using TimeProject.Infrastructure.Interfaces;
 

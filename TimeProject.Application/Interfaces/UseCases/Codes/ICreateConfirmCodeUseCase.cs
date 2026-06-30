@@ -6,5 +6,5 @@ namespace TimeProject.Application.Interfaces.UseCases.Codes;
 
 public interface ICreateConfirmCodeUseCase
 {
-    ICustomResult<IConfirmCode> Handle(int userId, ConfirmCodeType type);
+    ICustomResult<ConfirmCode> Handle(int userId, ConfirmCodeType type);
 }

@@ -5,7 +5,6 @@ using TimeProject.Application.Dtos.Minutes;
 using TimeProject.Application.Interfaces.UseCases.Minutes;
 using TimeProject.Application.Utils;
 using TimeProject.Domain.Entities;
-using TimeProject.Infrastructure.Database.Entities;
 
 namespace TimeProject.APIs.Controllers;
 
@@ -18,7 +17,7 @@ public class MinuteController(
 {
     [HttpPost]
     [Route("list")]
-    public ActionResult<IList<IMinute>> Create([FromBody] CreateMinuteListDto dto)
+    public ActionResult<IList<Minute>> Create([FromBody] CreateMinuteListDto dto)
     {
         var result = createMinuteByListUseCase.Handle(dto, UserClaimsUtil.Id(User));
         result.ActionName = nameof(Create);

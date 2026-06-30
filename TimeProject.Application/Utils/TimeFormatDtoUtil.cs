@@ -1,7 +1,7 @@
 ﻿using TimeProject.Application.Dtos.Minutes;
 using TimeProject.Application.Dtos.Periods;
 using TimeProject.Application.Dtos.Sessions;
-using TimeProject.Infrastructure.Database.Entities;
+using TimeProject.Domain.Entities;
 using TimeProject.Infrastructure.Utils;
 
 namespace TimeProject.Application.Utils;

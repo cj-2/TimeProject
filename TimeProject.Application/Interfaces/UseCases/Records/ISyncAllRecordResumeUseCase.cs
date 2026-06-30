@@ -5,5 +5,5 @@ namespace TimeProject.Application.Interfaces.UseCases.Records;
 
 public interface ISyncAllRecordResumeUseCase
 {
-    ICustomResult<IEnumerable<IRecordResume>> Handle();
+    ICustomResult<IEnumerable<RecordResume>> Handle();
 }

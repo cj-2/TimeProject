@@ -4,8 +4,8 @@ namespace TimeProject.Domain.Repositories;
 
 public interface IUserProviderRepository
 {
-    public IUserProvider Create(IUserProvider entity);
+    public UserProvider Create(UserProvider entity);
     public bool Delete(int id);
-    public IUserProvider? FindByUserId(int userId);
-    public IUserProvider? FindByUserProviderId(string provider, string id);
+    public UserProvider? FindByUserId(int userId);
+    public UserProvider? FindByUserProviderId(string provider, string id);
 }

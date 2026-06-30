@@ -10,9 +10,9 @@ namespace TimeProject.Application.UseCases.Categories;
 
 public class UpdateCategoryUseCase(ICategoryRepository repository) : IUpdateCategoryUseCase
 {
-    public ICustomResult<ICategory> Handle(int id, CategoryDto dto, int userId)
+    public ICustomResult<Category> Handle(int id, CategoryDto dto, int userId)
     {
-        var result = new CustomResult<ICategory>();
+        var result = new CustomResult<Category>();
         var category = repository.FindById(id);
 
         if (category == null) return result.SetError(CategoryMessageErrors.NotFound);

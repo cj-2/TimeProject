@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using TimeProject.Domain.Entities;
 using TimeProject.Infrastructure.Database.Configurations;
-using TimeProject.Infrastructure.Database.Entities;
 
 namespace TimeProject.Infrastructure.Database;
 

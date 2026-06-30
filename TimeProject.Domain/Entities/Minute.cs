@@ -1,8 +1,6 @@
-using TimeProject.Domain.Entities;
+namespace TimeProject.Domain.Entities;
 
-namespace TimeProject.Infrastructure.Database.Entities;
-
-public class Minute : IMinute
+public class Minute
 {
     public int MinuteId { get; set; }
     public DateTimeOffset Date { get; set; }

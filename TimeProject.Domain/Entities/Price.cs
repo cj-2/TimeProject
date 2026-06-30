@@ -1,8 +1,6 @@
-﻿using TimeProject.Domain.Entities;
+﻿namespace TimeProject.Domain.Entities;
 
-namespace TimeProject.Infrastructure.Database.Entities;
-
-public class Price : IPrice
+public class Price
 {
     public int PriceId { get; set; }
     public int? ProjectId { get; set; }

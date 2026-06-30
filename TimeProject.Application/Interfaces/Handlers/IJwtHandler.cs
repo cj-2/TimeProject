@@ -5,5 +5,5 @@ namespace TimeProject.Application.Interfaces.Handlers;
 
 public interface IJwtHandler
 {
-    JwtDto Generate(IUser user);
+    JwtDto Generate(User user);
 }

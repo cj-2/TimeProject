@@ -1,4 +1,4 @@
-﻿namespace TimeProject.Infrastructure.Database.Entities.Enums;
+﻿namespace TimeProject.Domain.Entities.Enums;
 
 public enum AccessType
 {

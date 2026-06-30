@@ -1,8 +1,6 @@
-﻿using TimeProject.Domain.Entities;
+﻿namespace TimeProject.Domain.Entities;
 
-namespace TimeProject.Infrastructure.Database.Entities;
-
-public class Record : IRecord
+public class Record
 {
     public int RecordId { get; set; }
     public string Code { get; set; } = string.Empty;

@@ -12,9 +12,9 @@ public class SyncAllRecordResumeUseCase(
 )
     : ISyncAllRecordResumeUseCase
 {
-    public ICustomResult<IEnumerable<IRecordResume>> Handle()
+    public ICustomResult<IEnumerable<RecordResume>> Handle()
     {
         var list = db.Records.ToList();
-        return new CustomResult<IEnumerable<IRecordResume>> { Data = syncRecordResumeUseCase.Handle(list, true) };
+        return new CustomResult<IEnumerable<RecordResume>> { Data = syncRecordResumeUseCase.Handle(list, true) };
     }
 }

@@ -6,5 +6,5 @@ namespace TimeProject.Application.Interfaces.UseCases.Logins;
 
 public interface ILoginGithubUseCase
 {
-    Task<ICustomResult<JwtDto>> Handle(LoginGithubDto dto, IUserAccessLog ac);
+    Task<ICustomResult<JwtDto>> Handle(LoginGithubDto dto, UserAccessLog ac);
 }

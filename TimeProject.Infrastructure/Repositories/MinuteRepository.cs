@@ -1,6 +1,4 @@
-using Microsoft.EntityFrameworkCore;
 using TimeProject.Domain.Entities;
-using TimeProject.Infrastructure.Database.Entities;
 using TimeProject.Domain.Repositories;
 using TimeProject.Infrastructure.Database;
 
@@ -8,28 +6,28 @@ namespace TimeProject.Infrastructure.Repositories;
 
 public class MinuteRepository(CustomDbContext db) : IMinuteRepository
 {
-    public IMinute Create(IMinute entity)
+    public Minute Create(Minute entity)
     {
-        db.Minutes.Add((Minute)entity);
+        db.Minutes.Add(entity);
         db.SaveChanges();
         return entity;
     }
 
-    public IList<IMinute> CreateByList(IList<IMinute> entities)
+    public IList<Minute> CreateByList(IList<Minute> entities)
     {
-        db.Minutes.AddRange(entities.OfType<Minute>());
+        db.Minutes.AddRange(entities);
         db.SaveChanges();
         return entities;
     }
 
-    public IMinute? FindById(int id, int userId)
+    public Minute? FindById(int id, int userId)
     {
         return db.Minutes.FirstOrDefault(e => e.MinuteId == id && e.UserId == userId);
     }
 
-    public bool Delete(IMinute entity)
+    public bool Delete(Minute entity)
     {
-        db.Minutes.Remove((Minute)entity);
+        db.Minutes.Remove(entity);
         db.SaveChanges();
         return true;
     }

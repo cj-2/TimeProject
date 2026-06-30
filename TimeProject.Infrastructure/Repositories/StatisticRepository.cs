@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using TimeProject.Domain.Entities;
-using TimeProject.Infrastructure.Database.Entities;
 using TimeProject.Domain.Repositories;
 using TimeProject.Infrastructure.Database;
 
@@ -8,29 +7,25 @@ namespace TimeProject.Infrastructure.Repositories;
 
 public class StatisticRepository(CustomDbContext db) : IStatisticRepository
 {
-    public IList<IPeriod> GetPeriodsByRange(
-        int userId,
+    public IList<Period> GetPeriodsByRange(int userId,
         DateTimeOffset initDate,
         DateTimeOffset endDate,
-        int? recordId = null
-    )
+        int? recordId = null)
     {
         var query = db.Periods.AsQueryable();
 
         if (recordId != null) query = query.Where(i => i.RecordId == recordId);
 
-        return (query.Where(e => (
+        return query.Where(e => (
                 (e.Start >= initDate && e.Start < endDate) || (e.End > initDate && e.End <= endDate)
             ) && userId == e.UserId)
-            .ToList<IPeriod>());
+            .ToList();
     }
 
-    public IList<ISession> GetSessionsByRange(
-        int userId,
+    public IList<Session> GetSessionsByRange(int userId,
         DateTimeOffset initDate,
         DateTimeOffset endDate,
-        int? recordId = null
-    )
+        int? recordId = null)
     {
         var query = db.Sessions.AsQueryable();
 
@@ -53,10 +48,10 @@ public class StatisticRepository(CustomDbContext db) : IStatisticRepository
                 )
                 && userId == p.UserId)
             .Include(p => p.Periods!.OrderBy(q => q.Start))
-            .ToList<ISession>();
+            .ToList();
     }
 
-    public IList<IMinute> GetTimeMinutesByRange(int userId, DateTimeOffset initDate, DateTimeOffset endDate,
+    public IList<Minute> GetTimeMinutesByRange(int userId, DateTimeOffset initDate, DateTimeOffset endDate,
         int? recordId = null)
     {
         var query = db.Minutes.AsQueryable();
@@ -69,7 +64,7 @@ public class StatisticRepository(CustomDbContext db) : IStatisticRepository
                 && tm.Date < endDate
             )
             .OrderBy(tm => tm.Date)
-            .ToList<IMinute>();
+            .ToList();
     }
 
     public int GetRecordCreatedCount(int userId, DateTimeOffset initDate, DateTimeOffset endDate)

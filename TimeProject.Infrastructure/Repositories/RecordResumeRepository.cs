@@ -1,5 +1,4 @@
 ﻿using TimeProject.Domain.Entities;
-using TimeProject.Infrastructure.Database.Entities;
 using TimeProject.Domain.Repositories;
 using TimeProject.Infrastructure.Database;
 using TimeProject.Infrastructure.Utils;
@@ -8,15 +7,15 @@ namespace TimeProject.Infrastructure.Repositories;
 
 public class RecordResumeRepository(CustomDbContext dbContext) : IRecordResumeRepository
 {
-    public IRecordResume? CreateOrUpdate(int recordId, bool saveChanges = true)
+    public RecordResume? CreateOrUpdate(int recordId, bool saveChanges = true)
     {
         var record = dbContext.Records.FirstOrDefault(e => e.RecordId == recordId);
         return record == null ? null : CreateOrUpdate(record, saveChanges);
     }
 
-    public IEnumerable<IRecordResume> CreateOrUpdateList(IEnumerable<IRecord> recordEntities, bool saveChanges = false)
+    public IEnumerable<RecordResume> CreateOrUpdateList(IEnumerable<Record> recordEntities, bool saveChanges = false)
     {
-        var list = new List<IRecordResume>();
+        var list = new List<RecordResume>();
 
         foreach (var recordEntity in recordEntities)
         {
@@ -29,7 +28,7 @@ public class RecordResumeRepository(CustomDbContext dbContext) : IRecordResumeRe
         return list;
     }
 
-    public IRecordResume? CreateOrUpdate(IRecord record, bool saveChanges = true)
+    public RecordResume? CreateOrUpdate(Record record, bool saveChanges = true)
     {
         var entity = dbContext.RecordResumes.FirstOrDefault(e => e.RecordId == record.RecordId);
 

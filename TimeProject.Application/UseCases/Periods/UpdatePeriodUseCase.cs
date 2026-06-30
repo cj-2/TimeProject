@@ -16,9 +16,9 @@ public class UpdatePeriodUseCase(
     IPeriodValidateUtil periodValidateUtil
 ) : IUpdatePeriodUseCase
 {
-    public ICustomResult<IPeriod> Handle(int id, PeriodDto dto, int userId)
+    public ICustomResult<Period> Handle(int id, PeriodDto dto, int userId)
     {
-        var result = new CustomResult<IPeriod>();
+        var result = new CustomResult<Period>();
 
         periodValidateUtil.ValidateStartAndEnd(dto.Start, dto.End, result);
         if (result.HasError) return result;

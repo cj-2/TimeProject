@@ -5,12 +5,12 @@ namespace TimeProject.Domain.Repositories;
 
 public interface IUserRepository
 {
-    IList<IUser> Index(IPaginationQuery paginationQuery);
+    IList<User> Index(IPaginationQuery paginationQuery);
     int GetTotalItems(IPaginationQuery paginationQuery);
-    IUser Create(IUser entity);
-    IUser Update(IUser entity);
+    User Create(User entity);
+    User Update(User entity);
     bool Delete(int id);
-    IUser? FindById(int id);
-    IUser? FindByEmail(string email);
+    User? FindById(int id);
+    User? FindByEmail(string email);
     bool EmailIsAvailable(string email);
 }

@@ -1,11 +1,10 @@
 ﻿using TimeProject.Domain.Entities;
-using TimeProject.Infrastructure.Database.Entities;
 
 namespace TimeProject.Infrastructure.Utils;
 
 public static class TimeFormatEntitiesUtil
 {
-    public static TimeSpan TimeSpanFromPeriods(this IEnumerable<IPeriod>? periods)
+    public static TimeSpan TimeSpanFromPeriods(this IEnumerable<Period>? periods)
     {
         if (periods == null) return TimeSpan.Zero;
         var total = TimeSpan.Zero;
@@ -16,19 +15,19 @@ public static class TimeFormatEntitiesUtil
                 current.Add(period.End!.Value.Subtract(period.Start)));
     }
 
-    public static TimeSpan TimeSpanFromMinutes(this IEnumerable<IMinute>? timeMinutes)
+    public static TimeSpan TimeSpanFromMinutes(this IEnumerable<Minute>? timeMinutes)
     {
         if (timeMinutes == null) return TimeSpan.Zero;
         var total = TimeSpan.Zero;
         return timeMinutes.Aggregate(total, (current, tm) => current.Add(new TimeSpan(0, tm.Total, 0)));
     }
     
-    public static TimeSpan TimeSpanFromSessions(this IEnumerable<ISession>? recordSessions)
+    public static TimeSpan TimeSpanFromSessions(this IEnumerable<Session>? recordSessions)
     {
         var total = TimeSpan.Zero;
         if (recordSessions == null) return total;
 
-        foreach (var rs in (recordSessions as IList<Session>)!)
+        foreach (var rs in recordSessions)
             if (rs.Periods != null && rs.Periods.Any())
                 total = total.Add(TimeSpanFromPeriods(rs.Periods.ToList()));
 
@@ -52,12 +51,12 @@ public static class TimeFormatEntitiesUtil
         return string.IsNullOrEmpty(result) ? "0s" : result;
     }
     
-    public static string StringFromPeriods(this IEnumerable<IPeriod>? periods)
+    public static string StringFromPeriods(this IEnumerable<Period>? periods)
     {
         return StringFromTimeSpan(TimeSpanFromPeriods(periods?.ToList()));
     }
 
-    public static string StringFromSessions(this IEnumerable<ISession>? sessions)
+    public static string StringFromSessions(this IEnumerable<Session>? sessions)
     {
         return StringFromTimeSpan(TimeSpanFromSessions(sessions));
     }

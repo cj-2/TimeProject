@@ -1,9 +1,8 @@
-﻿using TimeProject.Domain.Entities;
-using TimeProject.Domain.Entities.Enums;
+﻿using TimeProject.Domain.Entities.Enums;
 
-namespace TimeProject.Infrastructure.Database.Entities;
+namespace TimeProject.Domain.Entities;
 
-public class Session : ISession
+public class Session
 {
     public int SessionId { get; set; }
     public SessionType Type { get; set; }

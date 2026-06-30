@@ -32,7 +32,7 @@ public class PeriodController(
     }
 
     [HttpPost]
-    public ActionResult<IPeriod> Create([FromBody] CreatePeriodDto data)
+    public ActionResult<Period> Create([FromBody] CreatePeriodDto data)
     {
         var result = createPeriodUseCase.Handle(data, UserClaimsUtil.Id(User));
         result.ActionName = nameof(Create);
@@ -41,7 +41,7 @@ public class PeriodController(
 
     [HttpPost]
     [Route("list/{id:int}")]
-    public ActionResult<IList<IPeriod>> Create([FromBody] PeriodListDto dto, int id)
+    public ActionResult<IList<Period>> Create([FromBody] PeriodListDto dto, int id)
     {
         var result = createPeriodByListUseCase.Handle(dto, id, UserClaimsUtil.Id(User));
         result.ActionName = nameof(Create);
@@ -50,7 +50,7 @@ public class PeriodController(
 
     [HttpPut]
     [Route("{id:int}")]
-    public ActionResult<IPeriod> Update(int id, [FromBody] PeriodDto data)
+    public ActionResult<Period> Update(int id, [FromBody] PeriodDto data)
     {
         return HandleResponse(updatePeriodUseCase.Handle(id, data, UserClaimsUtil.Id(User)));
     }

@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TimeProject.Domain.Entities;
-using TimeProject.Infrastructure.Database.Entities;
 using TimeProject.Domain.Repositories;
 using TimeProject.Infrastructure.Database;
 
@@ -8,14 +7,14 @@ namespace TimeProject.Infrastructure.Repositories;
 
 public class UserAccessLogRepository(CustomDbContext db) : IUserAccessLogRepository
 {
-    public IUserAccessLog Create(IUserAccessLog entity)
+    public UserAccessLog Create(UserAccessLog entity)
     {
         entity.AccessedAt = DateTime.Now.ToUniversalTime();
         db.UserAccessLogs.Add((UserAccessLog)entity);
         return entity;
     }
 
-    public IUserAccessLog? GetLastAccessByUserId(int id)
+    public UserAccessLog? GetLastAccessByUserId(int id)
     {
         return db.UserAccessLogs
             .Where(e => e.UserId == id)
@@ -23,9 +22,9 @@ public class UserAccessLogRepository(CustomDbContext db) : IUserAccessLogReposit
             .FirstOrDefault();
     }
 
-    public IList<IUserAccessLog> GetLastAccessByUserIdList(IEnumerable<int> idList)
+    public IList<UserAccessLog> GetLastAccessByUserIdList(IEnumerable<int> idList)
     {
-        var list = new List<IUserAccessLog>();
+        var list = new List<UserAccessLog>();
 
         foreach (var id in idList)
         {

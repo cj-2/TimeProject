@@ -4,15 +4,14 @@ using TimeProject.Application.Shared;
 using TimeProject.Domain.Entities;
 using TimeProject.Domain.Entities.Enums;
 using TimeProject.Domain.Repositories;
-using TimeProject.Infrastructure.Database.Entities;
 
 namespace TimeProject.Application.UseCases.Codes;
 
 public class CreateConfirmCodeUseCase(IConfirmCodeRepository repository) : ICreateConfirmCodeUseCase
 {
-    public ICustomResult<IConfirmCode> Handle(int userId, ConfirmCodeType type)
+    public ICustomResult<ConfirmCode> Handle(int userId, ConfirmCodeType type)
     {
-        var result = new CustomResult<IConfirmCode>();
+        var result = new CustomResult<ConfirmCode>();
         var codes = repository.FindByUserIdThatIsNotExpiredOrUsed(userId, type);
 
         return codes.Count > 0

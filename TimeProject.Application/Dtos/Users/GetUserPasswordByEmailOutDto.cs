@@ -4,6 +4,6 @@ namespace TimeProject.Application.Dtos.Users;
 
 public class GetUserPasswordByEmailOutDto
 {
-    public IUserPassword UserPassword { get; set; } = null!;
-    public IUser User { get; set; } = null!;
+    public UserPassword UserPassword { get; set; } = null!;
+    public User User { get; set; } = null!;
 }

@@ -4,7 +4,6 @@ using TimeProject.Application.Interfaces.UseCases.Minutes;
 using TimeProject.Application.Interfaces.UseCases.Records;
 using TimeProject.Application.Shared;
 using TimeProject.Domain.Entities;
-using TimeProject.Infrastructure.Database.Entities;
 using TimeProject.Domain.Repositories;
 using TimeProject.Infrastructure.Errors;
 
@@ -18,10 +17,10 @@ public class CreateMinuteByListUseCase(
     ISyncRecordResumeUseCase syncRecordResumeUseCase
 ) : ICreateMinuteByListUseCase
 {
-    public ICustomResult<IList<IMinute>> Handle(CreateMinuteListDto dto, int userId)
+    public ICustomResult<IList<Minute>> Handle(CreateMinuteListDto dto, int userId)
     {
-        var result = new CustomResult<IList<IMinute>>();
-        IList<IMinute> list = [];
+        var result = new CustomResult<IList<Minute>>();
+        IList<Minute> list = [];
 
         if (dto.RecordId == null && dto.CategoryId == null)
         {

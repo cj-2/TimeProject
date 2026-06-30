@@ -5,13 +5,13 @@ namespace TimeProject.Domain.Repositories;
 
 public interface ICategoryRepository
 {
-    IList<ICategory> Index(int userId, bool onlyWithData);
-    IList<ICategory> Index(IPaginationQuery paginationQuery, int userId);
+    IList<Category> Index(int userId, bool onlyWithData);
+    IList<Category> Index(IPaginationQuery paginationQuery, int userId);
     int GetTotalItems(IPaginationQuery paginationQuery, int userId);
-    ICategory Create(ICategory entity);
-    ICategory Update(ICategory entity);
-    bool Delete(ICategory entity);
-    ICategory? FindById(int id);
-    ICategory? FindById(int id, int userId);
-    ICategory? FindByName(string name, int userId);
+    Category Create(Category entity);
+    Category Update(Category entity);
+    bool Delete(Category entity);
+    Category? FindById(int id);
+    Category? FindById(int id, int userId);
+    Category? FindByName(string name, int userId);
 }

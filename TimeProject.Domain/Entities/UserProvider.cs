@@ -1,8 +1,6 @@
-﻿using TimeProject.Domain.Entities;
+﻿namespace TimeProject.Domain.Entities;
 
-namespace TimeProject.Infrastructure.Database.Entities;
-
-public class UserProvider : IUserProvider
+public class UserProvider
 {
     public int ProviderId { get; set; }
     public string Provider { get; set; } = string.Empty;

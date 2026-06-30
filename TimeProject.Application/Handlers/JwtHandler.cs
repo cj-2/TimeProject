@@ -12,7 +12,7 @@ namespace TimeProject.Application.Handlers;
 
 public class JwtHandler(JwtSettings jwtSettings) : IJwtHandler
 {
-    public JwtDto Generate(IUser user)
+    public JwtDto Generate(User user)
     {
         var subject = new ClaimsIdentity([
             new Claim("Id", user.UserId.ToString()),

@@ -1,5 +1,5 @@
 ﻿using TimeProject.Application.Interfaces.Utils;
-using TimeProject.Infrastructure.Database.Entities;
+using TimeProject.Domain.Entities;
 
 namespace TimeProject.Application.Utils;
 

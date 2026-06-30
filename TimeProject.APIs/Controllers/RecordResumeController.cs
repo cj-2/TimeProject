@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using TimeProject.APIs.Controllers.Shared;
 using TimeProject.Application.Interfaces.UseCases.Records;
 using TimeProject.Domain.Entities;
-using TimeProject.Infrastructure.Database.Entities;
 
 namespace TimeProject.APIs.Controllers;
 
@@ -16,7 +15,7 @@ public class RecordResumeController(
 {
     [HttpPost]
     [Route("sync/all")]
-    public ActionResult<IEnumerable<IRecordResume>> SyncAll()
+    public ActionResult<IEnumerable<RecordResume>> SyncAll()
     {
         return HandleResponse(syncAllRecordResumeUseCase.Handle());
     }

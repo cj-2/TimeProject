@@ -4,7 +4,7 @@ namespace TimeProject.Application.Interfaces.UseCases.Records;
 
 public interface ISyncRecordResumeUseCase
 {
-    IRecordResume? Handle(int id, bool saveChanges = true);
-    IRecordResume? Handle(IRecord record, bool saveChanges = false);
-    IEnumerable<IRecordResume> Handle(IEnumerable<IRecord> recordEntities, bool saveChanges = false);
+    RecordResume? Handle(int id, bool saveChanges = true);
+    RecordResume? Handle(Record record, bool saveChanges = false);
+    IEnumerable<RecordResume> Handle(IEnumerable<Record> recordEntities, bool saveChanges = false);
 }

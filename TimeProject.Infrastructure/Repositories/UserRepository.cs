@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TimeProject.Domain.Entities;
 using TimeProject.Domain.ObjectValues;
-using TimeProject.Infrastructure.Database.Entities;
 using TimeProject.Domain.Repositories;
 using TimeProject.Infrastructure.Database;
 
@@ -9,7 +8,7 @@ namespace TimeProject.Infrastructure.Repositories;
 
 public class UserRepository(CustomDbContext db) : IUserRepository
 {
-    public IList<IUser> Index(IPaginationQuery paginationQuery)
+    public IList<User> Index(IPaginationQuery paginationQuery)
     {
         IQueryable<User> query = db.Users;
 
@@ -24,7 +23,7 @@ public class UserRepository(CustomDbContext db) : IUserRepository
         return query
             .Skip((paginationQuery.Page - 1) * paginationQuery.PerPage)
             .Take(paginationQuery.PerPage)
-            .ToList<IUser>();
+            .ToList();
     }
 
     public int GetTotalItems(IPaginationQuery paginationQuery)
@@ -37,16 +36,16 @@ public class UserRepository(CustomDbContext db) : IUserRepository
         return query.Count();
     }
 
-    public IUser Create(IUser entity)
+    public User Create(User entity)
     {
-        var user = (User)entity;
+        var user = entity;
         db.Users.Add(user);
         return user;
     }
 
-    public IUser Update(IUser entity)
+    public User Update(User entity)
     {
-        db.Users.Update((User)entity);
+        db.Users.Update(entity);
         return entity;
     }
 
@@ -54,16 +53,16 @@ public class UserRepository(CustomDbContext db) : IUserRepository
     {
         var entity = FindById(id);
         if (entity == null) return true;
-        db.Users.Remove((User)entity);
+        db.Users.Remove(entity);
         return true;
     }
 
-    public IUser? FindById(int id)
+    public User? FindById(int id)
     {
         return db.Users.FirstOrDefault(i => i.UserId == id);
     }
 
-    public IUser? FindByEmail(string email)
+    public User? FindByEmail(string email)
     {
         return db.Users.FirstOrDefault(u => u.Email == email);
     }

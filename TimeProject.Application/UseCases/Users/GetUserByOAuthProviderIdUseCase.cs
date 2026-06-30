@@ -10,9 +10,9 @@ namespace TimeProject.Application.UseCases.Users;
 public class GetUserByOAuthProviderIdUseCase(IUserRepository repository, IUserProviderRepository oAuthRepository)
     : IGetUserByOAtuhProviderIdUseCase
 {
-    public ICustomResult<IUser> Handle(string provider, string id)
+    public ICustomResult<User> Handle(string provider, string id)
     {
-        var result = new CustomResult<IUser>();
+        var result = new CustomResult<User>();
 
         var userOAuth = oAuthRepository.FindByUserProviderId(provider, id);
         if (userOAuth == null) return result.SetError(UserMessageErrors.NotFound);

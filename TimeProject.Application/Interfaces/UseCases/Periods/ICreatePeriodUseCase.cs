@@ -6,5 +6,5 @@ namespace TimeProject.Application.Interfaces.UseCases.Periods;
 
 public interface ICreatePeriodUseCase
 {
-    ICustomResult<IPeriod> Handle(CreatePeriodDto data, int userId);
+    ICustomResult<Period> Handle(CreatePeriodDto data, int userId);
 }

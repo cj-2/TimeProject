@@ -5,6 +5,6 @@ namespace TimeProject.Application.Interfaces.Utils;
 
 public interface IUserMapDataUtil
 {
-    UserOutDto Handle(IUser entity);
-    IEnumerable<UserOutDto> Handle(IEnumerable<IUser> entity);
+    UserOutDto Handle(User entity);
+    IEnumerable<UserOutDto> Handle(IEnumerable<User> entity);
 }

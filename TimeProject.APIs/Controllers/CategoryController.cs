@@ -45,7 +45,7 @@ public class CategoryController(
 
     [HttpPut]
     [Route("{id:int}")]
-    public ActionResult<ICategory> Update(int id, [FromBody] CategoryDto dto)
+    public ActionResult<Category> Update(int id, [FromBody] CategoryDto dto)
     {
         return HandleResponse( updateCategoryUseCase.Handle(id, dto, UserClaimsUtil.Id(User)));
     }

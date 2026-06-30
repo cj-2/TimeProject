@@ -6,5 +6,5 @@ namespace TimeProject.Application.Interfaces.UseCases.Periods;
 
 public interface ICreatePeriodByListUseCase
 {
-    ICustomResult<IList<IPeriod>> Handle(PeriodListDto dto, int recordId, int userId);
+    ICustomResult<IList<Period>> Handle(PeriodListDto dto, int recordId, int userId);
 }

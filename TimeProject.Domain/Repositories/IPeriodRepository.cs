@@ -5,12 +5,12 @@ namespace TimeProject.Domain.Repositories;
 
 public interface IPeriodRepository
 {
-    IList<IPeriod> Index(int recordId, int userId, IPaginationQuery paginationQuery);
+    IList<Period> Index(int recordId, int userId, IPaginationQuery paginationQuery);
     int GetTotalItems(int recordId, IPaginationQuery paginationQuery, int userId);
-    IPeriod Create(IPeriod entity);
-    IList<IPeriod> CreateByList(IList<IPeriod> entities);
-    bool DeleteByList(IList<IPeriod> entityList);
-    IPeriod Update(IPeriod entity);
-    bool Delete(IPeriod entity);
-    IPeriod? FindById(int id, int userId);
+    Period Create(Period entity);
+    IList<Period> CreateByList(IList<Period> entities);
+    bool DeleteByList(IList<Period> entityList);
+    Period Update(Period entity);
+    bool Delete(Period entity);
+    Period? FindById(int id, int userId);
 }

@@ -9,9 +9,9 @@ namespace TimeProject.Application.UseCases.Records;
 
 public class GetRecordByIdUseCase(IRecordRepository repository) : IGetRecordByIdUseCase
 {
-    public ICustomResult<IRecord> Handle(int id, int userId)
+    public ICustomResult<Record> Handle(int id, int userId)
     {
-        var result = new CustomResult<IRecord>();
+        var result = new CustomResult<Record>();
         var entity = repository.FindById(id, userId);
 
         return entity == null

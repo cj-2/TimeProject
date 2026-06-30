@@ -4,7 +4,6 @@ using TimeProject.Application.Interfaces.UseCases.Sessions;
 using TimeProject.Application.Shared;
 using TimeProject.Domain.Entities;
 using TimeProject.Domain.Repositories;
-using TimeProject.Infrastructure.Database.Entities;
 using TimeProject.Infrastructure.Errors;
 
 namespace TimeProject.Application.UseCases.Sessions;
@@ -22,8 +21,7 @@ public class DeleteSessionUseCase(
         if (entity == null)
             return result.SetError(SessionMessageErrors.NotFound);
 
-        var periods = ((Session)entity).Periods;
-        periodRepository.DeleteByList((periods as IList<IPeriod>)!);
+        periodRepository.DeleteByList(entity.Periods?.ToList() ?? []);
         repository.Delete(entity);
 
         var recordId = entity.RecordId;

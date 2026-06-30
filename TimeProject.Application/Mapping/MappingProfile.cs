@@ -7,7 +7,6 @@ using TimeProject.Application.Dtos.Records;
 using TimeProject.Application.Dtos.Sessions;
 using TimeProject.Application.Dtos.Users;
 using TimeProject.Domain.Entities;
-using TimeProject.Infrastructure.Database.Entities;
 
 namespace TimeProject.Application.Mapping;
 

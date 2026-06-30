@@ -4,7 +4,7 @@ namespace TimeProject.Domain.Repositories;
 
 public interface ISessionRepository
 {
-    ISession Create(ISession entity);
-    ISession? FindById(int id, int userId);
-    bool Delete(ISession entity);
+    Session Create(Session entity);
+    Session? FindById(int id, int userId);
+    bool Delete(Session entity);
 }

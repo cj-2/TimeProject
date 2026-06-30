@@ -1,8 +1,6 @@
-﻿using TimeProject.Domain.Entities;
+﻿namespace TimeProject.Domain.Entities;
 
-namespace TimeProject.Infrastructure.Database.Entities;
-
-public class RecordResume : IRecordResume
+public class RecordResume
 {
     public int RecordId { get; set; }
     public string Formatted { get; set; } = string.Empty;

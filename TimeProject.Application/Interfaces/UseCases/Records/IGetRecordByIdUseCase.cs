@@ -5,5 +5,5 @@ namespace TimeProject.Application.Interfaces.UseCases.Records;
 
 public interface IGetRecordByIdUseCase
 {
-    ICustomResult<IRecord> Handle(int id, int userId);
+    ICustomResult<Record> Handle(int id, int userId);
 }

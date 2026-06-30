@@ -5,13 +5,13 @@ namespace TimeProject.Domain.Repositories;
 
 public interface IRecordRepository
 {
-    IIndexRepositoryResult<IRecord> Index(IPaginationQuery paginationQuery, int userId);
+    IIndexRepositoryResult<Record> Index(IPaginationQuery paginationQuery, int userId);
     IList<SearchRecordItem> SearchRecord(string search, int userId);
-    IRecord Create(IRecord entity);
-    IRecord Update(IRecord entity);
-    bool Delete(IRecord entity);
-    IRecord? FindById(int id, int userId);
-    IEnumerable<IRecord> FindByIdList(IEnumerable<int> idList, int userId);
-    IRecord? FindByCode(string code, int userId);
-    IRecord? Details(string code, int userId);
+    Record Create(Record entity);
+    Record Update(Record entity);
+    bool Delete(Record entity);
+    Record? FindById(int id, int userId);
+    IEnumerable<Record> FindByIdList(IEnumerable<int> idList, int userId);
+    Record? FindByCode(string code, int userId);
+    Record? Details(string code, int userId);
 }

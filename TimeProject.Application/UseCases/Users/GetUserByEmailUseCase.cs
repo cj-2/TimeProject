@@ -9,9 +9,9 @@ namespace TimeProject.Application.UseCases.Users;
 
 public class GetUserByEmailUseCase(IUserRepository repository) : IGetUserByEmailUseCase
 {
-    public ICustomResult<IUser> Handle(string email)
+    public ICustomResult<User> Handle(string email)
     {
-        var result = new CustomResult<IUser>();
+        var result = new CustomResult<User>();
         var user = repository.FindByEmail(email);
 
         return user == null ? result.SetError(UserMessageErrors.NotFound) : result.SetData(user);

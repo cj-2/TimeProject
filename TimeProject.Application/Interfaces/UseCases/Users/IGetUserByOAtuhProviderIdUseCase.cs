@@ -5,5 +5,5 @@ namespace TimeProject.Application.Interfaces.UseCases.Users;
 
 public interface IGetUserByOAtuhProviderIdUseCase
 {
-    ICustomResult<IUser> Handle(string provider, string id);
+    ICustomResult<User> Handle(string provider, string id);
 }

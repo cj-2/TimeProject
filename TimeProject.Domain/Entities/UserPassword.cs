@@ -1,8 +1,6 @@
-﻿using TimeProject.Domain.Entities;
+﻿namespace TimeProject.Domain.Entities;
 
-namespace TimeProject.Infrastructure.Database.Entities;
-
-public class UserPassword : IUserPassword
+public class UserPassword
 {
     public int PasswordId { get; set; }
     public string Password { get; set; } = string.Empty;

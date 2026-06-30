@@ -1,4 +1,4 @@
-﻿using TimeProject.Infrastructure.Database.Entities;
+﻿using TimeProject.Domain.Entities;
 
 namespace TimeProject.Application.Interfaces.Utils;
 

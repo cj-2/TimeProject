@@ -3,8 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using TimeProject.Application.Interfaces.Shared;
 using TimeProject.Application.Utils;
 using TimeProject.Domain.Entities.Enums;
-using TimeProject.Infrastructure.Database.Entities;
-using TimeProject.Infrastructure.Database.Entities.Enums;
 
 namespace TimeProject.APIs.Controllers.Shared;
 

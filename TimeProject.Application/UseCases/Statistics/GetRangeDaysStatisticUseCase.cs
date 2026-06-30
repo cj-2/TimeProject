@@ -7,7 +7,6 @@ using TimeProject.Application.Utils;
 using TimeProject.Domain.Entities;
 using TimeProject.Domain.Repositories;
 using TimeProject.Domain.Entities.Enums;
-using TimeProject.Infrastructure.Database.Entities;
 using TimeProject.Infrastructure.Utils;
 
 namespace TimeProject.Application.UseCases.Statistics;
@@ -180,9 +179,9 @@ public class GetRangeDaysStatisticUseCase(
 
         return new RangeStatistics
         {
-            Periods = periods.OfType<IPeriod>().ToList(),
-            Minutes = minutes.OfType<IMinute>().ToList(),
-            Sessions = sessions.OfType<ISession>().ToList(),
+            Periods = periods.ToList(),
+            Minutes = minutes.ToList(),
+            Sessions = sessions.ToList(),
             StatisticOutDto = new RangeStatisticOutDto
             {
                 StartDay = start,
