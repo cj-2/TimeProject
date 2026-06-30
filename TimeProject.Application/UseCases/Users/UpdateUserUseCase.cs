@@ -3,7 +3,6 @@ using TimeProject.Application.Interfaces.Shared;
 using TimeProject.Application.Interfaces.UseCases.Users;
 using TimeProject.Application.Interfaces.Utils;
 using TimeProject.Application.Shared;
-using TimeProject.Domain.ObjectValues;
 using TimeProject.Infrastructure.Errors;
 using TimeProject.Infrastructure.Interfaces;
 
@@ -16,19 +15,19 @@ public class UpdateUserUseCase(IUnitOfWork unitOfWork, IUserMapDataUtil mapper) 
         return _update(id, dto, null);
     }
 
-    public ICustomResult<UserOutDto> Handle(int id, UpdateUserDto dto, IUpdateUserOptions config)
+    public ICustomResult<UserOutDto> Handle(int id, UpdateUserDto dto, UpdateUserOptions options)
     {
-        return _update(id, dto, config);
+        return _update(id, dto, options);
     }
 
-    private ICustomResult<UserOutDto> _update(int id, UpdateUserDto dto, IUpdateUserOptions? config)
+    private ICustomResult<UserOutDto> _update(int id, UpdateUserDto dto, UpdateUserOptions? options)
     {
         var result = new CustomResult<UserOutDto>();
         var user = unitOfWork.UserRepository.FindById(id);
 
         if (user == null) return result.SetError(UserMessageErrors.NotFound);
 
-        if (!string.IsNullOrWhiteSpace(dto.Email) && user.Email != dto.Email && config?.UpdateFromAdmin == true)
+        if (!string.IsNullOrWhiteSpace(dto.Email) && user.Email != dto.Email && options?.UpdateFromAdmin == true)
         {
             var emailAvailable = unitOfWork.UserRepository.EmailIsAvailable(dto.Email);
             if (emailAvailable == false) return result.SetError(UserMessageErrors.EmailAlreadyInUse);

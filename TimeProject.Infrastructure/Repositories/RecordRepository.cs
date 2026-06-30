@@ -2,16 +2,16 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using TimeProject.Domain.Entities;
-using TimeProject.Domain.ObjectValues;
 using TimeProject.Domain.Repositories;
+using TimeProject.Domain.Repositories.ObjectValues;
+using TimeProject.Domain.Repositories.Shared;
 using TimeProject.Infrastructure.Database;
-using TimeProject.Infrastructure.Shared;
 
 namespace TimeProject.Infrastructure.Repositories;
 
 public class RecordRepository(CustomDbContext db) : IRecordRepository
 {
-    public IIndexRepositoryResult<Record> Index(IPaginationQuery paginationQuery, int userId)
+    public IndexResult<Record> Index(PaginationQuery paginationQuery, int userId)
     {
         var query = db.Records.AsQueryable();
 
@@ -60,7 +60,7 @@ public class RecordRepository(CustomDbContext db) : IRecordRepository
             .Include(r => r.Resume)
             .ToList();
 
-        return new IndexRepositoryResult<Record>()
+        return new IndexResult<Record>()
         {
             Count = count,
             Entities = entities
@@ -78,7 +78,7 @@ public class RecordRepository(CustomDbContext db) : IRecordRepository
         query = query.OrderBy(record => record.Resume == null).ThenByDescending(record => record.Resume!.LastDate);
 
         return query
-            .Select(e => new SearchRecordItem(e.RecordId, e.Code, e.Name))
+            .Select(e => new SearchRecordItem { RecordId = e.RecordId, Code = e.Code, Name = e.Name})
             .Take(10)
             .ToList();
     }

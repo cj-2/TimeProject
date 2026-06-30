@@ -1,13 +1,13 @@
 ﻿using TimeProject.Domain.Entities;
-using TimeProject.Domain.ObjectValues;
 using TimeProject.Domain.Repositories;
+using TimeProject.Domain.Repositories.Shared;
 using TimeProject.Infrastructure.Database;
 
 namespace TimeProject.Infrastructure.Repositories;
 
 public class PeriodRepository(CustomDbContext db) : IPeriodRepository
 {
-    public IList<Period> Index(int recordId, int userId, IPaginationQuery paginationQuery)
+    public IList<Period> Index(int recordId, int userId, PaginationQuery paginationQuery)
     {
         return db.Periods
             .Where(period => period.RecordId == recordId && period.UserId == userId)
@@ -17,7 +17,7 @@ public class PeriodRepository(CustomDbContext db) : IPeriodRepository
             .ToList<Period>();
     }
 
-    public int GetTotalItems(int recordId, IPaginationQuery paginationQuery, int userId)
+    public int GetTotalItems(int recordId, PaginationQuery paginationQuery, int userId)
     {
         return db.Periods
             .Count(period => period.RecordId == recordId && period.UserId == userId);

@@ -1,13 +1,13 @@
 ﻿using TimeProject.Domain.Entities;
-using TimeProject.Domain.ObjectValues;
+using TimeProject.Domain.Repositories.Shared;
 
 namespace TimeProject.Domain.Repositories;
 
 public interface ICategoryRepository
 {
     IList<Category> Index(int userId, bool onlyWithData);
-    IList<Category> Index(IPaginationQuery paginationQuery, int userId);
-    int GetTotalItems(IPaginationQuery paginationQuery, int userId);
+    IList<Category> Index(PaginationQuery paginationQuery, int userId);
+    int GetTotalItems(PaginationQuery paginationQuery, int userId);
     Category Create(Category entity);
     Category Update(Category entity);
     bool Delete(Category entity);

@@ -2,11 +2,10 @@
 using Microsoft.AspNetCore.Mvc;
 using TimeProject.APIs.Controllers.Shared;
 using TimeProject.Application.Dtos.Categories;
-using TimeProject.Application.Dtos.General;
 using TimeProject.Application.Interfaces.UseCases.Categories;
 using TimeProject.Application.Utils;
 using TimeProject.Domain.Entities;
-using TimeProject.Domain.ObjectValues;
+using TimeProject.Domain.Repositories.Shared;
 
 namespace TimeProject.APIs.Controllers;
 
@@ -23,7 +22,7 @@ public class CategoryController(
     : CustomController
 {
     [HttpGet]
-    public ActionResult<IPagination<CategoryOutDto>> Index([FromQuery] PaginationQuery paginationQuery)
+    public ActionResult<Pagination<CategoryOutDto>> Index([FromQuery] PaginationQuery paginationQuery)
     {
         return HandleResponse( getPaginatedCategoryUseCase.Handle(paginationQuery, UserClaimsUtil.Id(User)));
     }

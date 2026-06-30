@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TimeProject.APIs.Controllers.Shared;
-using TimeProject.Application.Dtos.General;
 using TimeProject.Application.Dtos.Records;
 using TimeProject.Application.Interfaces.UseCases.Records;
 using TimeProject.Application.Utils;
-using TimeProject.Domain.ObjectValues;
+using TimeProject.Domain.Repositories.ObjectValues;
+using TimeProject.Domain.Repositories.Shared;
 
 namespace TimeProject.APIs.Controllers;
 
@@ -23,14 +23,14 @@ public class RecordController(
 ) : CustomController
 {
     [HttpGet]
-    public ActionResult<IPagination<RecordOutDto>> Index([FromQuery] PaginationQuery paginationQuery)
+    public ActionResult<Pagination<RecordOutDto>> Index([FromQuery] PaginationQuery paginationQuery)
     {
         return HandleResponse(getPaginatedRecordUseCase.Handle(paginationQuery, UserClaimsUtil.Id(User)));
     }
 
     [HttpGet]
     [Route("history/{recordId:int}")]
-    public ActionResult<IPagination<RecordHistoryDayOutDto>> HistoryIndex([FromRoute] int recordId,
+    public ActionResult<Pagination<RecordHistoryDayOutDto>> HistoryIndex([FromRoute] int recordId,
         [FromQuery] PaginationQuery paginationQuery)
     {
         return HandleResponse(

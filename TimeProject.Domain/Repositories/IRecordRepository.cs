@@ -1,11 +1,12 @@
 ﻿using TimeProject.Domain.Entities;
-using TimeProject.Domain.ObjectValues;
+using TimeProject.Domain.Repositories.ObjectValues;
+using TimeProject.Domain.Repositories.Shared;
 
 namespace TimeProject.Domain.Repositories;
 
 public interface IRecordRepository
 {
-    IIndexRepositoryResult<Record> Index(IPaginationQuery paginationQuery, int userId);
+    IndexResult<Record> Index(PaginationQuery paginationQuery, int userId);
     IList<SearchRecordItem> SearchRecord(string search, int userId);
     Record Create(Record entity);
     Record Update(Record entity);

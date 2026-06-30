@@ -1,11 +1,10 @@
-using TimeProject.Application.Dtos.General;
 using TimeProject.Application.Dtos.Records;
 using TimeProject.Application.Interfaces.Shared;
 using TimeProject.Application.Interfaces.UseCases.Records;
 using TimeProject.Application.Interfaces.Utils;
 using TimeProject.Application.Shared;
-using TimeProject.Domain.ObjectValues;
 using TimeProject.Domain.Repositories;
+using TimeProject.Domain.Repositories.Shared;
 using TimeProject.Infrastructure.Errors;
 
 namespace TimeProject.Application.UseCases.Records;
@@ -15,14 +14,14 @@ public class GetRecordHistoryUseCase(
     IUserRepository userRepository,
     IRecordMapDataUtil mapDataUtil) : IGetRecordHistoryUseCase
 {
-    public ICustomResult<IPagination<RecordHistoryDayOutDto>> Handle(int recordId,
+    public ICustomResult<Pagination<RecordHistoryDayOutDto>> Handle(int recordId,
         int userId,
-        IPaginationQuery paginationQuery)
+        PaginationQuery paginationQuery)
     {
         var user = userRepository.FindById(userId);
         if (user == null)
         {
-            return new CustomResult<IPagination<RecordHistoryDayOutDto>>().SetError(UserMessageErrors.NotFound);
+            return new CustomResult<Pagination<RecordHistoryDayOutDto>>().SetError(UserMessageErrors.NotFound);
         }
 
         // É passado um int referente ao UTC entre -12 e 13, para que consigamos saber as datas do UTC do usuário.
@@ -57,7 +56,7 @@ public class GetRecordHistoryUseCase(
             });
         }
 
-        return new CustomResult<IPagination<RecordHistoryDayOutDto>>
+        return new CustomResult<Pagination<RecordHistoryDayOutDto>>
         {
             Data = Pagination<RecordHistoryDayOutDto>
                 .Handle(mapDataUtil.Handle(historyDays), paginationQuery, distinctDates.Count)

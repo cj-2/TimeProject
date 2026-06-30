@@ -1,11 +1,10 @@
-﻿using TimeProject.Application.Dtos.General;
-using TimeProject.Application.Dtos.Users;
+﻿using TimeProject.Application.Dtos.Users;
 using TimeProject.Application.Interfaces.Shared;
 using TimeProject.Application.Interfaces.UseCases.Users;
 using TimeProject.Application.Interfaces.Utils;
 using TimeProject.Application.Shared;
-using TimeProject.Domain.ObjectValues;
 using TimeProject.Domain.Repositories;
+using TimeProject.Domain.Repositories.Shared;
 
 namespace TimeProject.Application.UseCases.Users;
 
@@ -14,7 +13,7 @@ public class GetPaginatedUserUseCase(
     IUserAccessLogRepository userAccessLogRepository,
     IUserMapDataUtil mapper) : IGetPaginatedUserUseCase
 {
-    public ICustomResult<IPagination<UserOutDto>> Handle(IPaginationQuery paginationQuery)
+    public ICustomResult<Pagination<UserOutDto>> Handle(PaginationQuery paginationQuery)
     {
         var data = mapper.Handle(userRepository.Index(paginationQuery));
         var totalItems = userRepository.GetTotalItems(paginationQuery);
@@ -31,7 +30,7 @@ public class GetPaginatedUserUseCase(
             user.LastAccessProvider = lastUserAccess.Provider.ToString();
         }
 
-        return new CustomResult<IPagination<UserOutDto>>
+        return new CustomResult<Pagination<UserOutDto>>
             { Data = Pagination<UserOutDto>.Handle(data, paginationQuery, totalItems) };
     }
 }

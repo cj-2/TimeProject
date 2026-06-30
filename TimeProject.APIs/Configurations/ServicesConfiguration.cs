@@ -28,7 +28,6 @@ using TimeProject.Application.UseCases.Records;
 using TimeProject.Application.UseCases.Sessions;
 using TimeProject.Application.UseCases.Users;
 using TimeProject.Application.Utils;
-using TimeProject.Domain.ObjectValues;
 using TimeProject.Domain.Repositories;
 using TimeProject.Infrastructure.Integrations;
 using TimeProject.Infrastructure.Interfaces;
@@ -92,7 +91,6 @@ public static class ServicesConfiguration
         services.AddScoped<IUserPasswordRepository, UserPasswordRepository>();
 
         services.AddScoped<IUserMapDataUtil, UserMapDataUtil>();
-        services.AddScoped<IUpdateUserOptions, UpdateUserOptions>();
 
         services.AddScoped<ICreateUserUseCase, CreateUserUseCase>();
         services.AddScoped<IUpdateUserUseCase, UpdateUserUseCase>();

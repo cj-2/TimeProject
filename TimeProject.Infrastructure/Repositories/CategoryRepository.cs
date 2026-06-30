@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TimeProject.Domain.Entities;
-using TimeProject.Domain.ObjectValues;
 using TimeProject.Domain.Repositories;
+using TimeProject.Domain.Repositories.Shared;
 using TimeProject.Infrastructure.Database;
 
 namespace TimeProject.Infrastructure.Repositories;
@@ -21,7 +21,7 @@ public class CategoryRepository(CustomDbContext db) : ICategoryRepository
                 .ToList<Category>();
     }
 
-    public IList<Category> Index(IPaginationQuery paginationQuery, int userId)
+    public IList<Category> Index(PaginationQuery paginationQuery, int userId)
     {
         IQueryable<Category> query = db.Categories;
         query = query.Where(c => c.UserId == userId);
@@ -40,7 +40,7 @@ public class CategoryRepository(CustomDbContext db) : ICategoryRepository
             .ToList();
     }
 
-    public int GetTotalItems(IPaginationQuery paginationQuery, int userId)
+    public int GetTotalItems(PaginationQuery paginationQuery, int userId)
     {
         IQueryable<Category> query = db.Categories;
         query = query.Where(c => c.UserId == userId);

@@ -1,13 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TimeProject.APIs.Controllers.Shared;
-using TimeProject.Application.Dtos.General;
 using TimeProject.Application.Dtos.Periods;
 using TimeProject.Application.Dtos.Records;
 using TimeProject.Application.Interfaces.UseCases.Periods;
 using TimeProject.Application.Utils;
 using TimeProject.Domain.Entities;
-using TimeProject.Domain.ObjectValues;
+using TimeProject.Domain.Repositories.Shared;
 
 namespace TimeProject.APIs.Controllers;
 
@@ -25,7 +24,7 @@ public class PeriodController(
 {
     [HttpGet]
     [Route("{recordId:int}")]
-    public ActionResult<IPagination<PeriodOutDto>> Index(int recordId, [FromQuery] PaginationQuery paginationQuery)
+    public ActionResult<Pagination<PeriodOutDto>> Index(int recordId, [FromQuery] PaginationQuery paginationQuery)
     {
         return HandleResponse(
             getPaginatedPeriodUseCase.Handle(recordId, UserClaimsUtil.Id(User), paginationQuery));

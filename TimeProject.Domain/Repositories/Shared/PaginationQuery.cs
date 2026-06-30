@@ -1,8 +1,6 @@
-﻿using TimeProject.Domain.ObjectValues;
+﻿namespace TimeProject.Domain.Repositories.Shared;
 
-namespace TimeProject.Application.Dtos.General;
-
-public class PaginationQuery : IPaginationQuery
+public class PaginationQuery
 {
     private int _page = 1;
 

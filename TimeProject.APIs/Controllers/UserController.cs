@@ -1,12 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TimeProject.APIs.Controllers.Shared;
-using TimeProject.Domain.ObjectValues;
 using TimeProject.APIs.Controllers.Attributes;
-using TimeProject.Application.Dtos.General;
 using TimeProject.Application.Dtos.Users;
 using TimeProject.Application.Interfaces.UseCases.Users;
 using TimeProject.Application.Utils;
+using TimeProject.Domain.Repositories.Shared;
 
 namespace TimeProject.APIs.Controllers;
 
@@ -24,7 +23,7 @@ public class UserController(
 {
     [HttpGet]
     [Authorize(Policy = "IsAdmin")]
-    public ActionResult<IPagination<UserOutDto>> Index([FromQuery] PaginationQuery paginationQuery)
+    public ActionResult<Pagination<UserOutDto>> Index([FromQuery] PaginationQuery paginationQuery)
     {
         return HandleResponse(getPaginatedUserUseCase.Handle(paginationQuery));
     }

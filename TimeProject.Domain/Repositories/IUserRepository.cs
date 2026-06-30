@@ -1,12 +1,12 @@
 ﻿using TimeProject.Domain.Entities;
-using TimeProject.Domain.ObjectValues;
+using TimeProject.Domain.Repositories.Shared;
 
 namespace TimeProject.Domain.Repositories;
 
 public interface IUserRepository
 {
-    IList<User> Index(IPaginationQuery paginationQuery);
-    int GetTotalItems(IPaginationQuery paginationQuery);
+    IList<User> Index(PaginationQuery paginationQuery);
+    int GetTotalItems(PaginationQuery paginationQuery);
     User Create(User entity);
     User Update(User entity);
     bool Delete(int id);

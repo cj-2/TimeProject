@@ -1,8 +1,6 @@
-﻿using TimeProject.Domain.ObjectValues;
+﻿namespace TimeProject.Domain.Repositories.Shared;
 
-namespace TimeProject.Application.Dtos.General;
-
-public class Pagination<T> : IPagination<T>
+public class Pagination<T>
 {
     public int Page { get; set; }
     public int PerPage { get; set; }
@@ -14,7 +12,7 @@ public class Pagination<T> : IPagination<T>
     public string? Sort { get; set; }
     public string? SortProp { get; set; }
 
-    public static IPagination<T> Handle(
+    public static Pagination<T> Handle(
         IEnumerable<T> data,
         int page,
         int perPage,
@@ -40,7 +38,7 @@ public class Pagination<T> : IPagination<T>
 
     public static Pagination<T> Handle(
         IEnumerable<T> data,
-        IPaginationQuery paginationQuery,
+        PaginationQuery paginationQuery,
         int totalItems)
     {
         return new Pagination<T>

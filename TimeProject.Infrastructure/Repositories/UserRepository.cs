@@ -1,14 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TimeProject.Domain.Entities;
-using TimeProject.Domain.ObjectValues;
 using TimeProject.Domain.Repositories;
+using TimeProject.Domain.Repositories.Shared;
 using TimeProject.Infrastructure.Database;
 
 namespace TimeProject.Infrastructure.Repositories;
 
 public class UserRepository(CustomDbContext db) : IUserRepository
 {
-    public IList<User> Index(IPaginationQuery paginationQuery)
+    public IList<User> Index(PaginationQuery paginationQuery)
     {
         IQueryable<User> query = db.Users;
 
@@ -26,7 +26,7 @@ public class UserRepository(CustomDbContext db) : IUserRepository
             .ToList();
     }
 
-    public int GetTotalItems(IPaginationQuery paginationQuery)
+    public int GetTotalItems(PaginationQuery paginationQuery)
     {
         IQueryable<User> query = db.Users;
 
