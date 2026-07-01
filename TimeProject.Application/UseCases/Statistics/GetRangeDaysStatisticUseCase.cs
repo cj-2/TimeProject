@@ -19,21 +19,21 @@ public class GetRangeDaysStatisticUseCase(
 )
     : IGetRangeDaysStatisticUseCase
 {
-    public ICustomResult<RangeStatisticOutDto> Handle(int userId,
+    public ICustomResult<RangeStatistic> Handle(int userId,
         DateTimeOffset? start = null,
         DateTimeOffset? end = null,
         int? recordId = null,
         bool skipRangeProgress = false)
     {
-        return new CustomResult<RangeStatisticOutDto>().SetData(
-            (_handle(userId, start, end, recordId, skipRangeProgress)).StatisticOutDto
+        return new CustomResult<RangeStatistic>().SetData(
+            (_handle(userId, start, end, recordId, skipRangeProgress)).Statistic
         );
     }
 
-    public ICustomResult<RangeStatisticsWithDaysOutDto> Handle(int userId, DateTimeOffset start, DateTimeOffset end)
+    public ICustomResult<RangeStatisticsWithDays> Handle(int userId, DateTimeOffset start, DateTimeOffset end)
     {
         var daysFromRange = new List<DateTimeOffset> { start };
-        var daysStatistics = new List<RangeStatisticOutDto>();
+        var daysStatistics = new List<RangeStatistic>();
 
         var periods = new List<Period>();
         var minutes = new List<Minute>();
@@ -55,12 +55,12 @@ public class GetRangeDaysStatisticUseCase(
         foreach (var day in daysFromRange)
         {
             var result = _handle(userId, day, null, null, true);
-            periods.AddRange(result.Periods.OfType<Period>());
-            minutes.AddRange(result.Minutes.OfType<Minute>());
-            sessions.AddRange(result.Sessions.OfType<Session>());
-            daysStatistics.Add(result.StatisticOutDto);
+            periods.AddRange(result.Periods);
+            minutes.AddRange(result.Minutes);
+            sessions.AddRange(result.Sessions);
+            daysStatistics.Add(result.Statistic);
 
-            if (result.StatisticOutDto.TotalInMinutes > 0) activeDaysCount++;
+            if (result.Statistic.TotalInMinutes > 0) activeDaysCount++;
         }
 
         var rangeStatistics = MakeRangeStatisticDatas(
@@ -69,19 +69,18 @@ public class GetRangeDaysStatisticUseCase(
             periods,
             minutes,
             sessions,
-            new List<Record>(),
+            [],
             daysCount,
             activeDaysCount
-        ).StatisticOutDto;
+        ).Statistic;
 
         rangeStatistics.RecordRangeProgress = MakeRangeProgress(
             GetRecordsByRange(userId, periods, minutes),
             periods,
             minutes
         );
-
-
-        return new CustomResult<RangeStatisticsWithDaysOutDto>().SetData(new RangeStatisticsWithDaysOutDto
+        
+        return new CustomResult<RangeStatisticsWithDays>().SetData(new RangeStatisticsWithDays
         {
             Total = rangeStatistics,
             Days = daysStatistics.OrderByDescending(e => e.StartDay).ToList()
@@ -99,13 +98,11 @@ public class GetRangeDaysStatisticUseCase(
         var initDate = start ?? DateTime.Today.ToUniversalTime();
         var endDate = end ?? initDate.AddDays(1).AddMicroseconds(-1);
 
-        var periodsByRange = statisticRepository
-            .GetPeriodsByRange(userId, initDate, endDate, recordId);
-
-        var periods = periodCutUtil.Handle(periodsByRange.OfType<Period>(), initDate, endDate).ToList();
+        var periodsByRange = statisticRepository.GetPeriodsByRange(userId, initDate, endDate, recordId);
+        var periods = periodCutUtil.Handle(periodsByRange, initDate, endDate).ToList();
 
         var sessions =
-            statisticRepository.GetSessionsByRange(userId, initDate, endDate, recordId).OfType<Session>()
+            statisticRepository.GetSessionsByRange(userId, initDate, endDate, recordId)
                 .Select(e =>
                 {
                     e.Periods = periodCutUtil.Handle(e.Periods!, initDate, endDate);
@@ -113,24 +110,22 @@ public class GetRangeDaysStatisticUseCase(
                 })
                 .ToList();
 
-        var timeMinutes = statisticRepository
-            .GetTimeMinutesByRange(userId, initDate, endDate, recordId).OfType<Minute>().ToList();
-
+        var minutes = statisticRepository.GetTimeMinutesByRange(userId, initDate, endDate, recordId).ToList();
         var records = new List<Record>();
 
         if (recordId == null && !skipRangeProgress)
         {
             var trIdList = new List<int>();
             trIdList.AddRange(periods.Where(e => e.RecordId.HasValue).Select(e => e.RecordId!.Value));
-            trIdList.AddRange(timeMinutes.Where(e => e.RecordId.HasValue).Select(e => e.RecordId!.Value));
-            records.AddRange(recordRepository.FindByIdList(trIdList.Distinct(), userId).OfType<Record>());
+            trIdList.AddRange(minutes.Where(e => e.RecordId.HasValue).Select(e => e.RecordId!.Value));
+            records.AddRange(recordRepository.FindByIdList(trIdList.Distinct(), userId));
         }
 
         return MakeRangeStatisticDatas(
             initDate,
             endDate,
             periods,
-            timeMinutes,
+            minutes,
             sessions,
             records
         );
@@ -182,7 +177,7 @@ public class GetRangeDaysStatisticUseCase(
             Periods = periods.ToList(),
             Minutes = minutes.ToList(),
             Sessions = sessions.ToList(),
-            StatisticOutDto = new RangeStatisticOutDto
+            Statistic = new RangeStatistic
             {
                 StartDay = start,
                 EndDay = end,
@@ -226,7 +221,7 @@ public class GetRangeDaysStatisticUseCase(
         };
     }
 
-    private IList<RecordRangeProgress> MakeRangeProgress(
+    private List<RecordRangeProgress> MakeRangeProgress(
         List<Record> records,
         List<Period> allPeriods,
         List<Minute> allMinutes
@@ -236,8 +231,8 @@ public class GetRangeDaysStatisticUseCase(
 
         foreach (var record in records)
         {
-            var periods = allPeriods.Where(e => e.RecordId == record.RecordId);
-            var minutes = allMinutes.Where(e => e.RecordId == record.RecordId);
+            var periods = allPeriods.Where(period => period.RecordId == record.RecordId);
+            var minutes = allMinutes.Where(minute => minute.RecordId == record.RecordId);
 
             var periodsTimeSpan = periods.TimeSpanFromPeriods();
             var minutesTimeSpan = minutes.TimeSpanFromMinutes();
@@ -256,13 +251,13 @@ public class GetRangeDaysStatisticUseCase(
 
     private List<Record> GetRecordsByRange(
         int userId,
-        IEnumerable<Period> periods,
-        IEnumerable<Minute> minutes
+        List<Period> periods,
+        List<Minute> minutes
     )
     {
-        var trIdList = new List<int>();
-        trIdList.AddRange(periods.Where(e => e.RecordId.HasValue).Select(e => e.RecordId!.Value));
-        trIdList.AddRange(minutes.Where(e => e.RecordId.HasValue).Select(e => e.RecordId!.Value));
-        return recordRepository.FindByIdList(trIdList.Distinct().ToList(), userId).OfType<Record>().ToList();
+        var recordIds = new List<int>();
+        recordIds.AddRange(periods.Where(e => e.RecordId.HasValue).Select(e => e.RecordId!.Value));
+        recordIds.AddRange(minutes.Where(e => e.RecordId.HasValue).Select(e => e.RecordId!.Value));
+        return recordRepository.FindByIdList(recordIds.Distinct(), userId).ToList();
     }
 }

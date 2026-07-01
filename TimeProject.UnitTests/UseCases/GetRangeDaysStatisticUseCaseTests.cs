@@ -145,7 +145,7 @@ public class GetRangeDaysStatisticUseCaseTests
         ];
     }
 
-    private static void RunAssets(RangeStatisticOutDto? data)
+    private static void RunAssets(RangeStatistic? data)
     {
         data.Should().NotBeNull();
 
