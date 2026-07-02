@@ -16,5 +16,5 @@ public class CreateRecordDto
 
     public int? CategoryId { get; set; }
 
-    [Required] public IList<PeriodDto>? Periods { get; set; }
+    [Required] public List<PeriodDto>? Periods { get; set; }
 }
