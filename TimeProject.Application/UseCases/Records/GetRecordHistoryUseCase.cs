@@ -19,9 +19,7 @@ public class GetRecordHistoryUseCase(
         PaginationQuery paginationQuery)
     {
         var distinctDates = repository
-            .GetDistinctDates(recordId, userId)
-            .Skip((paginationQuery.Page - 1) * paginationQuery.PerPage)
-            .Take(paginationQuery.PerPage)
+            .GetDistinctDates(recordId, userId, paginationQuery.PerPage, (paginationQuery.Page - 1) * paginationQuery.PerPage)
             .ToList();
 
         var historyDays = new List<RecordHistoryDayDto>();

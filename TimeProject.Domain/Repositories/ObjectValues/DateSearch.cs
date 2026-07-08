@@ -1,4 +1,4 @@
-﻿namespace TimeProject.Infrastructure.Repositories.ObjectValues;
+﻿namespace TimeProject.Domain.Repositories.ObjectValues;
 
 public class DateSearch
 {

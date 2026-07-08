@@ -2,21 +2,13 @@ using Dapper;
 using Microsoft.EntityFrameworkCore;
 using TimeProject.Domain.Entities;
 using TimeProject.Domain.Repositories;
+using TimeProject.Domain.Repositories.ObjectValues;
 using TimeProject.Infrastructure.Database;
-using TimeProject.Infrastructure.Repositories.ObjectValues;
 
 namespace TimeProject.Infrastructure.Repositories;
 
 public class RecordHistoryRepository(CustomDbContext context) : IRecordHistoryRepository
 {
-    public List<DateTimeOffset> GetDistinctDates(int recordId, int userId, string utc = "America/Sao_Paulo")
-    {
-        var dates = GetDatesFromPeriods(recordId, userId, utc);
-        var datesFromMinutes = GetDatesFromMinutes(recordId, userId, utc);
-        dates.AddRange(datesFromMinutes);
-        return dates.Distinct().OrderByDescending(e => e).ToList();
-    }
-
     public List<Period> GetPeriodsWithoutSession(int recordId, int userId,
         DateTimeOffset initDate, DateTimeOffset endDate)
     {
@@ -52,34 +44,29 @@ public class RecordHistoryRepository(CustomDbContext context) : IRecordHistoryRe
             .ToList();
     }
 
-    private List<DateTimeOffset> GetDatesFromPeriods(int recordId, int userId, string utc)
+    public List<DateTimeOffset> GetDistinctDates(
+        int recordId,
+        int userId,
+        int limit = 12,
+        int offset = 0,
+        string utc = "America/Sao_Paulo")
     {
         var sql =
             """
-            select distinct (date_trunc('day', start_period at time zone @utc)) as Date
-            from periods
-            where user_id = @userId and record_id = @recordId
-            order by Date desc;
+            select date_trunc('day', p.start_period at time zone @utc) as Date
+            from periods p
+            where p.user_id = @userId and p.record_id = @recordId
+            union
+            (select date_trunc('day', m.date at time zone @utc) as Date
+            from minutes m
+            where m.user_id = @userId and m.record_id = @recordId)
+            order by Date desc
+            limit @limit
+            offset @offset;
             """;
 
         return context.Database.GetDbConnection()
-            .Query<DateSearch>(sql, new { userId, recordId, utc })
-            .Select(e => e.Date)
-            .ToList();
-    }
-
-    private List<DateTimeOffset> GetDatesFromMinutes(int recordId, int userId, string utc)
-    {
-        var sql =
-            """
-            select distinct (date_trunc('day', date at time zone @utc)) as Date
-            from minutes
-            where user_id = @userId and record_id = @recordId
-            order by Date desc;
-            """;
-
-        return context.Database.GetDbConnection()
-            .Query<DateSearch>(sql, new { userId, recordId, utc })
+            .Query<DateSearch>(sql, new { userId, recordId, utc, limit, offset })
             .Select(e => e.Date)
             .ToList();
     }
