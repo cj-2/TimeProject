@@ -4,10 +4,10 @@ namespace TimeProject.Application.Dtos.Records;
 
 public class RecordHistoryDayDto
 {
-    public DateTime Date { get; set; }
-    public DateTime InitDate { get; set; }
-    public DateTime EndDate { get; set; }
-    public IEnumerable<Period>? Periods { get; set; }
-    public IEnumerable<Minute>? Minutes { get; set; }
-    public IEnumerable<Session>? Sessions { get; set; }
+    public DateTimeOffset Date { get; set; }
+    public DateTimeOffset InitDate { get; set; }
+    public DateTimeOffset EndDate { get; set; }
+    public List<Period>? Periods { get; set; }
+    public List<Minute>? Minutes { get; set; }
+    public List<Session>? Sessions { get; set; }
 }

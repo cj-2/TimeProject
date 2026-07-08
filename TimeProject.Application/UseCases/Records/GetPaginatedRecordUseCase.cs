@@ -18,7 +18,7 @@ public class GetPaginatedRecordUseCase(IRecordRepository repository, IRecordMapD
         return new CustomResult<Pagination<RecordOutDto>>
         {
             Data = Pagination<RecordOutDto>
-                .Handle(mapDataUtil.Handle(result.Entities), paginationQuery, result.Count)
+                .Handle(mapDataUtil.Handle(result.Entities.ToList()), paginationQuery, result.Count)
         };
     }
 }

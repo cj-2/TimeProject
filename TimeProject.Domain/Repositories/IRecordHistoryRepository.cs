@@ -4,14 +4,14 @@ namespace TimeProject.Domain.Repositories;
 
 public interface IRecordHistoryRepository
 {
-    IList<DateTime> GetDistinctDates(int recordId, int userId, int addHours = 0);
+    List<DateTimeOffset> GetDistinctDates(int recordId, int userId, string utc = "America/Sao_Paulo");
 
-    IList<Period> GetPeriodsWithoutSession(int recordId, int userId,
-        DateTime initDate, DateTime endDate);
+    List<Period> GetPeriodsWithoutSession(int recordId, int userId,
+        DateTimeOffset initDate, DateTimeOffset endDate);
 
-    IList<Minute> GetMinutes(int recordId, int userId, DateTime initDate,
-        DateTime endDate);
+    List<Minute> GetMinutes(int recordId, int userId, DateTimeOffset initDate,
+        DateTimeOffset endDate);
 
-    IList<Session> GetSessions(int recordId, int userId, DateTime initDate,
-        DateTime endDate);
+    List<Session> GetSessions(int recordId, int userId, DateTimeOffset initDate,
+        DateTimeOffset endDate);
 }

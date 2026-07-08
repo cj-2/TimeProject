@@ -9,11 +9,11 @@ namespace TimeProject.Application.Dtos.Records;
 
 public class RecordHistoryDayOutDto
 {
-    public DateTime Date { get; set; }
+    public DateTimeOffset Date { get; set; }
 
-    public IEnumerable<PeriodOutDto>? Periods { get; set; }
-    public IEnumerable<SessionOutDto>? Sessions { get; set; }
-    public IEnumerable<MinuteOutDto>? Minutes { get; set; }
+    public List<PeriodOutDto>? Periods { get; set; }
+    public List<SessionOutDto>? Sessions { get; set; }
+    public List<MinuteOutDto>? Minutes { get; set; }
 
     private TimeSpan TimeSpanPeriods => Periods.TimeSpanFromPeriods();
     private TimeSpan TimeSpanSessions => Sessions.TimeSpanFromSessions();

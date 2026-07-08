@@ -7,9 +7,9 @@ namespace TimeProject.Application.Utils;
 
 public class RecordMapDataUtil(IMapper mapper) : IRecordMapDataUtil
 {
-    public IEnumerable<RecordHistoryDayOutDto> Handle(IEnumerable<RecordHistoryDayDto> entity)
+    public List<RecordHistoryDayOutDto> Handle(List<RecordHistoryDayDto> entity)
     {
-        return mapper.Map<IEnumerable<RecordHistoryDayDto>, IEnumerable<RecordHistoryDayOutDto>>(entity);
+        return mapper.Map<List<RecordHistoryDayDto>, List<RecordHistoryDayOutDto>>(entity);
     }
 
     public RecordOutDto Handle(Record entity)
@@ -17,8 +17,8 @@ public class RecordMapDataUtil(IMapper mapper) : IRecordMapDataUtil
         return mapper.Map<Record, RecordOutDto>(entity);
     }
 
-    public IEnumerable<RecordOutDto> Handle(IEnumerable<Record> entities)
+    public List<RecordOutDto> Handle(List<Record> entities)
     {
-        return mapper.Map<IEnumerable<Record>, IEnumerable<RecordOutDto>>(entities);
+        return mapper.Map<List<Record>, List<RecordOutDto>>(entities);
     }
 }

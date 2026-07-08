@@ -5,7 +5,7 @@ namespace TimeProject.Application.Interfaces.Utils;
 
 public interface IRecordMapDataUtil
 {
-    IEnumerable<RecordHistoryDayOutDto> Handle(IEnumerable<RecordHistoryDayDto> entity);
+    List<RecordHistoryDayOutDto> Handle(List<RecordHistoryDayDto> entity);
     RecordOutDto Handle(Record entity);
-    IEnumerable<RecordOutDto> Handle(IEnumerable<Record> entities);
+    List<RecordOutDto> Handle(List<Record> entities);
 }

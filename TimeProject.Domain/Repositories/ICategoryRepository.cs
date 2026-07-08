@@ -5,7 +5,7 @@ namespace TimeProject.Domain.Repositories;
 
 public interface ICategoryRepository
 {
-    IList<Category> Index(int userId, bool onlyWithData);
+    List<Category> Index(int userId, bool onlyWithData);
     IList<Category> Index(PaginationQuery paginationQuery, int userId);
     int GetTotalItems(PaginationQuery paginationQuery, int userId);
     Category Create(Category entity);

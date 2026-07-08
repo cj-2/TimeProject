@@ -18,48 +18,39 @@ public class GetRecordHistoryUseCase(
         int userId,
         PaginationQuery paginationQuery)
     {
-        var user = userRepository.FindById(userId);
-        if (user == null)
-        {
-            return new CustomResult<Pagination<RecordHistoryDayOutDto>>().SetError(UserMessageErrors.NotFound);
-        }
-
-        // É passado um int referente ao UTC entre -12 e 13, para que consigamos saber as datas do UTC do usuário.
-        var distinctDates = repository.GetDistinctDates(recordId, userId, -3);
-
-        var dates = distinctDates
+        var distinctDates = repository
+            .GetDistinctDates(recordId, userId)
             .Skip((paginationQuery.Page - 1) * paginationQuery.PerPage)
-            .Take(paginationQuery.PerPage);
+            .Take(paginationQuery.PerPage)
+            .ToList();
 
         var historyDays = new List<RecordHistoryDayDto>();
 
-        foreach (var dateItem in dates)
+        foreach (var initDate in distinctDates)
         {
-            // initDate pega a data que já subtraimos a diferênça de utc e somamos novamente para fazer a busca correnta.
-            var initDate = dateItem.AddHours(-3);
             var endDate = initDate.AddDays(1);
 
-            var tpList = repository.GetPeriodsWithoutSession(recordId, userId, initDate, endDate);
-            var tsList = repository.GetSessions(recordId, userId, initDate, endDate);
-            var tmList = repository.GetMinutes(recordId, userId, initDate, endDate);
+            var periods = repository.GetPeriodsWithoutSession(recordId, userId, initDate, endDate);
+            var sessions = repository.GetSessions(recordId, userId, initDate, endDate);
+            var minutes = repository.GetMinutes(recordId, userId, initDate, endDate);
 
-            if (tpList.Count == 0 && tsList.Count == 0 && tmList.Count == 0) continue;
+            if (periods.Count == 0 && sessions.Count == 0 && minutes.Count == 0) continue;
 
             historyDays.Add(new RecordHistoryDayDto
             {
                 Date = initDate,
                 InitDate = initDate,
                 EndDate = endDate,
-                Periods = tpList,
-                Minutes = tmList,
-                Sessions = tsList
+                Periods = periods,
+                Minutes = minutes,
+                Sessions = sessions
             });
         }
 
         return new CustomResult<Pagination<RecordHistoryDayOutDto>>
         {
             Data = Pagination<RecordHistoryDayOutDto>
-                .Handle(mapDataUtil.Handle(historyDays), paginationQuery, distinctDates.Count)
+                .Handle(mapDataUtil.Handle(historyDays), paginationQuery, historyDays.Count)
         };
     }
 }
