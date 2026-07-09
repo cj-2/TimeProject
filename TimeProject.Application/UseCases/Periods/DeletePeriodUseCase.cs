@@ -19,9 +19,7 @@ public class DeletePeriodUseCase(IPeriodRepository repository, ISyncRecordResume
             return result.SetError(PeriodMessageErrors.NotFound);
 
         var data = repository.Delete(period);
-        
-        if (period.RecordId != null)
-            syncRecordResumeUseCase.Handle((int)period.RecordId);
+        syncRecordResumeUseCase.Handle((int)period.RecordId);
 
         return result.SetData(data);
     }

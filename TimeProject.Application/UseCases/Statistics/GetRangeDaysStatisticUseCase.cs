@@ -116,8 +116,8 @@ public class GetRangeDaysStatisticUseCase(
         if (recordId == null && !skipRangeProgress)
         {
             var trIdList = new List<int>();
-            trIdList.AddRange(periods.Where(e => e.RecordId.HasValue).Select(e => e.RecordId!.Value));
-            trIdList.AddRange(minutes.Where(e => e.RecordId.HasValue).Select(e => e.RecordId!.Value));
+            trIdList.AddRange(periods.Select(e => e.RecordId));
+            trIdList.AddRange(minutes.Select(e => e.RecordId));
             records.AddRange(recordRepository.FindByIdList(trIdList.Distinct(), userId));
         }
 
@@ -256,8 +256,8 @@ public class GetRangeDaysStatisticUseCase(
     )
     {
         var recordIds = new List<int>();
-        recordIds.AddRange(periods.Where(e => e.RecordId.HasValue).Select(e => e.RecordId!.Value));
-        recordIds.AddRange(minutes.Where(e => e.RecordId.HasValue).Select(e => e.RecordId!.Value));
+        recordIds.AddRange(periods.Select(e => e.RecordId));
+        recordIds.AddRange(minutes.Select(e => e.RecordId));
         return recordRepository.FindByIdList(recordIds.Distinct(), userId).ToList();
     }
 }

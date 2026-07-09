@@ -179,7 +179,6 @@ execute procedure update_timestamp();
 create table if not exists record_resumes
 (
     record_id  int         not null unique,
-    user_id    int         not null,
     seconds    float8 check (seconds >= 0),
     formatted  varchar(24),
     first_date timestamptz          default now(),
@@ -188,11 +187,8 @@ create table if not exists record_resumes
     created_at timestamptz not null default now(),
     updated_at timestamptz not null default now(),
     constraint pk_record_resumes primary key (record_id),
-    constraint fk_record_resumes_users foreign key (user_id) references users (user_id) on delete cascade,
     constraint fk_record_resumes_records foreign key (record_id) references records (record_id) on delete cascade
 );
-
-create index idx_record_resumes_user_id_record_id on record_resumes (user_id, record_id);
 
 create or replace trigger record_resumes_update_timestamp_trigger
     before update
@@ -207,20 +203,17 @@ create table if not exists sessions
     type         int         not null,
     date         timestamptz not null default now(),
     session_from varchar(20),
-    user_id      int         not null,
-    record_id    int,
-    category_id  int,
+    user_id      int,
+    record_id    int         not null,
     created_at   timestamptz not null default now(),
     updated_at   timestamptz not null default now(),
     constraint pk_sessions primary key (session_id),
-    constraint fk_sessions_users foreign key (user_id) references users (user_id) on delete cascade,
-    constraint fk_sessions_records foreign key (record_id) references records (record_id) on delete cascade,
-    constraint fk_sessions_categories foreign key (category_id) references categories (category_id) on delete set null
+    constraint fk_sessions_users foreign key (user_id) references users (user_id) on delete set null,
+    constraint fk_sessions_records foreign key (record_id) references records (record_id) on delete cascade
 );
 
 create index idx_sessions_user_id on sessions (user_id);
 create index idx_sessions_record_id on sessions (record_id);
-create index idx_sessions_category_id on sessions (category_id);
 
 create or replace trigger sessions_update_timestamp_trigger
     before update
@@ -233,24 +226,21 @@ create table if not exists periods
 (
     period_id    serial,
     start_period timestamptz not null,
-    end_period   timestamptz check (end_period is null or end_period > start_period),
-    user_id      int         not null,
-    record_id    int,
-    session_id   int,
-    category_id  int,
+    end_period   timestamptz not null check (end_period > start_period),
+    user_id      int,
+    record_id    int         not null,
+    session_id   int         not null,
     created_at   timestamptz not null default now(),
     updated_at   timestamptz not null default now(),
     constraint pk_periods primary key (period_id),
-    constraint fk_periods_users foreign key (user_id) references users (user_id) on delete cascade,
-    constraint fk_periods_records foreign key (record_id) references records (record_id) on delete set null,
-    constraint fk_periods_sessions foreign key (session_id) references sessions (session_id) on delete set null,
-    constraint fk_periods_categories foreign key (category_id) references categories (category_id) on delete set null
+    constraint fk_periods_users foreign key (user_id) references users (user_id) on delete set null,
+    constraint fk_periods_records foreign key (record_id) references records (record_id) on delete cascade,
+    constraint fk_periods_sessions foreign key (session_id) references sessions (session_id) on delete cascade
 );
 
 create index idx_periods_user_id on periods (user_id);
 create index idx_periods_record_id on periods (record_id);
 create index idx_periods_session_id on periods (session_id);
-create index idx_periods_category_id on periods (category_id);
 
 create or replace trigger periods_update_timestamp_trigger
     before update
@@ -261,38 +251,26 @@ execute procedure update_timestamp();
 /* minutes */
 create table if not exists minutes
 (
-    minute_id   serial,
-    date        timestamptz not null,
-    total       int         not null check (total >= 0),
-    user_id     int         not null,
-    record_id   int,
-    session_id  int,
-    category_id int,
-    created_at  timestamptz not null default now(),
-    updated_at  timestamptz not null default now(),
+    minute_id  serial,
+    date       timestamptz not null,
+    total      int         not null check (total >= 0),
+    user_id    int,
+    record_id  int         not null,
+    session_id int         not null,
+    created_at timestamptz not null default now(),
+    updated_at timestamptz not null default now(),
     constraint pk_minutes primary key (minute_id),
-    constraint fk_minutes_users foreign key (user_id) references users (user_id) on delete cascade,
-    constraint fk_minutes_records foreign key (record_id) references records (record_id) on delete set null,
-    constraint fk_minutes_sessions foreign key (session_id) references sessions (session_id) on delete set null,
-    constraint fk_minutes_categories foreign key (category_id) references categories (category_id) on delete set null
+    constraint fk_minutes_users foreign key (user_id) references users (user_id) on delete set null,
+    constraint fk_minutes_records foreign key (record_id) references records (record_id) on delete cascade,
+    constraint fk_minutes_sessions foreign key (session_id) references sessions (session_id) on delete cascade
 );
 
 create index idx_minutes_user_id on minutes (user_id);
 create index idx_minutes_record_id on minutes (record_id);
 create index idx_minutes_session_id on minutes (session_id);
-create index idx_minutes_category_id on minutes (category_id);
 
 create or replace trigger minutes_update_timestamp_trigger
     before update
     on minutes
     for each row
 execute procedure update_timestamp();
-
-/* 
-    TODO: Criar um trigger para: "periods" e "minutes" 
-    para serem excluídos quando não houverem referência 
-    para nenhum "record" ou "category".
-    
-    Talvez posso implementar isso como uma rotina para 
-    evitar a exclusão automática "não intencional".
-*/

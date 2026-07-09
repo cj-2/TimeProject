@@ -8,9 +8,9 @@ public class Session
     public SessionType Type { get; set; }
     public DateTimeOffset Date { get; set; }
     public string? From { get; set; } = string.Empty;
-    public int? RecordId { get; set; }
-    public int? CategoryId { get; set; }
-    public int UserId { get; set; }
+
+    public int RecordId { get; set; }
+    public int? UserId { get; set; }
 
     public Record? Record { get; set; }
     public Category? Category { get; set; }

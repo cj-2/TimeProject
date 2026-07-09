@@ -20,7 +20,6 @@ public class RecordResumeEntityConfiguration : IEntityTypeConfiguration<RecordRe
         builder.Property(e => e.LastDate).HasColumnName("last_date")
             .HasConversion(v => v.HasValue ? v.Value.ToUniversalTime() : v,
                 v => v.HasValue ? v.Value.ToUniversalTime() : v);
-        builder.Property(e => e.UserId).HasColumnName("user_id");
 
         builder.HasOne<Record>().WithOne(e => e.Resume).HasForeignKey<RecordResume>(e => e.RecordId);
     }

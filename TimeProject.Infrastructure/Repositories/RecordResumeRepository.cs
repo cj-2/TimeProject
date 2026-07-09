@@ -73,7 +73,6 @@ public class RecordResumeRepository(CustomDbContext dbContext) : IRecordResumeRe
                 Seconds = timeSpan.TotalSeconds,
                 FirstDate = first,
                 LastDate = last,
-                UserId = record.UserId
             };
 
             dbContext.Add(entity);

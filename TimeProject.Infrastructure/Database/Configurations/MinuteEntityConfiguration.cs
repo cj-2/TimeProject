@@ -15,7 +15,6 @@ public class MinuteEntityConfiguration : IEntityTypeConfiguration<Minute>
             .HasConversion(v => v.ToUniversalTime(), v => v.ToUniversalTime());
         builder.Property(e => e.Total).HasColumnName("total");
         builder.Property(e => e.RecordId).HasColumnName("record_id");
-        builder.Property(e => e.CategoryId).HasColumnName("category_id");
         builder.Property(e => e.SessionId).HasColumnName("session_id");
         builder.Property(e => e.UserId).HasColumnName("user_id");
         

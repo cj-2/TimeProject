@@ -5,5 +5,6 @@ public enum SessionType
     Default,
     Timer,
     Pomodoro,
-    Break
+    Break,
+    Manual
 }

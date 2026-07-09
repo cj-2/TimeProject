@@ -19,7 +19,6 @@ public class PeriodEntityConfiguration : IEntityTypeConfiguration<Period>
                 v => v.HasValue ? v.Value.ToUniversalTime() : v);
         builder.Property(e => e.RecordId).HasColumnName("record_id");
         builder.Property(e => e.SessionId).HasColumnName("session_id");
-        builder.Property(e => e.CategoryId).HasColumnName("category_id");
         builder.Property(e => e.UserId).HasColumnName("user_id");
 
         builder.HasOne<User>().WithMany().HasForeignKey(e => e.UserId);

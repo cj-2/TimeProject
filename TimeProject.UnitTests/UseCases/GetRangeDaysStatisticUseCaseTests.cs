@@ -44,7 +44,7 @@ public class GetRangeDaysStatisticUseCaseTests
                 Start = today.AddHours(-3),
                 End = today.AddHours(-3).AddMinutes(15),
                 UserId = userId,
-                SessionId = null,
+                SessionId = 1,
                 RecordId = recordId
             },
             new Period
@@ -52,7 +52,7 @@ public class GetRangeDaysStatisticUseCaseTests
                 Start = today,
                 End = today.AddMinutes(15).AddSeconds(10),
                 UserId = userId,
-                SessionId = null,
+                SessionId = 1,
                 RecordId = recordId
             },
             new Period
@@ -60,7 +60,7 @@ public class GetRangeDaysStatisticUseCaseTests
                 Start = today.AddMinutes(20),
                 End = today.AddMinutes(45),
                 UserId = userId,
-                SessionId = null,
+                SessionId = 1,
                 RecordId = recordId
             },
             // will be removed
@@ -69,7 +69,7 @@ public class GetRangeDaysStatisticUseCaseTests
                 Start = today.AddDays(1).AddMinutes(20),
                 End = today.AddDays(1).AddMinutes(45),
                 UserId = userId,
-                SessionId = null,
+                SessionId = 1,
                 RecordId = recordId
             }
         ];

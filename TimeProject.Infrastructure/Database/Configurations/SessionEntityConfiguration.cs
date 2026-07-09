@@ -16,7 +16,6 @@ public class SessionEntityConfiguration : IEntityTypeConfiguration<Session>
             .HasConversion(v => v.ToUniversalTime(), v => v.ToUniversalTime());
         builder.Property(e => e.From).HasColumnName("session_from");
         builder.Property(e => e.RecordId).HasColumnName("record_id");
-        builder.Property(e => e.CategoryId).HasColumnName("category_id");
         builder.Property(e => e.UserId).HasColumnName("user_id");
 
         builder.HasOne<User>().WithMany().HasForeignKey(e => e.UserId);

@@ -8,5 +8,4 @@ public class RecordResume
     public DateTimeOffset? FirstDate { get; set; }
     public DateTimeOffset? LastDate { get; set; }
     public int Count { get; set; }
-    public int UserId { get; set; }
 }
