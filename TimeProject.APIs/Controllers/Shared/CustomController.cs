@@ -8,13 +8,21 @@ namespace TimeProject.APIs.Controllers.Shared;
 
 public class CustomController : ControllerBase
 {
+    protected ActionResult HandleResponse(ICustomResult customResult)
+    {
+        return customResult.IsValid ? NoContent() : ErrorHandler(customResult);
+    }
+
     protected ActionResult<T> HandleResponse<T>(ICustomResult<T> customResult)
     {
         if (!string.IsNullOrEmpty(customResult.ActionName) && customResult.IsValid)
             return CreatedAtAction(customResult.ActionName, customResult.Data);
 
-        if (customResult.IsValid) return Ok(customResult.Data);
+        return customResult.IsValid ? Ok(customResult.Data) : ErrorHandler(customResult);
+    }
 
+    private ActionResult ErrorHandler(ICustomResult customResult)
+    {
         var messageSplit = customResult.Message?.Split(":") ?? ["generic_error"];
         var errorResponse = new ErrorResult { Message = messageSplit[^1] };
 
@@ -29,7 +37,7 @@ public class CustomController : ControllerBase
         return BadRequest(errorResponse);
     }
 
-    protected bool IsAdmin()
+    private bool IsAdmin()
     {
         return nameof(UserRoleType.Admin) == UserClaimsUtil.Role(User);
     }

@@ -1,13 +1,18 @@
 ﻿
 namespace TimeProject.Application.Interfaces.Shared;
 
-public interface ICustomResult<T>
+public interface ICustomResult
 {
-    public T? Data { get; }
     bool IsValid { get; }
     bool HasError { get; set; }
     string? Message { get; set; }
     string? ActionName { get; set; }
-    ICustomResult<T> SetError(string? message);
+    ICustomResult SetError(string? message);
+}
+
+public interface ICustomResult<T> : ICustomResult
+{
+    public T? Data { get; }
+    new ICustomResult<T> SetError(string? message);
     ICustomResult<T> SetData(T data);
 }
