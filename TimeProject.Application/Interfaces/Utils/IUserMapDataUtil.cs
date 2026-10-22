@@ -1,4 +1,4 @@
-﻿using TimeProject.Application.Dtos.Users;
+﻿using TimeProject.Application.UseCases.Users.Dtos;
 using TimeProject.Domain.Entities;
 
 namespace TimeProject.Application.Interfaces.Utils;

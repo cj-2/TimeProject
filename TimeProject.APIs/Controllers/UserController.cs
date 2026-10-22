@@ -2,8 +2,10 @@
 using Microsoft.AspNetCore.Mvc;
 using TimeProject.APIs.Controllers.Shared;
 using TimeProject.APIs.Controllers.Attributes;
-using TimeProject.Application.Dtos.Users;
-using TimeProject.Application.Interfaces.UseCases.Users;
+using TimeProject.Application.UseCases.Users.Dtos;
+using TimeProject.Application.UseCases.Users.Queries.Interfaces;
+using TimeProject.Application.UseCases.Users.Stories.Dtos;
+using TimeProject.Application.UseCases.Users.Stories.Interfaces;
 using TimeProject.Application.Utils;
 using TimeProject.Domain.Repositories.Shared;
 
