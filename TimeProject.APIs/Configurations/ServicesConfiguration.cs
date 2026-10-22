@@ -102,7 +102,6 @@ public static class ServicesConfiguration
         services.AddScoped<IDisableUserUseCase, DisableUserUseCase>();
         services.AddScoped<IGetUserUseCase, GetUserUseCase>();
         services.AddScoped<IGetUserByEmailUseCase, GetUserByEmailUseCase>();
-        services.AddScoped<IGetUserPasswordByEmailUseCase, GetUserPasswordByEmailUseCase>();
         services.AddScoped<IGetUserByOAtuhProviderIdUseCase, GetUserByOAuthProviderIdUseCase>();
         services.AddScoped<IDeleteUserUseCase, DeleteUserUseCase>();
         services.AddScoped<IGetPaginatedUserUseCase, GetPaginatedUserUseCase>();

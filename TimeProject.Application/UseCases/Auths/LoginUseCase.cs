@@ -3,16 +3,17 @@ using TimeProject.Application.Interfaces.Handlers;
 using TimeProject.Application.Interfaces.Shared;
 using TimeProject.Application.Interfaces.UseCases.CustomLogs;
 using TimeProject.Application.Interfaces.UseCases.Logins;
-using TimeProject.Application.Interfaces.UseCases.Users;
 using TimeProject.Application.Shared;
 using TimeProject.Domain.Entities;
+using TimeProject.Domain.Repositories;
 using TimeProject.Infrastructure.Errors;
 
 namespace TimeProject.Application.UseCases.Auths;
 
 public class LoginUseCase(
     IJwtHandler jwtHandler,
-    IGetUserPasswordByEmailUseCase getUserPasswordByEmailUseCase,
+    IUserRepository userRepository,
+    IUserPasswordRepository passwordRepository,
     ICreateUserAccessLogUseCase createUserAccessLogUseCase
 )
     : ILoginUseCase
@@ -20,18 +21,19 @@ public class LoginUseCase(
     public ICustomResult<JwtDto> Handle(LoginDto dto, UserAccessLog accessLog)
     {
         var result = new CustomResult<JwtDto>();
+        
+        var user = userRepository.FindByEmail(dto.Email);
+        if (user == null) return result.SetError(UserMessageErrors.Unauthorized);
 
-        var findUserPasswordResult = getUserPasswordByEmailUseCase.Handle(dto.Email);
-        if (findUserPasswordResult.HasError) return result.SetError(findUserPasswordResult.Message);
-
-        var data = findUserPasswordResult.Data!;
-
-        var passwordMatch = BCrypt.Net.BCrypt.Verify(dto.Password, data.UserPassword.Password);
+        var userPassword = passwordRepository.FindByUserId(user.UserId);
+        if (userPassword == null) return result.SetError(UserMessageErrors.PasswordNotAllowed);
+        
+        var passwordMatch = BCrypt.Net.BCrypt.Verify(dto.Password, userPassword.Password);
         if (!passwordMatch) return result.SetError(AuthMessageErrors.WrongEmailOrPassword);
 
-        accessLog.UserId = data.User.UserId;
+        accessLog.UserId = userPassword.UserId;
         createUserAccessLogUseCase.Handle(accessLog);
 
-        return result.SetData(jwtHandler.Generate(data.User));
+        return result.SetData(jwtHandler.Generate(user));
     }
 }
