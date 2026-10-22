@@ -1,5 +1,7 @@
-﻿using TimeProject.Application.Dtos.Periods;
+﻿using TimeProject.Application.Dtos.Minutes;
+using TimeProject.Application.Dtos.Periods;
 using TimeProject.Application.Utils;
+using TimeProject.Infrastructure.Utils;
 
 namespace TimeProject.Application.Dtos.Sessions;
 
@@ -13,6 +15,8 @@ public class SessionOutDto
     public string? From { get; set; }
 
     public IEnumerable<PeriodOutDto>? Periods { get; set; }
+    public IEnumerable<MinuteOutDto>? Minutes { get; set; }
 
-    public string FormattedTime => Periods.StringFromPeriods();
+    public string FormattedTime =>
+        Periods.TimeSpanFromPeriods().Add(Minutes.TimeSpanFromMinutes()).StringFromTimeSpan();
 }

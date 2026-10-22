@@ -36,11 +36,9 @@ public class RecordHistoryRepository(CustomDbContext context) : IRecordHistoryRe
         DateTimeOffset endDate)
     {
         return SessionQuery(recordId, userId)
-            .Where(e =>
-                e.Periods!.FirstOrDefault()!.Start >= initDate
-                && e.Periods!.FirstOrDefault()!.Start < endDate
-            )
+            .Where(e => e.Date >= initDate && e.Date < endDate)
             .Include(e => e.Periods!.OrderBy(period => period.Start))
+            .Include(e => e.Minutes!.OrderBy(minute => minute.Date))
             .ToList();
     }
 

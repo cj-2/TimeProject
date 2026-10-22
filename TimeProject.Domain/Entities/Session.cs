@@ -15,4 +15,5 @@ public class Session
     public Record? Record { get; set; }
     public Category? Category { get; set; }
     public IEnumerable<Period>? Periods { get; set; }
+    public IEnumerable<Minute>? Minutes { get; set; }
 }

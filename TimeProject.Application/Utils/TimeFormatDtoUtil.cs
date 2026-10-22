@@ -24,7 +24,7 @@ public static class TimeFormatDtoUtil
 
         foreach (var session in sessions)
         {
-            total = total.Add(session.Periods.TimeSpanFromPeriods());
+            total = total.Add(session.Periods.TimeSpanFromPeriods()).Add(session.Minutes.TimeSpanFromMinutes());
         }
 
         return total;
