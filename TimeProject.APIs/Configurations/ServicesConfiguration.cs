@@ -8,7 +8,6 @@ using TimeProject.Application.Interfaces.UseCases.Codes;
 using TimeProject.Application.Interfaces.UseCases.CustomLogs;
 using TimeProject.Application.Interfaces.UseCases.Feedbacks;
 using TimeProject.Application.Interfaces.UseCases.Logins;
-using TimeProject.Application.Interfaces.UseCases.Minutes;
 using TimeProject.Application.Interfaces.UseCases.Periods;
 using TimeProject.Application.Interfaces.UseCases.Records;
 using TimeProject.Application.Interfaces.UseCases.Sessions;

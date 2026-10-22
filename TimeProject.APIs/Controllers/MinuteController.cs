@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TimeProject.APIs.Controllers.Shared;
-using TimeProject.Application.Interfaces.UseCases.Minutes;
 using TimeProject.Application.UseCases.Minutes.Dtos;
 using TimeProject.Application.UseCases.Minutes.Interfaces;
 using TimeProject.Application.Utils;
@@ -17,7 +16,8 @@ public class MinuteController(
 {
     [HttpPost]
     [Route("list/{recordId:int}")]
-    public ActionResult<List<CreateMinuteByListOutDto>> Create([FromRoute] int recordId, [FromBody] CreateMinuteByListDto dto)
+    public ActionResult<List<CreateMinuteByListOutDto>> Create([FromRoute] int recordId,
+        [FromBody] CreateMinuteByListDto dto)
     {
         dto.RecordId = recordId;
         var result = createMinuteByListUseCase.Handle(dto, UserClaimsUtil.Id(User));
@@ -27,8 +27,9 @@ public class MinuteController(
 
     [HttpDelete]
     [Route("{id:int}")]
-    public ActionResult<bool> Delete(int id)
+    public ActionResult Delete(int id)
     {
-        return HandleResponse(deleteMinuteUseCase.Handle(id, UserClaimsUtil.Id(User)));
+        var result = deleteMinuteUseCase.Handle(id, UserClaimsUtil.Id(User));
+        return HandleResponse(result);
     }
 }

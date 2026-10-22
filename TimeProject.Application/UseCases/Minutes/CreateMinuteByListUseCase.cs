@@ -1,5 +1,4 @@
 ﻿using TimeProject.Application.Interfaces.Shared;
-using TimeProject.Application.Interfaces.UseCases.Records;
 using TimeProject.Application.Shared;
 using TimeProject.Application.UseCases.Minutes.Dtos;
 using TimeProject.Application.UseCases.Minutes.Interfaces;
@@ -14,8 +13,7 @@ public class CreateMinuteByListUseCase(
     IMinuteRepository minuteRepository,
     IRecordRepository recordRepository,
     ISessionRepository sessionRepository,
-    IUserRepository userRepository,
-    ISyncRecordResumeUseCase syncRecordResumeUseCase
+    IUserRepository userRepository
 ) : ICreateMinuteByListUseCase
 {
     public ICustomResult<List<CreateMinuteByListOutDto>> Handle(CreateMinuteByListDto dto, int userId)
@@ -52,9 +50,7 @@ public class CreateMinuteByListUseCase(
             });
         }
 
-        var data = minuteRepository.CreateByList(list);
-        syncRecordResumeUseCase.Handle(dto.RecordId);
-
+        minuteRepository.CreateByList(list);
         return result.SetData(list.Select(CreateMinuteByListOutDto.Map).ToList());
     }
 }
