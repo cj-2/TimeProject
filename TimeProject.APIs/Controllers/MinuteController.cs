@@ -1,10 +1,10 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TimeProject.APIs.Controllers.Shared;
-using TimeProject.Application.Dtos.Minutes;
 using TimeProject.Application.Interfaces.UseCases.Minutes;
+using TimeProject.Application.UseCases.Minutes.Dtos;
+using TimeProject.Application.UseCases.Minutes.Interfaces;
 using TimeProject.Application.Utils;
-using TimeProject.Domain.Entities;
 
 namespace TimeProject.APIs.Controllers;
 
@@ -16,9 +16,10 @@ public class MinuteController(
     IDeleteMinuteUseCase deleteMinuteUseCase) : CustomController
 {
     [HttpPost]
-    [Route("list")]
-    public ActionResult<IList<Minute>> Create([FromBody] CreateMinuteListDto dto)
+    [Route("list/{recordId:int}")]
+    public ActionResult<List<CreateMinuteByListOutDto>> Create([FromRoute] int recordId, [FromBody] CreateMinuteByListDto dto)
     {
+        dto.RecordId = recordId;
         var result = createMinuteByListUseCase.Handle(dto, UserClaimsUtil.Id(User));
         result.ActionName = nameof(Create);
         return HandleResponse(result);

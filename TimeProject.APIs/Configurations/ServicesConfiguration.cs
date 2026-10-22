@@ -23,6 +23,7 @@ using TimeProject.Application.UseCases.CustomLogs;
 using TimeProject.Application.UseCases.Feedbacks;
 using TimeProject.Application.UseCases.Statistics;
 using TimeProject.Application.UseCases.Minutes;
+using TimeProject.Application.UseCases.Minutes.Interfaces;
 using TimeProject.Application.UseCases.Periods;
 using TimeProject.Application.UseCases.Records;
 using TimeProject.Application.UseCases.Sessions;

@@ -1,8 +1,8 @@
-﻿using TimeProject.Application.Dtos.Minutes;
-using TimeProject.Application.Interfaces.Shared;
-using TimeProject.Application.Interfaces.UseCases.Minutes;
+﻿using TimeProject.Application.Interfaces.Shared;
 using TimeProject.Application.Interfaces.UseCases.Records;
 using TimeProject.Application.Shared;
+using TimeProject.Application.UseCases.Minutes.Dtos;
+using TimeProject.Application.UseCases.Minutes.Interfaces;
 using TimeProject.Domain.Entities;
 using TimeProject.Domain.Entities.Enums;
 using TimeProject.Domain.Repositories;
@@ -18,9 +18,9 @@ public class CreateMinuteByListUseCase(
     ISyncRecordResumeUseCase syncRecordResumeUseCase
 ) : ICreateMinuteByListUseCase
 {
-    public ICustomResult<IList<Minute>> Handle(CreateMinuteListDto dto, int userId)
+    public ICustomResult<List<CreateMinuteByListOutDto>> Handle(CreateMinuteByListDto dto, int userId)
     {
-        var result = new CustomResult<IList<Minute>>();
+        var result = new CustomResult<List<CreateMinuteByListOutDto>>();
         IList<Minute> list = [];
 
         var user = userRepository.FindById(userId);
@@ -39,7 +39,7 @@ public class CreateMinuteByListUseCase(
                     Date = dto.Date
                 }
             );
-        
+
         foreach (var minutes in dto.Minutes)
         {
             list.Add(new Minute
@@ -55,6 +55,6 @@ public class CreateMinuteByListUseCase(
         var data = minuteRepository.CreateByList(list);
         syncRecordResumeUseCase.Handle(dto.RecordId);
 
-        return result.SetData(data);
+        return result.SetData(list.Select(CreateMinuteByListOutDto.Map).ToList());
     }
 }

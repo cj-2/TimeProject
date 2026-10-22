@@ -19,6 +19,7 @@ public class MinuteEntityConfiguration : IEntityTypeConfiguration<Minute>
         builder.Property(e => e.UserId).HasColumnName("user_id");
         
         builder.HasOne<User>().WithMany().HasForeignKey(e => e.UserId);
-        builder.HasOne<Record>(e => e.Record).WithMany().HasForeignKey(e => e.RecordId);
+        builder.HasOne<Record>().WithMany().HasForeignKey(e => e.RecordId);
+        builder.HasOne<Session>().WithMany(e => e.Minutes).HasForeignKey(e => e.SessionId);
     }
 }
