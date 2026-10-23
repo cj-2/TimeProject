@@ -13,7 +13,6 @@ namespace TimeProject.Application.UseCases.Periods;
 public class CreatePeriodUseCase(
     IPeriodRepository repository,
     IGetRecordByIdUseCase getRecordByIdUseCase,
-    ISyncRecordResumeUseCase syncRecordResumeUseCase,
     IPeriodValidateUtil periodValidateUtil
 ) : ICreatePeriodUseCase
 {
@@ -30,17 +29,12 @@ public class CreatePeriodUseCase(
         var findTrResult = getRecordByIdUseCase.Handle(data.RecordId, userId);
         if (findTrResult.HasError) return result.SetError(findTrResult.Message);
 
-        var period = repository.Create(new Period
+        var period = repository.Create(new Period(data.Start, data.End)
             {
                 UserId = userId,
                 RecordId = data.RecordId,
-                Start = data.Start,
-                End = data.End
             }
         );
-
-        if (period.RecordId != null)
-            syncRecordResumeUseCase.Handle((int)period.RecordId);
 
         return result.SetData(period);
     }

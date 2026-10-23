@@ -1,7 +1,6 @@
 ﻿using TimeProject.Application.Dtos.Periods;
 using TimeProject.Application.Interfaces.Shared;
 using TimeProject.Application.Interfaces.UseCases.Periods;
-using TimeProject.Application.Interfaces.UseCases.Records;
 using TimeProject.Application.Interfaces.Utils;
 using TimeProject.Application.Shared;
 using TimeProject.Domain.Entities;
@@ -12,7 +11,6 @@ namespace TimeProject.Application.UseCases.Periods;
 
 public class UpdatePeriodUseCase(
     IPeriodRepository repository,
-    ISyncRecordResumeUseCase syncRecordResumeUseCase,
     IPeriodValidateUtil periodValidateUtil
 ) : IUpdatePeriodUseCase
 {
@@ -26,13 +24,8 @@ public class UpdatePeriodUseCase(
         var period = repository.FindById(id, userId);
         if (period == null) return result.SetError(PeriodErrors.NotFound);
 
-        period.Start = dto.Start;
-        period.End = dto.End;
-
+        period.DefineRange(dto.Start, dto.End);
         repository.Update(period);
-        
-        if (period.RecordId != null)
-            syncRecordResumeUseCase.Handle((int)period.RecordId);
 
         return result.SetData(period);
     }

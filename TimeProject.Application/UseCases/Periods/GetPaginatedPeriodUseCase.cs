@@ -3,7 +3,6 @@ using TimeProject.Application.Interfaces.Shared;
 using TimeProject.Application.Interfaces.UseCases.Periods;
 using TimeProject.Application.Interfaces.Utils;
 using TimeProject.Application.Shared;
-using TimeProject.Domain.Entities;
 using TimeProject.Domain.Repositories;
 using TimeProject.Domain.Repositories.Shared;
 
@@ -16,7 +15,7 @@ public class GetPaginatedPeriodUseCase(IPeriodRepository repository, IPeriodMapD
         PaginationQuery paginationQuery)
     {
         var totalItems = repository.GetTotalItems(recordId, paginationQuery, userId);
-        var data = mapDataUtil.Handle(repository.Index(recordId, userId, paginationQuery).OfType<Period>().ToList());
+        var data = mapDataUtil.Handle(repository.Index(recordId, userId, paginationQuery).ToList());
 
         return new CustomResult<Pagination<PeriodOutDto>>
         {
