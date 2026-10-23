@@ -1,4 +1,4 @@
-﻿namespace TimeProject.Infrastructure.Errors;
+﻿namespace TimeProject.Domain.Errors;
 
 public static class UserMessageErrors
 {

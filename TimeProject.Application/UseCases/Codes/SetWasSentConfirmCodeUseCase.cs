@@ -2,7 +2,7 @@
 using TimeProject.Application.Interfaces.UseCases.Codes;
 using TimeProject.Application.Shared;
 using TimeProject.Domain.Repositories;
-using TimeProject.Infrastructure.Errors;
+using TimeProject.Domain.Errors;
 
 namespace TimeProject.Application.UseCases.Codes;
 

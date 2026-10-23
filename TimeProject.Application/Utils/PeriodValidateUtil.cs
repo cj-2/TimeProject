@@ -1,7 +1,7 @@
 ﻿using TimeProject.Application.Dtos.Periods;
 using TimeProject.Application.Interfaces.Shared;
 using TimeProject.Application.Interfaces.Utils;
-using TimeProject.Infrastructure.Errors;
+using TimeProject.Domain.Errors;
 
 namespace TimeProject.Application.Utils;
 

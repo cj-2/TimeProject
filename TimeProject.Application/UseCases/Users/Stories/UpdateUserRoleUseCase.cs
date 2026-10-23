@@ -5,7 +5,7 @@ using TimeProject.Application.UseCases.Users.Dtos;
 using TimeProject.Application.UseCases.Users.Stories.Dtos;
 using TimeProject.Application.UseCases.Users.Stories.Interfaces;
 using TimeProject.Domain.Entities.Enums;
-using TimeProject.Infrastructure.Errors;
+using TimeProject.Domain.Errors;
 using TimeProject.Infrastructure.Interfaces;
 
 namespace TimeProject.Application.UseCases.Users.Stories;

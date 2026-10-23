@@ -6,7 +6,7 @@ using TimeProject.Application.Shared;
 using TimeProject.Application.UseCases.Emails.Interfaces;
 using TimeProject.Domain.Entities.Enums;
 using TimeProject.Domain.Repositories;
-using TimeProject.Infrastructure.Errors;
+using TimeProject.Domain.Errors;
 using TimeProject.Infrastructure.Interfaces;
 
 namespace TimeProject.Application.UseCases.Emails;

@@ -5,7 +5,7 @@ using TimeProject.Application.UseCases.Minutes.Interfaces;
 using TimeProject.Domain.Entities;
 using TimeProject.Domain.Entities.Enums;
 using TimeProject.Domain.Repositories;
-using TimeProject.Infrastructure.Errors;
+using TimeProject.Domain.Errors;
 
 namespace TimeProject.Application.UseCases.Minutes;
 

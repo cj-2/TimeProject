@@ -4,7 +4,7 @@ using TimeProject.Application.Shared;
 using TimeProject.Application.UseCases.Users.Dtos;
 using TimeProject.Application.UseCases.Users.Queries.Interfaces;
 using TimeProject.Domain.Repositories;
-using TimeProject.Infrastructure.Errors;
+using TimeProject.Domain.Errors;
 
 namespace TimeProject.Application.UseCases.Users.Queries;
 

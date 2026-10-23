@@ -9,8 +9,7 @@ using TimeProject.Application.UseCases.Users.Queries.Interfaces;
 using TimeProject.Application.UseCases.Users.Stories.Dtos;
 using TimeProject.Application.UseCases.Users.Stories.Interfaces;
 using TimeProject.Domain.Entities;
-using TimeProject.Infrastructure.Errors;
-using TimeProject.Infrastructure.Interfaces;
+using TimeProject.Domain.Errors;
 
 namespace TimeProject.Application.UseCases.Auths;
 
