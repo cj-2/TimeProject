@@ -1,9 +1,9 @@
-﻿using TimeProject.Application.Interfaces.Shared;
-using TimeProject.Application.Interfaces.Utils;
+﻿using TimeProject.Application.Utils.Interfaces;
 using TimeProject.Application.Modules.Users.Dtos;
 using TimeProject.Application.Modules.Users.Interfaces;
 using TimeProject.Application.Modules.Users.Options;
 using TimeProject.Application.Shared;
+using TimeProject.Application.Shared.Interfaces;
 using TimeProject.Application.UseCases.Users.Dtos;
 using TimeProject.Domain.Errors;
 using TimeProject.Infrastructure.Interfaces;

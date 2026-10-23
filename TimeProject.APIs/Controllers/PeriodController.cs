@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TimeProject.APIs.Controllers.Shared;
-using TimeProject.Application.Dtos.Periods;
+using TimeProject.Application.Modules.Periods.Dtos;
 using TimeProject.Application.Modules.Records.Dtos;
-using TimeProject.Application.Interfaces.UseCases.Periods;
+using TimeProject.Application.Modules.Periods.Interfaces;
 using TimeProject.Application.Utils;
 using TimeProject.Domain.Entities;
 using TimeProject.Domain.Repositories.Shared;

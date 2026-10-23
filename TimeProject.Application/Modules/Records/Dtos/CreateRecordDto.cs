@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using TimeProject.Application.Dtos.Periods;
+using TimeProject.Application.Modules.Periods.Dtos;
 using TimeProject.Domain.Entities.Enums;
 
 namespace TimeProject.Application.Modules.Records.Dtos;

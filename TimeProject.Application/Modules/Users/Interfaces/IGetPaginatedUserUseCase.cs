@@ -1,4 +1,4 @@
-﻿using TimeProject.Application.Interfaces.Shared;
+﻿using TimeProject.Application.Shared.Interfaces;
 using TimeProject.Application.UseCases.Users.Dtos;
 using TimeProject.Domain.Repositories.Shared;
 

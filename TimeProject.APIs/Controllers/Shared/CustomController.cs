@@ -1,6 +1,6 @@
 ﻿using System.Net;
 using Microsoft.AspNetCore.Mvc;
-using TimeProject.Application.Interfaces.Shared;
+using TimeProject.Application.Shared.Interfaces;
 using TimeProject.Application.Utils;
 using TimeProject.Domain.Entities.Enums;
 

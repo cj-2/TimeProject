@@ -1,6 +1,6 @@
-﻿using TimeProject.Application.Dtos.Minutes;
-using TimeProject.Application.Dtos.Periods;
-using TimeProject.Application.Dtos.Sessions;
+﻿using TimeProject.Application.Modules.Periods.Dtos;
+using TimeProject.Application.Modules.Minutes.Dtos;
+using TimeProject.Application.Modules.Sessions.Dtos;
 using TimeProject.Domain.Entities;
 using TimeProject.Domain.Extensions;
 using TimeProject.Infrastructure.Utils;

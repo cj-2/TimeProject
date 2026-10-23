@@ -1,6 +1,6 @@
 using AutoMapper;
-using TimeProject.Application.Dtos.Periods;
-using TimeProject.Application.Interfaces.Utils;
+using TimeProject.Application.Modules.Periods.Dtos;
+using TimeProject.Application.Utils.Interfaces;
 using TimeProject.Domain.Entities;
 
 namespace TimeProject.Application.Utils;

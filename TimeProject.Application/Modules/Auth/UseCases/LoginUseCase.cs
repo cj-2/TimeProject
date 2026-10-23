@@ -1,9 +1,8 @@
-﻿using TimeProject.Application.Interfaces.Handlers;
-using TimeProject.Application.Interfaces.Shared;
-using TimeProject.Application.Interfaces.UseCases.CustomLogs;
-using TimeProject.Application.Modules.Auth.Interfaces;
+﻿using TimeProject.Application.Modules.Auth.Interfaces;
 using TimeProject.Application.Modules.Auth.Dtos;
+using TimeProject.Application.Modules.CustomLogs.CustomLogs;
 using TimeProject.Application.Shared;
+using TimeProject.Application.Shared.Interfaces;
 using TimeProject.Domain.Entities;
 using TimeProject.Domain.Repositories;
 using TimeProject.Domain.Errors;

@@ -1,6 +1,6 @@
-﻿using TimeProject.Application.Interfaces.Shared;
-using TimeProject.Application.Modules.Users.Interfaces;
+﻿using TimeProject.Application.Modules.Users.Interfaces;
 using TimeProject.Application.Shared;
+using TimeProject.Application.Shared.Interfaces;
 using TimeProject.Domain.Entities;
 using TimeProject.Domain.Errors;
 using TimeProject.Infrastructure.Interfaces;

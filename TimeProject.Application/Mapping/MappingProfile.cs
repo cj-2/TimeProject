@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 using TimeProject.Application.Modules.Categories.Dtos;
-using TimeProject.Application.Dtos.Codes;
-using TimeProject.Application.Dtos.Minutes;
-using TimeProject.Application.Dtos.Periods;
+using TimeProject.Application.Modules.Codes.Dtos;
+using TimeProject.Application.Modules.Periods.Dtos;
 using TimeProject.Application.Modules.Records.Dtos;
-using TimeProject.Application.Dtos.Sessions;
+using TimeProject.Application.Modules.Minutes.Dtos;
+using TimeProject.Application.Modules.Sessions.Dtos;
 using TimeProject.Application.UseCases.Users.Dtos;
 using TimeProject.Domain.Entities;
 

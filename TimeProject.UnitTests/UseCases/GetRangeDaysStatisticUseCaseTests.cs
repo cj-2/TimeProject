@@ -1,6 +1,6 @@
 using FluentAssertions;
 using Moq;
-using TimeProject.Application.Dtos.Statistics;
+using TimeProject.Application.Modules.Statistics.Dtos;
 using TimeProject.Domain.Entities;
 using TimeProject.Domain.Entities.Enums;
 using TimeProject.Domain.Repositories;

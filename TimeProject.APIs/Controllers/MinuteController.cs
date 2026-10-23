@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TimeProject.APIs.Controllers.Shared;
-using TimeProject.Application.UseCases.Minutes.Dtos;
-using TimeProject.Application.UseCases.Minutes.Interfaces;
+using TimeProject.Application.Modules.Minutes.Dtos;
+using TimeProject.Application.Modules.Minutes.Interfaces;
 using TimeProject.Application.Utils;
 
 namespace TimeProject.APIs.Controllers;

@@ -1,5 +1,5 @@
 ﻿using TimeProject.Application.Modules.Categories.Dtos;
-using TimeProject.Application.Interfaces.Shared;
+using TimeProject.Application.Shared.Interfaces;
 
 namespace TimeProject.Application.Modules.Categories.Interfaces;
 

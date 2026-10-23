@@ -1,4 +1,4 @@
-﻿using TimeProject.Application.Interfaces.Shared;
+﻿using TimeProject.Application.Shared.Interfaces;
 using TimeProject.Domain.Repositories.ObjectValues;
 using TimeProject.Domain.Repositories.Shared;
 
