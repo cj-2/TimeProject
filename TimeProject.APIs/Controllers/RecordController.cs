@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TimeProject.APIs.Controllers.Shared;
+using TimeProject.Application.Extensions;
 using TimeProject.Application.Modules.Records.Dtos;
 using TimeProject.Application.Modules.Records.Interfaces;
 using TimeProject.Application.Utils;
@@ -25,7 +26,7 @@ public class RecordController(
     [HttpGet]
     public ActionResult<Pagination<RecordOutDto>> Index([FromQuery] PaginationQuery paginationQuery)
     {
-        return HandleResponse(getPaginatedRecordUseCase.Handle(paginationQuery, UserClaimsUtil.Id(User)));
+        return HandleResponse(getPaginatedRecordUseCase.Handle(paginationQuery, UserClaimsExtensions.Id(User)));
     }
 
     [HttpGet]
@@ -34,20 +35,20 @@ public class RecordController(
         [FromQuery] PaginationQuery paginationQuery)
     {
         return HandleResponse(
-            getRecordHistoryUseCase.Handle(recordId, UserClaimsUtil.Id(User), paginationQuery));
+            getRecordHistoryUseCase.Handle(recordId, UserClaimsExtensions.Id(User), paginationQuery));
     }
 
     [HttpGet]
     [Route("search")]
     public ActionResult<IList<SearchRecordItem>> Search([FromQuery] string? value)
     {
-        return HandleResponse(searchRecordUseCase.Handle(value ?? "", UserClaimsUtil.Id(User)));
+        return HandleResponse(searchRecordUseCase.Handle(value ?? "", UserClaimsExtensions.Id(User)));
     }
 
     [HttpPost]
     public ActionResult<RecordOutDto> Create([FromBody] CreateRecordDto dto)
     {
-        var result = createRecordUseCase.Handle(dto, dto.Periods?.ToList(), UserClaimsUtil.Id(User));
+        var result = createRecordUseCase.Handle(dto, dto.Periods?.ToList(), UserClaimsExtensions.Id(User));
         result.ActionName = nameof(Create);
         return HandleResponse(result);
     }
@@ -56,20 +57,20 @@ public class RecordController(
     [Route("{id:int}")]
     public ActionResult<RecordOutDto> Update(int id, [FromBody] UpdateRecordDto dto)
     {
-        return HandleResponse(updateRecordUseCase.Handle(id, dto, UserClaimsUtil.Id(User)));
+        return HandleResponse(updateRecordUseCase.Handle(id, dto, UserClaimsExtensions.Id(User)));
     }
 
     [HttpGet]
     [Route("{code}")]
     public ActionResult<RecordOutDto> Get(string code)
     {
-        return HandleResponse(getRecordByCodeUseCase.Handle(code, UserClaimsUtil.Id(User)));
+        return HandleResponse(getRecordByCodeUseCase.Handle(code, UserClaimsExtensions.Id(User)));
     }
 
     [HttpDelete]
     [Route("{id:int}")]
     public ActionResult<bool> Delete(int id)
     {
-        return HandleResponse(deleteRecordUseCase.Handle(id, UserClaimsUtil.Id(User)));
+        return HandleResponse(deleteRecordUseCase.Handle(id, UserClaimsExtensions.Id(User)));
     }
 }

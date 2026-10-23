@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using Microsoft.AspNetCore.Mvc;
+using TimeProject.Application.Extensions;
 using TimeProject.Application.Shared.Interfaces;
 using TimeProject.Application.Utils;
 using TimeProject.Domain.Entities.Enums;
@@ -39,12 +40,12 @@ public class CustomController : ControllerBase
 
     private bool IsAdmin()
     {
-        return nameof(UserRoleType.Admin) == UserClaimsUtil.Role(User);
+        return nameof(UserRoleType.Admin) == UserClaimsExtensions.Role(User);
     }
 
     protected bool HasAuthorization(int id)
     {
-        return UserClaimsUtil.Id(User) == id || IsAdmin();
+        return UserClaimsExtensions.Id(User) == id || IsAdmin();
     }
 
     public IPAddress? GetClientIpAddress(HttpContext context)

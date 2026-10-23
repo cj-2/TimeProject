@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TimeProject.APIs.Controllers.Shared;
+using TimeProject.Application.Extensions;
 using TimeProject.Application.Modules.Periods.Dtos;
 using TimeProject.Application.Modules.Records.Dtos;
 using TimeProject.Application.Modules.Periods.Interfaces;
@@ -27,13 +28,13 @@ public class PeriodController(
     public ActionResult<Pagination<PeriodOutDto>> Index(int recordId, [FromQuery] PaginationQuery paginationQuery)
     {
         return HandleResponse(
-            getPaginatedPeriodUseCase.Handle(recordId, UserClaimsUtil.Id(User), paginationQuery));
+            getPaginatedPeriodUseCase.Handle(recordId, UserClaimsExtensions.Id(User), paginationQuery));
     }
 
     [HttpPost]
     public ActionResult<Period> Create([FromBody] CreatePeriodDto data)
     {
-        var result = createPeriodUseCase.Handle(data, UserClaimsUtil.Id(User));
+        var result = createPeriodUseCase.Handle(data, UserClaimsExtensions.Id(User));
         result.ActionName = nameof(Create);
         return HandleResponse(result);
     }
@@ -42,7 +43,7 @@ public class PeriodController(
     [Route("list/{id:int}")]
     public ActionResult<IList<Period>> Create([FromBody] PeriodListDto dto, int id)
     {
-        var result = createPeriodByListUseCase.Handle(dto, id, UserClaimsUtil.Id(User));
+        var result = createPeriodByListUseCase.Handle(dto, id, UserClaimsExtensions.Id(User));
         result.ActionName = nameof(Create);
         return HandleResponse(result);
     }
@@ -51,13 +52,13 @@ public class PeriodController(
     [Route("{id:int}")]
     public ActionResult<Period> Update(int id, [FromBody] PeriodDto data)
     {
-        return HandleResponse(updatePeriodUseCase.Handle(id, data, UserClaimsUtil.Id(User)));
+        return HandleResponse(updatePeriodUseCase.Handle(id, data, UserClaimsExtensions.Id(User)));
     }
 
     [HttpDelete]
     [Route("{id:int}")]
     public ActionResult<bool> Delete(int id)
     {
-        return HandleResponse(deletePeriodUseCase.Handle(id, UserClaimsUtil.Id(User)));
+        return HandleResponse(deletePeriodUseCase.Handle(id, UserClaimsExtensions.Id(User)));
     }
 }

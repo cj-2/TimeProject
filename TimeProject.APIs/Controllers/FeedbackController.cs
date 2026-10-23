@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using TimeProject.APIs.Controllers.Attributes;
 using TimeProject.APIs.Controllers.Shared;
+using TimeProject.Application.Extensions;
 using TimeProject.Application.Modules.Feedbacks.Dtos;
 using TimeProject.Application.Modules.Feedbacks.Interfaces;
 using TimeProject.Application.Utils;
@@ -20,7 +21,7 @@ public class FeedbackController(
     public ActionResult<bool> Send(FeedbackDto feedbackDto)
     {
         return HandleResponse(sendFeedbackUseCase
-            .Handle(feedbackDto, UserClaimsUtil.Name(User), UserClaimsUtil.Email(User), UserClaimsUtil.IsVerified(User)));
+            .Handle(feedbackDto, UserClaimsExtensions.Name(User), UserClaimsExtensions.Email(User), UserClaimsExtensions.IsVerified(User)));
     }
 
     [HttpPost("public")]

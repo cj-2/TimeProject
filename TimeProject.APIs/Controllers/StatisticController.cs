@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TimeProject.APIs.Controllers.Shared;
+using TimeProject.Application.Extensions;
 using TimeProject.Application.Modules.Statistics.Interfaces;
 using TimeProject.Application.Modules.Statistics.Dtos;
 using TimeProject.Application.Utils;
@@ -16,20 +17,20 @@ public class StatisticController(IGetRangeDaysStatisticUseCase getRangeDaysStati
     [Route("day")]
     public ActionResult<RangeStatistic> Day([FromQuery] DateTimeOffset? date)
     {
-        return HandleResponse(getRangeDaysStatisticUseCase.Handle(UserClaimsUtil.Id(User), date));
+        return HandleResponse(getRangeDaysStatisticUseCase.Handle(UserClaimsExtensions.Id(User), date));
     }
 
     [HttpGet]
     [Route("{recordId:int}/day")]
     public ActionResult<RangeStatistic> Day(int recordId, [FromQuery] DateTimeOffset? date)
     {
-        return HandleResponse(getRangeDaysStatisticUseCase.Handle(UserClaimsUtil.Id(User), date, null, recordId));
+        return HandleResponse(getRangeDaysStatisticUseCase.Handle(UserClaimsExtensions.Id(User), date, null, recordId));
     }
 
     [HttpGet]
     [Route("range")]
     public ActionResult<RangeStatisticsWithDays> Range([FromQuery] DateTimeOffset start, [FromQuery] DateTimeOffset end)
     {
-        return HandleResponse(getRangeDaysStatisticUseCase.Handle(UserClaimsUtil.Id(User), start, end));
+        return HandleResponse(getRangeDaysStatisticUseCase.Handle(UserClaimsExtensions.Id(User), start, end));
     }
 }

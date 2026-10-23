@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using TimeProject.APIs.Controllers.Shared;
 using TimeProject.APIs.Controllers.Attributes;
+using TimeProject.Application.Extensions;
 using TimeProject.Application.UseCases.Users.Dtos;
 using TimeProject.Application.Modules.Users.Dtos;
 using TimeProject.Application.Modules.Users.Interfaces;
@@ -77,7 +78,7 @@ public class UserController(
     [Authorize(Policy = "IsActive")]
     public ActionResult<UserOutDto> Myself()
     {
-        return HandleResponse(getUserUseCase.Handle(UserClaimsUtil.Id(User)));
+        return HandleResponse(getUserUseCase.Handle(UserClaimsExtensions.Id(User)));
     }
 
     // [HttpPost, Route("recovery")]

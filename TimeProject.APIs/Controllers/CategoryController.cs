@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TimeProject.APIs.Controllers.Shared;
+using TimeProject.Application.Extensions;
 using TimeProject.Application.Modules.Categories.Dtos;
 using TimeProject.Application.Modules.Categories.Interfaces;
 using TimeProject.Application.Utils;
@@ -24,20 +25,20 @@ public class CategoryController(
     [HttpGet]
     public ActionResult<Pagination<CategoryOutDto>> Index([FromQuery] PaginationQuery paginationQuery)
     {
-        return HandleResponse( getPaginatedCategoryUseCase.Handle(paginationQuery, UserClaimsUtil.Id(User)));
+        return HandleResponse( getPaginatedCategoryUseCase.Handle(paginationQuery, UserClaimsExtensions.Id(User)));
     }
 
     [HttpGet]
     [Route("all")]
     public ActionResult<IList<CategoryOutDto>> Index([FromQuery] bool onlyWithData)
     {
-        return HandleResponse(getAllCategoryUseCase.Handle(UserClaimsUtil.Id(User), onlyWithData));
+        return HandleResponse(getAllCategoryUseCase.Handle(UserClaimsExtensions.Id(User), onlyWithData));
     }
 
     [HttpPost]
     public ActionResult<CategoryOutDto> Create([FromBody] CategoryDto dto)
     {
-        var result =  createCategoryUseCase.Handle(dto, UserClaimsUtil.Id(User));
+        var result =  createCategoryUseCase.Handle(dto, UserClaimsExtensions.Id(User));
         result.ActionName = nameof(Create);
         return HandleResponse(result);
     }
@@ -46,13 +47,13 @@ public class CategoryController(
     [Route("{id:int}")]
     public ActionResult<Category> Update(int id, [FromBody] CategoryDto dto)
     {
-        return HandleResponse( updateCategoryUseCase.Handle(id, dto, UserClaimsUtil.Id(User)));
+        return HandleResponse( updateCategoryUseCase.Handle(id, dto, UserClaimsExtensions.Id(User)));
     }
 
     [HttpDelete]
     [Route("{id:int}")]
     public ActionResult<bool> Delete(int id)
     {
-        return HandleResponse( deleteCategoryUseCase.Handle(id, UserClaimsUtil.Id(User)));
+        return HandleResponse( deleteCategoryUseCase.Handle(id, UserClaimsExtensions.Id(User)));
     }
 }

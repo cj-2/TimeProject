@@ -1,9 +1,9 @@
 ﻿using System.Security.Claims;
 using TimeProject.Domain.Entities.Enums;
 
-namespace TimeProject.Application.Utils;
+namespace TimeProject.Application.Extensions;
 
-public static class UserClaimsUtil
+public static class UserClaimsExtensions
 {
     public static int Id(this ClaimsPrincipal p)
     {
