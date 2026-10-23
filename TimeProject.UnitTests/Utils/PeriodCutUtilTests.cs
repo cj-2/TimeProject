@@ -19,33 +19,13 @@ public class PeriodCutUtilTests
         var list = new List<Period>
         {
             // start is before then initDate
-            new()
-            {
-                Start = initDate.AddHours(-1),
-                End = initDate.AddHours(2)
-            },
+            new(initDate.AddHours(-1), initDate.AddHours(2)),
             // end is after then endDate
-            new()
-            {
-                Start = endDate.AddHours(-1),
-                End = endDate.AddHours(1)
-            },
-            new()
-            {
-                Start = initDate.AddHours(2),
-                End = initDate.AddHours(2).AddMinutes(15)
-            },
-            new()
-            {
-                Start = initDate.AddHours(3).AddMinutes(25),
-                End = initDate.AddHours(3).AddMinutes(45)
-            },
+            new(endDate.AddHours(-1), endDate.AddHours(1)),
+            new(initDate.AddHours(2), initDate.AddHours(2).AddMinutes(15)),
+            new(initDate.AddHours(3).AddMinutes(25), initDate.AddHours(3).AddMinutes(45)),
             // start and end is before then initDate (should be removed)
-            new()
-            {
-                Start = initDate.AddHours(-5),
-                End = initDate.AddHours(-4)
-            }
+            new(initDate.AddHours(-5), initDate.AddHours(-4))
         };
 
         #endregion Arrange

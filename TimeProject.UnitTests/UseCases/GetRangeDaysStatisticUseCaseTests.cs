@@ -39,35 +39,27 @@ public class GetRangeDaysStatisticUseCaseTests
         return
         [
             // will be removed
-            new Period
+            new Period(today.AddHours(-3), today.AddHours(-3).AddMinutes(15))
             {
-                Start = today.AddHours(-3),
-                End = today.AddHours(-3).AddMinutes(15),
                 UserId = userId,
                 SessionId = 1,
                 RecordId = recordId
             },
-            new Period
+            new Period(today, today.AddMinutes(15).AddSeconds(10))
             {
-                Start = today,
-                End = today.AddMinutes(15).AddSeconds(10),
                 UserId = userId,
                 SessionId = 1,
                 RecordId = recordId
             },
-            new Period
+            new Period(today.AddMinutes(20), today.AddMinutes(45))
             {
-                Start = today.AddMinutes(20),
-                End = today.AddMinutes(45),
                 UserId = userId,
                 SessionId = 1,
                 RecordId = recordId
             },
             // will be removed
-            new Period
+            new Period(today.AddDays(1).AddMinutes(20), today.AddDays(1).AddMinutes(45))
             {
-                Start = today.AddDays(1).AddMinutes(20),
-                End = today.AddDays(1).AddMinutes(45),
                 UserId = userId,
                 SessionId = 1,
                 RecordId = recordId
@@ -87,14 +79,12 @@ public class GetRangeDaysStatisticUseCaseTests
                 Type = SessionType.Timer,
                 Periods = new List<Period>
                 {
-                    new()
+                    new(today.AddHours(3), today.AddHours(4).AddMinutes(15))
                     {
-                        Start = today.AddHours(3), End = today.AddHours(4).AddMinutes(15),
                         SessionId = 1
                     },
-                    new()
+                    new(today.AddHours(4).AddMinutes(20), today.AddHours(4).AddMinutes(40))
                     {
-                        Start = today.AddHours(4).AddMinutes(20), End = today.AddHours(4).AddMinutes(40),
                         SessionId = 1
                     }
                 }
@@ -107,14 +97,12 @@ public class GetRangeDaysStatisticUseCaseTests
                 Type = SessionType.Pomodoro,
                 Periods = new List<Period>
                 {
-                    new()
+                    new(today.AddHours(5), today.AddHours(5).AddMinutes(10))
                     {
-                        Start = today.AddHours(5), End = today.AddHours(5).AddMinutes(10),
                         SessionId = 2
                     },
-                    new()
+                    new(today.AddHours(5).AddMinutes(15), today.AddHours(5).AddMinutes(30))
                     {
-                        Start = today.AddHours(5).AddMinutes(15), End = today.AddHours(5).AddMinutes(30),
                         SessionId = 2
                     }
                 }
@@ -127,9 +115,8 @@ public class GetRangeDaysStatisticUseCaseTests
                 Type = SessionType.Break,
                 Periods = new List<Period>
                 {
-                    new()
+                    new(today.AddHours(6), today.AddHours(6).AddMinutes(15).AddSeconds(5))
                     {
-                        Start = today.AddHours(6), End = today.AddHours(6).AddMinutes(15).AddSeconds(5),
                         SessionId = 3
                     }
                 }
