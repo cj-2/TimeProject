@@ -1,16 +1,16 @@
 ﻿using Octokit;
-using TimeProject.Application.Dtos.Auths;
 using TimeProject.Application.Interfaces.Handlers;
 using TimeProject.Application.Interfaces.Shared;
 using TimeProject.Application.Interfaces.UseCases.CustomLogs;
-using TimeProject.Application.Interfaces.UseCases.Logins;
-using TimeProject.Application.Shared;
+using TimeProject.Application.Modules.Auth.Dtos;
+using TimeProject.Application.Modules.Auth.Interfaces;
 using TimeProject.Application.Modules.Users.Dtos;
 using TimeProject.Application.Modules.Users.Interfaces;
+using TimeProject.Application.Shared;
 using TimeProject.Domain.Entities;
 using TimeProject.Domain.Errors;
 
-namespace TimeProject.Application.UseCases.Auths;
+namespace TimeProject.Application.Modules.Auth.UseCases;
 
 public class LoginGithubUseCase(
     IJwtHandler jwtHandler,

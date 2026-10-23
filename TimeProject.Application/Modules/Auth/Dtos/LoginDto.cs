@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace TimeProject.Application.Dtos.Auths;
+namespace TimeProject.Application.Modules.Auth.Dtos;
 
 public class LoginDto
 {

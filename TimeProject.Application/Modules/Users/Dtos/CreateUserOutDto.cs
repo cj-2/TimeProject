@@ -1,4 +1,4 @@
-﻿using TimeProject.Application.Dtos.Auths;
+﻿using TimeProject.Application.Modules.Auth.Dtos;
 using TimeProject.Application.UseCases.Users.Dtos;
 
 namespace TimeProject.Application.Modules.Users.Dtos;

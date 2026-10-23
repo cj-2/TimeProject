@@ -1,4 +1,4 @@
-﻿using TimeProject.Application.Dtos.Auths;
+﻿using TimeProject.Application.Modules.Auth.Dtos;
 using TimeProject.Domain.Entities;
 
 namespace TimeProject.Application.Interfaces.Handlers;

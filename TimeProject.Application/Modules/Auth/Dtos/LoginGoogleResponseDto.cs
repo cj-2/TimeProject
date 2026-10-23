@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace TimeProject.Application.Dtos.Auths;
+namespace TimeProject.Application.Modules.Auth.Dtos;
 
 public class LoginGoogleResponseDto
 {
