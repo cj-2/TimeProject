@@ -13,21 +13,21 @@ public class CreateOrUpdateUserPasswordByEmailUseCase(IUnitOfWork unitOfWork)
     public ICustomResult<bool> Handle(string email, string password)
     {
         var result = new CustomResult<bool>();
-        var user = unitOfWork.UserRepository.FindByEmail(email);
+        var user = unitOfWork.User.FindByEmail(email);
 
         if (user == null)
             return result.SetError(UserErrors.NotFound);
 
-        var userPassword = unitOfWork.UserPasswordRepository.FindByUserId(user.UserId);
+        var userPassword = unitOfWork.UserPassword.FindByUserId(user.UserId);
 
         if (userPassword != null)
         {
             userPassword.Password = BCrypt.Net.BCrypt.HashPassword(password);
-            unitOfWork.UserPasswordRepository.Update(userPassword);
+            unitOfWork.UserPassword.Update(userPassword);
         }
         else
         {
-            unitOfWork.UserPasswordRepository
+            unitOfWork.UserPassword
                 .Create(new UserPassword { Password = BCrypt.Net.BCrypt.HashPassword(password) });
         }
 

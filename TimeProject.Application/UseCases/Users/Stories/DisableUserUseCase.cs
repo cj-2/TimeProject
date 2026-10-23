@@ -12,13 +12,13 @@ public class DisableUserUseCase(IUnitOfWork unitOfWork) : IDisableUserUseCase
     public ICustomResult<bool> Handle(int id, DisableUserDto dto)
     {
         var result = new CustomResult<bool>();
-        var user = unitOfWork.UserRepository.FindById(id);
+        var user = unitOfWork.User.FindById(id);
 
         if (user == null)
             return result.SetError(UserErrors.NotFound);
 
         user.IsActive = dto.IsActive;
-        unitOfWork.UserRepository.Update(user);
+        unitOfWork.User.Update(user);
         unitOfWork.SaveChanges();
 
         result.Data = user.IsActive;

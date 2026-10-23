@@ -22,11 +22,11 @@ public class CreateUserByGhUserUseCase(IUnitOfWork unitOfWork) : ICreateUserByGh
 
         if (filtredEmails.Count != 0 && primaryEmail != null)
         {
-            var userWithPrimaryEmail = unitOfWork.UserRepository.FindByEmail(primaryEmail.Email);
+            var userWithPrimaryEmail = unitOfWork.User.FindByEmail(primaryEmail.Email);
 
             if (userWithPrimaryEmail != null)
             {
-                unitOfWork.UserProviderRepository.Create(new UserProvider
+                unitOfWork.UserProvider.Create(new UserProvider
                 {
                     UserId = userWithPrimaryEmail.UserId,
                     Provider = "github",
@@ -42,10 +42,10 @@ public class CreateUserByGhUserUseCase(IUnitOfWork unitOfWork) : ICreateUserByGh
 
             foreach (var secondaryEmail in filtredEmails)
             {
-                var userWithSecondaryEmail = unitOfWork.UserRepository.FindByEmail(secondaryEmail.Email);
+                var userWithSecondaryEmail = unitOfWork.User.FindByEmail(secondaryEmail.Email);
                 if (userWithSecondaryEmail == null) continue;
 
-                unitOfWork.UserProviderRepository.Create(new UserProvider
+                unitOfWork.UserProvider.Create(new UserProvider
                 {
                     UserId = userWithSecondaryEmail.UserId,
                     Provider = "github",
@@ -58,7 +58,7 @@ public class CreateUserByGhUserUseCase(IUnitOfWork unitOfWork) : ICreateUserByGh
             }
         }
 
-        var userEntity = unitOfWork.UserRepository
+        var userEntity = unitOfWork.User
             .Create(new User
             {
                 Name = dto.Name,
@@ -68,7 +68,7 @@ public class CreateUserByGhUserUseCase(IUnitOfWork unitOfWork) : ICreateUserByGh
 
         unitOfWork.SaveChanges();
 
-        unitOfWork.UserProviderRepository.Create(new UserProvider
+        unitOfWork.UserProvider.Create(new UserProvider
         {
             UserId = userEntity.UserId,
             Provider = "github",

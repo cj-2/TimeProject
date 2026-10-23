@@ -10,7 +10,7 @@ public class CreateUserAccessLogUseCase(IUnitOfWork unitOfWork) : ICreateUserAcc
 {
     public ICustomResult<UserAccessLog> Handle(UserAccessLog entity)
     {
-        var result = unitOfWork.UserAccessLogRepository.Create(entity);
+        var result = unitOfWork.UserAccessLog.Create(entity);
         unitOfWork.SaveChanges();
         return new CustomResult<UserAccessLog>().SetData(result);
     }

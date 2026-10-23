@@ -35,7 +35,7 @@ public class CreateOrUpdateUserPasswordUseCase(IUnitOfWork unitOfWork)
     )
     {
         var result = new CustomResult<bool>();
-        var entity = unitOfWork.UserPasswordRepository.FindByUserId(userId);
+        var entity = unitOfWork.UserPassword.FindByUserId(userId);
 
         if (entity != null && (!string.IsNullOrEmpty(oldPassword) || skipOldPasswordCompare))
         {
@@ -43,11 +43,11 @@ public class CreateOrUpdateUserPasswordUseCase(IUnitOfWork unitOfWork)
                 return result.SetError(UserErrors.DifferentPassword);
 
             entity.Password = BCrypt.Net.BCrypt.HashPassword(password);
-            unitOfWork.UserPasswordRepository.Update(entity);
+            unitOfWork.UserPassword.Update(entity);
         }
         else
         {
-            unitOfWork.UserPasswordRepository.Create(new UserPassword
+            unitOfWork.UserPassword.Create(new UserPassword
             {
                 UserId = userId,
                 Password = BCrypt.Net.BCrypt.HashPassword(password),

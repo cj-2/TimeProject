@@ -12,12 +12,12 @@ public class DeletePeriodUseCase(IUnitOfWork unit)
     public ICustomResult<bool> Handle(int id, int userId)
     {
         var result = new CustomResult<bool>();
-        var period = unit.PeriodRepository.FindById(id, userId);
+        var period = unit.Period.FindById(id, userId);
 
         if (period == null)
             return result.SetError(PeriodErrors.NotFound);
 
-        var data = unit.PeriodRepository.Delete(period);
+        var data = unit.Period.Delete(period);
         return result.SetData(data);
     }
 }

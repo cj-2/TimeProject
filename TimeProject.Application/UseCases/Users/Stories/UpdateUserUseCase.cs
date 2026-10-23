@@ -25,13 +25,13 @@ public class UpdateUserUseCase(IUnitOfWork unitOfWork, IUserMapDataUtil mapper) 
     private ICustomResult<UserOutDto> _update(int id, UpdateUserDto dto, UpdateUserOptions? options)
     {
         var result = new CustomResult<UserOutDto>();
-        var user = unitOfWork.UserRepository.FindById(id);
+        var user = unitOfWork.User.FindById(id);
 
         if (user == null) return result.SetError(UserErrors.NotFound);
 
         if (!string.IsNullOrWhiteSpace(dto.Email) && user.Email != dto.Email && options?.UpdateFromAdmin == true)
         {
-            var emailAvailable = unitOfWork.UserRepository.EmailIsAvailable(dto.Email);
+            var emailAvailable = unitOfWork.User.EmailIsAvailable(dto.Email);
             if (emailAvailable == false) return result.SetError(UserErrors.EmailAlreadyInUse);
 
             user.UpdateEmail(dto.Email);
@@ -41,7 +41,7 @@ public class UpdateUserUseCase(IUnitOfWork unitOfWork, IUserMapDataUtil mapper) 
 
         if (!string.IsNullOrEmpty(dto.Timezone)) user.UpdateTimeZone(dto.Timezone);
 
-        var entity = unitOfWork.UserRepository.Update(user);
+        var entity = unitOfWork.User.Update(user);
         unitOfWork.SaveChanges();
 
         result.Data = mapper.Handle(entity);

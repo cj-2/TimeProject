@@ -15,7 +15,7 @@ public class UpdateUserRoleUseCase(IUnitOfWork unitOfWork, IUserMapDataUtil mapp
     public ICustomResult<UserOutDto> Handle(int id, UpdateRoleDto dto)
     {
         var result = new CustomResult<UserOutDto>();
-        var user = unitOfWork.UserRepository.FindById(id);
+        var user = unitOfWork.User.FindById(id);
 
         if (user == null)
             return result.SetError(UserErrors.NotFound);
@@ -25,7 +25,7 @@ public class UpdateUserRoleUseCase(IUnitOfWork unitOfWork, IUserMapDataUtil mapp
 
         user.UserRole = (UserRoleType)userRole;
 
-        var entity = unitOfWork.UserRepository.Update(user);
+        var entity = unitOfWork.User.Update(user);
         unitOfWork.SaveChanges();
         result.Data = mapper.Handle(entity);
         return result;

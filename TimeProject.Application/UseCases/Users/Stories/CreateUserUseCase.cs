@@ -22,7 +22,7 @@ public class CreateUserUseCase(
     public ICustomResult<CreateUserOutDto> Handle(CreateUserDto dto)
     {
         var result = new CustomResult<CreateUserOutDto>();
-        var emailAvailable = unitOfWork.UserRepository.EmailIsAvailable(dto.Email);
+        var emailAvailable = unitOfWork.User.EmailIsAvailable(dto.Email);
 
         if (emailAvailable == false) return result.SetError(UserErrors.EmailAlreadyInUse);
 
@@ -37,11 +37,11 @@ public class CreateUserUseCase(
             return result.SetError(ex.Message);
         }
 
-        unitOfWork.Context.Database.BeginTransaction();
+        unitOfWork.BeginTransaction();
 
         try
         {
-            unitOfWork.UserRepository.Create(user);
+            unitOfWork.User.Create(user);
             unitOfWork.SaveChanges();
 
             createUserPasswordUseCase.Handle(user.UserId, new CreatePasswordDto { Password = dto.Password }, false);
@@ -49,11 +49,11 @@ public class CreateUserUseCase(
         }
         catch
         {
-            unitOfWork.Context.Database.RollbackTransaction();
+            unitOfWork.RollbackTransaction();
             return result.SetError(GeneralErrors.TransactionError);
         }
 
-        unitOfWork.Context.Database.CommitTransaction();
+        unitOfWork.CommitTransaction();
 
         result.Data = new CreateUserOutDto
         {

@@ -5,22 +5,23 @@ namespace TimeProject.Infrastructure.Interfaces;
 
 public interface IUnitOfWork
 {
-    IUserRepository UserRepository { get; }
-    IUserPasswordRepository UserPasswordRepository { get; }
-    IUserProviderRepository UserProviderRepository { get; }
-    IUserAccessLogRepository UserAccessLogRepository { get; }
-    IConfirmCodeRepository ConfirmCodeRepository { get; }
-    ICategoryRepository CategoryRepository { get; }
-    ISessionRepository SessionRepository { get; }
-    IRecordRepository RecordRepository { get; }
-    IRecordResumeRepository RecordResumeRepository { get; }
-    IRecordHistoryRepository RecordHistoryRepository { get; }
-    IPeriodRepository PeriodRepository { get; }
-    IMinuteRepository MinuteRepository { get; }
-    IStatisticRepository StatisticRepository { get; }
+    IUserRepository User { get; }
+    IUserPasswordRepository UserPassword { get; }
+    IUserProviderRepository UserProvider { get; }
+    IUserAccessLogRepository UserAccessLog { get; }
+    IConfirmCodeRepository ConfirmCode { get; }
+    ICategoryRepository Category { get; }
+    ISessionRepository Session { get; }
+    IRecordRepository Record { get; }
+    IRecordResumeRepository RecordResume { get; }
+    IRecordHistoryRepository RecordHistory { get; }
+    IPeriodRepository Period { get; }
+    IMinuteRepository Minute { get; }
+    IStatisticRepository Statistic { get; }
 
-    CustomDbContext Context { get; }
-    
     void SaveChanges();
     Task SaveChangesAsync();
+    void BeginTransaction();
+    void CommitTransaction();
+    void RollbackTransaction();
 }

@@ -17,11 +17,11 @@ public class CreateUserByGoogleUserUseCase(IUnitOfWork unitOfWork) : ICreateUser
         if (string.IsNullOrEmpty(dto.UserProviderId))
             return result.SetError(UserErrors.OAuthWithoutProviderId);
 
-        var userWithEmail = unitOfWork.UserRepository.FindByEmail(email);
+        var userWithEmail = unitOfWork.User.FindByEmail(email);
 
         if (userWithEmail != null)
         {
-            unitOfWork.UserProviderRepository.Create(new UserProvider
+            unitOfWork.UserProvider.Create(new UserProvider
             {
                 UserId = userWithEmail.UserId,
                 Provider = "google",
@@ -33,7 +33,7 @@ public class CreateUserByGoogleUserUseCase(IUnitOfWork unitOfWork) : ICreateUser
             return result.SetData(userWithEmail);
         }
 
-        var userEntity = unitOfWork.UserRepository
+        var userEntity = unitOfWork.User
             .Create(new User
             {
                 Name = dto.Name,
@@ -43,7 +43,7 @@ public class CreateUserByGoogleUserUseCase(IUnitOfWork unitOfWork) : ICreateUser
 
         unitOfWork.SaveChanges();
 
-        unitOfWork.UserProviderRepository.Create(new UserProvider
+        unitOfWork.UserProvider.Create(new UserProvider
         {
             UserId = userEntity.UserId,
             Provider = "google",

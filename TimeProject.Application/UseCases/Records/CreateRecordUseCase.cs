@@ -23,7 +23,7 @@ public class CreateRecordUseCase(
 
         if (dto.CategoryId != null)
         {
-            var category = unitOfWork.CategoryRepository.FindById((int)dto.CategoryId, userId);
+            var category = unitOfWork.Category.FindById((int)dto.CategoryId, userId);
             if (category == null)
             {
                 return result.SetError(RecordErrors.CategoryNotFound);
@@ -32,12 +32,12 @@ public class CreateRecordUseCase(
 
         if (string.IsNullOrEmpty(dto.Code) == false)
         {
-            var trByCode = unitOfWork.RecordRepository.FindByCode(dto.Code!, userId);
+            var trByCode = unitOfWork.Record.FindByCode(dto.Code!, userId);
             if (trByCode != null) return result.SetError(RecordErrors.CodeAlreadyInUse);
         }
 
-        var transaction = unitOfWork.Context.Database.BeginTransaction();
-        var record = unitOfWork.RecordRepository
+        unitOfWork.BeginTransaction();
+        var record = unitOfWork.Record
             .Create(new Record
                 {
                     UserId = userId,
@@ -71,11 +71,11 @@ public class CreateRecordUseCase(
         }
         catch (Exception error)
         {
-            transaction.Rollback();
+            unitOfWork.RollbackTransaction();
             return result.SetError(error.Message);
         }
 
-        transaction.Commit();
+        unitOfWork.CommitTransaction();
         return result.SetData(mapDataUtil.Handle(record));
     }
 }
