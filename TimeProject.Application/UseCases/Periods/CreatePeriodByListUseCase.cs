@@ -21,7 +21,11 @@ public class CreatePeriodByListUseCase(IPeriodRepository repository, ISessionRep
         {
             list = dto.Periods
                 .OrderBy(p => p.Start)
-                .Select(p => new Period(p.Start, p.End))
+                .Select(p => new Period(p.Start, p.End)
+                {
+                    RecordId = recordId,
+                    UserId = userId,
+                })
                 .ToList();
         }
         catch (DomainException ex)

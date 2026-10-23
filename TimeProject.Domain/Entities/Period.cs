@@ -40,7 +40,7 @@ public class Period : ITimeSpanCalc
 
     public void DefineRange(DateTimeOffset start, DateTimeOffset? end)
     {
-        if (end == null || start <= end)
+        if (end != null && start >= end)
             throw new DomainException(PeriodErrors.EndDateIsBiggerThenStartDate);
 
         _start = start;
