@@ -2,13 +2,15 @@
 
 public static class UserErrors
 {
-    public const string NotFound = "not_found:user_not_found";
-    public const string EmailAlreadyInUse = "bad_request:email_already_in_use";
-    public const string DifferentPassword = "bad_request:different_password";
-    public const string RoleNotFound = "bad_request:role_not_found";
-    public const string PasswordNotAllowed = "unauthorized:password_not_allowed";
-    public const string Unauthorized = "unauthorized:unauthorized";
-    public const string TimeZoneNotFound = "bad_request:time_zone_not_found";
-    public const string OAuthWithoutProviderId = "server_error:you_need_a_provider_id";
-    public const string UserEmailProviderNotVerified = "bad_request:user_email_provider_not_verified";
+    public static readonly string NotFound = ErrorTypes.BadRequest.Message("user_not_found");
+    public static readonly string EmailAlreadyInUse = ErrorTypes.BadRequest.Message("email_already_in_use");
+    public static readonly string DifferentPassword = ErrorTypes.BadRequest.Message("different_password");
+    public static readonly string RoleNotFound = ErrorTypes.BadRequest.Message("role_not_found");
+    public static readonly string PasswordNotAllowed = ErrorTypes.Unauthorized.Message("password_not_allowed");
+    public static readonly string Unauthorized = ErrorTypes.Unauthorized.Message("unauthorized");
+    public static readonly string TimeZoneNotFound = ErrorTypes.BadRequest.Message("time_zone_not_found");
+    public static readonly string OAuthWithoutProviderId = ErrorTypes.ServerError.Message("you_need_a_provider_id");
+
+    public static readonly string UserEmailProviderNotVerified =
+        ErrorTypes.BadRequest.Message("user_email_provider_not_verified");
 }
