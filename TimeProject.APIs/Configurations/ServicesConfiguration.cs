@@ -27,8 +27,6 @@ using TimeProject.Application.Modules.Records.UseCases;
 using TimeProject.Application.Modules.Sessions.Interfaces;
 using TimeProject.Application.Modules.Sessions.UseCases;
 using TimeProject.Application.Modules.Statistics.UseCases;
-using TimeProject.Application.Shared.Handlers;
-using TimeProject.Application.Shared.Interfaces;
 using TimeProject.Application.Utils;
 using TimeProject.Application.Utils.Interfaces;
 using TimeProject.Domain.Repositories;

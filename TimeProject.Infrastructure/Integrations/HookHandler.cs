@@ -1,8 +1,7 @@
-using TimeProject.Application.Shared.Interfaces;
 using TimeProject.Infrastructure.Interfaces;
 using TimeProject.Infrastructure.Settings;
 
-namespace TimeProject.Application.Shared.Handlers;
+namespace TimeProject.Infrastructure.Integrations;
 
 public class HookHandler(ICustomBot customBot, TelegramSettings telegramSettings)
     : IHookHandler

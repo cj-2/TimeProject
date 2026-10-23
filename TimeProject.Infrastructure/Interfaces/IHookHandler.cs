@@ -1,4 +1,4 @@
-namespace TimeProject.Application.Shared.Interfaces;
+namespace TimeProject.Infrastructure.Interfaces;
 
 public enum HookTo
 {
