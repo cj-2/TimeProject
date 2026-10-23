@@ -3,8 +3,7 @@ using TimeProject.Application.UseCases.Users.Dtos;
 
 namespace TimeProject.Application.UseCases.Users.Stories.Dtos;
 
-public class CreateUserOutDto
+public class CreateUserOutDto(JwtDto jwt)
 {
-    public UserOutDto User { get; set; } = null!;
-    public JwtDto Jwt { get; set; } = null!;
+    public JwtDto Jwt { get; } = jwt;
 }

@@ -55,12 +55,6 @@ public class CreateUserUseCase(
 
         unitOfWork.CommitTransaction();
 
-        result.Data = new CreateUserOutDto
-        {
-            User = UserOutDto.Map(user),
-            Jwt = jwtHandler.Generate(user)
-        };
-
-        return result;
+        return result.SetData(new CreateUserOutDto(jwtHandler.Generate(user)));
     }
 }
