@@ -2,6 +2,7 @@
 using TimeProject.Application.Dtos.Periods;
 using TimeProject.Application.Dtos.Sessions;
 using TimeProject.Domain.Entities;
+using TimeProject.Domain.Extensions;
 using TimeProject.Infrastructure.Utils;
 
 namespace TimeProject.Application.Utils;
@@ -13,8 +14,8 @@ public static class TimeFormatDtoUtil
         if (periods == null) return TimeSpan.Zero;
 
         return periods
-            .Select(p => new Period { Start = p.Start, End = p.End })
-            .TimeSpanFromPeriods();
+            .Select(p => new Period(p.Start, p.End))
+            .TimeSpan();
     }
 
     public static TimeSpan TimeSpanFromSessions(this IEnumerable<SessionOutDto>? sessions)
@@ -42,7 +43,7 @@ public static class TimeFormatDtoUtil
         if (periods == null) return "0s";
 
         return periods
-            .Select(p => new Period { Start = p.Start, End = p.End })
+            .Select(p => new Period(p.Start, p.End))
             .TimeSpanFromPeriods()
             .StringFromTimeSpan();
     }
