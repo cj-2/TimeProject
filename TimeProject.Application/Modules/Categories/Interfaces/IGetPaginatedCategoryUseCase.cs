@@ -1,8 +1,8 @@
-﻿using TimeProject.Application.Dtos.Categories;
+﻿using TimeProject.Application.Modules.Categories.Dtos;
 using TimeProject.Application.Interfaces.Shared;
 using TimeProject.Domain.Repositories.Shared;
 
-namespace TimeProject.Application.Interfaces.UseCases.Categories;
+namespace TimeProject.Application.Modules.Categories.Interfaces;
 
 public interface IGetPaginatedCategoryUseCase
 {

@@ -1,6 +1,6 @@
 ﻿using TimeProject.Application.Interfaces.Shared;
 
-namespace TimeProject.Application.Interfaces.UseCases.Categories;
+namespace TimeProject.Application.Modules.Categories.Interfaces;
 
 public interface IDeleteCategoryUseCase
 {

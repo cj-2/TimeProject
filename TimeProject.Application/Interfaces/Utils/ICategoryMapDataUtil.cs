@@ -1,4 +1,4 @@
-﻿using TimeProject.Application.Dtos.Categories;
+﻿using TimeProject.Application.Modules.Categories.Dtos;
 using TimeProject.Domain.Entities;
 
 namespace TimeProject.Application.Interfaces.Utils;

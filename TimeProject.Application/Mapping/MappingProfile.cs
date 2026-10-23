@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using TimeProject.Application.Dtos.Categories;
+using TimeProject.Application.Modules.Categories.Dtos;
 using TimeProject.Application.Dtos.Codes;
 using TimeProject.Application.Dtos.Minutes;
 using TimeProject.Application.Dtos.Periods;

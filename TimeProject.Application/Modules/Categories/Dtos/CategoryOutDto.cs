@@ -1,4 +1,4 @@
-﻿namespace TimeProject.Application.Dtos.Categories;
+﻿namespace TimeProject.Application.Modules.Categories.Dtos;
 
 public class CategoryOutDto
 {

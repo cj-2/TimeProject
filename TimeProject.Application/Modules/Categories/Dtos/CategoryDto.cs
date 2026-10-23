@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace TimeProject.Application.Dtos.Categories;
+namespace TimeProject.Application.Modules.Categories.Dtos;
 
 public class CategoryDto
 {

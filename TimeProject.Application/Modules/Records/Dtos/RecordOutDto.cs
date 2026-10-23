@@ -1,5 +1,5 @@
 ﻿
-using TimeProject.Application.Dtos.Categories;
+using TimeProject.Application.Modules.Categories.Dtos;
 
 namespace TimeProject.Application.Modules.Records.Dtos;
 

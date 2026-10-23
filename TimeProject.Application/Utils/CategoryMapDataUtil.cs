@@ -1,5 +1,5 @@
 using AutoMapper;
-using TimeProject.Application.Dtos.Categories;
+using TimeProject.Application.Modules.Categories.Dtos;
 using TimeProject.Application.Interfaces.Utils;
 using TimeProject.Domain.Entities;
 

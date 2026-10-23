@@ -1,10 +1,10 @@
 ﻿using TimeProject.Application.Interfaces.Shared;
-using TimeProject.Application.Interfaces.UseCases.Categories;
+using TimeProject.Application.Modules.Categories.Interfaces;
 using TimeProject.Application.Shared;
 using TimeProject.Domain.Repositories;
 using TimeProject.Domain.Errors;
 
-namespace TimeProject.Application.UseCases.Categories;
+namespace TimeProject.Application.Modules.Categories.UseCases;
 
 public class DeleteCategoryUseCase(ICategoryRepository repository) : IDeleteCategoryUseCase
 {
