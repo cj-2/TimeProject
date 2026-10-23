@@ -35,7 +35,7 @@ public class LoginGoogleUseCase(
 
             var userFromProvider = (await _client.ExecuteAsync<LoginGoogleResponseDto>(request)).Data;
 
-            if (userFromProvider is null) return result.SetError(AuthMessageErrors.AuthProviderError);
+            if (userFromProvider is null) return result.SetError(AuthErrors.AuthProviderError);
 
             var getUserByPIdResult = getUserByOAtuhProviderIdUseCase.Handle("google", userFromProvider.Id);
 
@@ -47,7 +47,7 @@ public class LoginGoogleUseCase(
             }
 
             if (userFromProvider.VerifiedEmail == false)
-                return result.SetError(UserMessageErrors.UserEmailProviderNotVerified);
+                return result.SetError(UserErrors.UserEmailProviderNotVerified);
 
             var createUserResult = createUserByGoogleUserUseCase
                 .Handle(
@@ -68,7 +68,7 @@ public class LoginGoogleUseCase(
         }
         catch
         {
-            return result.SetError(AuthMessageErrors.AuthProviderError);
+            return result.SetError(AuthErrors.AuthProviderError);
         }
     }
 }

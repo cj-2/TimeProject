@@ -23,22 +23,22 @@ public class UpdateRecordUseCase(
         var record = repository.FindById(id, userId);
 
         if (record == null)
-            return result.SetError(RecordMessageErrors.NotFound);
+            return result.SetError(RecordErrors.NotFound);
 
         if (dto.CategoryId != null)
         {
             var category = categoryRepo.FindById((int)dto.CategoryId, userId);
-            if (category == null) return result.SetError(RecordMessageErrors.CategoryNotFound);
+            if (category == null) return result.SetError(RecordErrors.CategoryNotFound);
             record.CategoryId = dto.CategoryId;
         }
 
         if (string.IsNullOrEmpty(dto.Code))
-            return result.SetError(RecordMessageErrors.CodeMustValue);
+            return result.SetError(RecordErrors.CodeMustValue);
 
         if (record.Code != dto.Code)
         {
             var trByCode = repository.FindByCode(dto.Code, userId);
-            if (trByCode != null) return result.SetError(RecordMessageErrors.AlreadyInUse);
+            if (trByCode != null) return result.SetError(RecordErrors.AlreadyInUse);
         }
 
         record.Code = dto.Code;

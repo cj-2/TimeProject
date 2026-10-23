@@ -14,7 +14,7 @@ public class DeleteRecordUseCase(IRecordRepository repository) : IDeleteRecordUs
         var entity = repository.FindById(id, userId);
 
         return entity == null
-            ? result.SetError(RecordMessageErrors.NotFound)
+            ? result.SetError(RecordErrors.NotFound)
             : result.SetData(repository.Delete(entity));
     }
 }

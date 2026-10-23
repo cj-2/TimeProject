@@ -64,7 +64,7 @@ public class LoginGithubUseCase(
         }
         catch
         {
-            return result.SetError(AuthMessageErrors.AuthProviderError);
+            return result.SetError(AuthErrors.AuthProviderError);
         }
     }
 }

@@ -14,10 +14,10 @@ public class ValidateConfirmCodeUseCase(IConfirmCodeRepository repository) : IVa
 
         var code = repository.FindByIdAndEmail(id, email);
 
-        if (code == null) return result.SetError(ConfirmCodeMessageErrors.NotFound);
+        if (code == null) return result.SetError(ConfirmCodeErrors.NotFound);
 
         if (code is { IsUsed: true } || DateTime.Now.ToUniversalTime() > code.Expiration)
-            return result.SetError(ConfirmCodeMessageErrors.IsUsedOrExpired);
+            return result.SetError(ConfirmCodeErrors.IsUsedOrExpired);
 
         return result.SetData(true);
     }

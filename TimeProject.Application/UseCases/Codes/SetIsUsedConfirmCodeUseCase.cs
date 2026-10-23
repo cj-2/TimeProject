@@ -14,7 +14,7 @@ public class SetIsUsedConfirmCodeUseCase(IConfirmCodeRepository repository) : IS
         var recoveryCode = repository.FindById(id);
 
         if (recoveryCode == null)
-            return result.SetError(ConfirmCodeMessageErrors.NotFound);
+            return result.SetError(ConfirmCodeErrors.NotFound);
 
         recoveryCode.IsUsed = true;
         repository.Update(recoveryCode);

@@ -40,7 +40,7 @@ public class CreateOrUpdateUserPasswordUseCase(IUnitOfWork unitOfWork)
         if (entity != null && (!string.IsNullOrEmpty(oldPassword) || skipOldPasswordCompare))
         {
             if (skipOldPasswordCompare == false && BCrypt.Net.BCrypt.Verify(oldPassword, entity.Password) == false)
-                return result.SetError(UserMessageErrors.DifferentPassword);
+                return result.SetError(UserErrors.DifferentPassword);
 
             entity.Password = BCrypt.Net.BCrypt.HashPassword(password);
             unitOfWork.UserPasswordRepository.Update(entity);

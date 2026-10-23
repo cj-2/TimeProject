@@ -16,7 +16,7 @@ public class CreateOrUpdateUserPasswordByEmailUseCase(IUnitOfWork unitOfWork)
         var user = unitOfWork.UserRepository.FindByEmail(email);
 
         if (user == null)
-            return result.SetError(UserMessageErrors.NotFound);
+            return result.SetError(UserErrors.NotFound);
 
         var userPassword = unitOfWork.UserPasswordRepository.FindByUserId(user.UserId);
 

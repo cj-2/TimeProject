@@ -15,7 +15,7 @@ public class GetRecordByIdUseCase(IRecordRepository repository) : IGetRecordById
         var entity = repository.FindById(id, userId);
 
         return entity == null
-            ? result.SetError(RecordMessageErrors.NotFound)
+            ? result.SetError(RecordErrors.NotFound)
             : result.SetData(entity);
     }
 }

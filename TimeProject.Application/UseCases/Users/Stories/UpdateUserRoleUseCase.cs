@@ -18,10 +18,10 @@ public class UpdateUserRoleUseCase(IUnitOfWork unitOfWork, IUserMapDataUtil mapp
         var user = unitOfWork.UserRepository.FindById(id);
 
         if (user == null)
-            return result.SetError(UserMessageErrors.NotFound);
+            return result.SetError(UserErrors.NotFound);
 
         if (Enum.TryParse(typeof(UserRoleType), dto.Role, out var userRole) == false)
-            return result.SetError(UserMessageErrors.RoleNotFound);
+            return result.SetError(UserErrors.RoleNotFound);
 
         user.UserRole = (UserRoleType)userRole;
 

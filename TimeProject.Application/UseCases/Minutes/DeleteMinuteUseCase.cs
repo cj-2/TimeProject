@@ -13,7 +13,7 @@ public class DeleteMinuteUseCase(IMinuteRepository repository) : IDeleteMinuteUs
         var result = new CustomResult();
 
         var timeMinute = repository.FindById(id, userId);
-        if (timeMinute == null) return result.SetError(MinuteMessageErrors.NotFound);
+        if (timeMinute == null) return result.SetError(MinuteErrors.NotFound);
 
         repository.Delete(timeMinute);
         return result;

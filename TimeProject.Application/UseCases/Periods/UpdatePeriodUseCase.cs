@@ -24,7 +24,7 @@ public class UpdatePeriodUseCase(
         if (result.HasError) return result;
 
         var period = repository.FindById(id, userId);
-        if (period == null) return result.SetError(PeriodMessageErrors.NotFound);
+        if (period == null) return result.SetError(PeriodErrors.NotFound);
 
         period.Start = dto.Start;
         period.End = dto.End;

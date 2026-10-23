@@ -14,7 +14,7 @@ public class SetWasSentConfirmCodeUseCase(IConfirmCodeRepository repository) : I
         var recoveryCode = repository.FindById(id);
 
         if (recoveryCode == null)
-            return result.SetError(ConfirmCodeMessageErrors.NotFound);
+            return result.SetError(ConfirmCodeErrors.NotFound);
 
         recoveryCode.WasSent = wasSent;
         repository.Update(recoveryCode);

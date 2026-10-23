@@ -15,12 +15,12 @@ public class UpdateCategoryUseCase(ICategoryRepository repository) : IUpdateCate
         var result = new CustomResult<Category>();
         var category = repository.FindById(id);
 
-        if (category == null) return result.SetError(CategoryMessageErrors.NotFound);
+        if (category == null) return result.SetError(CategoryErrors.NotFound);
 
-        if (category.UserId != userId) return result.SetError(GeneralMessageErrors.Unauthorized);
+        if (category.UserId != userId) return result.SetError(GeneralErrors.Unauthorized);
 
         if (repository.FindByName(dto.Name, userId) != null)
-            return result.SetError(CategoryMessageErrors.AlreadyExists);
+            return result.SetError(CategoryErrors.AlreadyExists);
 
         category.Name = dto.Name;
         result.Data = repository.Update(category);

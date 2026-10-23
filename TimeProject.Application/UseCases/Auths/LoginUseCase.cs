@@ -23,13 +23,13 @@ public class LoginUseCase(
         var result = new CustomResult<JwtDto>();
         
         var user = userRepository.FindByEmail(dto.Email);
-        if (user == null) return result.SetError(UserMessageErrors.Unauthorized);
+        if (user == null) return result.SetError(UserErrors.Unauthorized);
 
         var userPassword = passwordRepository.FindByUserId(user.UserId);
-        if (userPassword == null) return result.SetError(UserMessageErrors.PasswordNotAllowed);
+        if (userPassword == null) return result.SetError(UserErrors.PasswordNotAllowed);
         
         var passwordMatch = BCrypt.Net.BCrypt.Verify(dto.Password, userPassword.Password);
-        if (!passwordMatch) return result.SetError(AuthMessageErrors.WrongEmailOrPassword);
+        if (!passwordMatch) return result.SetError(AuthErrors.WrongEmailOrPassword);
 
         accessLog.UserId = userPassword.UserId;
         createUserAccessLogUseCase.Handle(accessLog);

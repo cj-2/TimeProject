@@ -24,13 +24,13 @@ public class SendRegisterEmailUseCase(
         var result = new CustomResult<bool>();
 
         var user = userRepository.FindByEmail(email);
-        if (user == null) return result.SetError(UserMessageErrors.NotFound);
+        if (user == null) return result.SetError(UserErrors.NotFound);
         
         var registerCodeResult = createConfirmCodeUseCase.Handle((int)user.UserId!, ConfirmCodeType.Register);
         if (registerCodeResult.HasError) return result.SetError(registerCodeResult.Message);
 
         var registerCode = registerCodeResult.Data!;
-        if (registerCode.WasSent) return result.SetError(ConfirmCodeMessageErrors.CheckYourEmailInbox);
+        if (registerCode.WasSent) return result.SetError(ConfirmCodeErrors.CheckYourEmailInbox);
 
         try
         {
@@ -45,7 +45,7 @@ public class SendRegisterEmailUseCase(
         catch
         {
             hookHandler.SendError($"Não foi possível enviar o e-mail de verificação para:\n<b>{user.Email}</b>");
-            return result.SetError(AuthMessageErrors.SendEmailError);
+            return result.SetError(AuthErrors.SendEmailError);
         }
 
         return result.SetData(true);

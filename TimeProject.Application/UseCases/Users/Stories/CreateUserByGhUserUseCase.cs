@@ -15,7 +15,7 @@ public class CreateUserByGhUserUseCase(IUnitOfWork unitOfWork) : ICreateUserByGh
         var result = new CustomResult<User>();
 
         if (string.IsNullOrEmpty(dto.UserProviderId))
-            return result.SetError(UserMessageErrors.OAuthWithoutProviderId);
+            return result.SetError(UserErrors.OAuthWithoutProviderId);
 
         var filtredEmails = emails.Where(e => e.Verified).ToList();
         var primaryEmail = filtredEmails.FirstOrDefault(e => e.Primary);

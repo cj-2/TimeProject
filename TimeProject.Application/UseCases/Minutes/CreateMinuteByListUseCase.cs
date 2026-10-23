@@ -22,10 +22,10 @@ public class CreateMinuteByListUseCase(
         IList<Minute> list = [];
 
         var user = userRepository.FindById(userId);
-        if (user is null) return result.SetError(UserMessageErrors.NotFound);
+        if (user is null) return result.SetError(UserErrors.NotFound);
 
         var record = recordRepository.FindById(dto.RecordId, userId);
-        if (record is null) return result.SetError(RecordMessageErrors.NotFound);
+        if (record is null) return result.SetError(RecordErrors.NotFound);
 
         var session = sessionRepository
             .Create(new Session

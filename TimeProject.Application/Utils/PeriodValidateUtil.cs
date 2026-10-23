@@ -14,7 +14,7 @@ public class PeriodValidateUtil : IPeriodValidateUtil
     )
     {
         if (start.CompareTo(end) > 0)
-            customResult.SetError(PeriodMessageErrors.EndDateIsBiggerThenStartDate);
+            customResult.SetError(PeriodErrors.EndDateIsBiggerThenStartDate);
     }
 
     public bool HasMinSize(PeriodDto dto)

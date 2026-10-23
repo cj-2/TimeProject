@@ -20,7 +20,7 @@ public class GetUserUseCase(
         var user = userRepository.FindById(id);
 
         if (user == null)
-            return result.SetError(UserMessageErrors.NotFound);
+            return result.SetError(UserErrors.NotFound);
 
         var userMapped = mapper.Handle(user);
 

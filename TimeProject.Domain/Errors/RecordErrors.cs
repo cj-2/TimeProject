@@ -1,6 +1,6 @@
 ﻿namespace TimeProject.Domain.Errors;
 
-public static class RecordMessageErrors
+public static class RecordErrors
 {
     public const string NotFound = "not_found:record_not_found";
     public const string AlreadyInUse = "bad_request:record_code_already_in_use";

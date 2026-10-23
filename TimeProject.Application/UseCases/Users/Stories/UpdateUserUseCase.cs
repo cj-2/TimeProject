@@ -27,19 +27,19 @@ public class UpdateUserUseCase(IUnitOfWork unitOfWork, IUserMapDataUtil mapper) 
         var result = new CustomResult<UserOutDto>();
         var user = unitOfWork.UserRepository.FindById(id);
 
-        if (user == null) return result.SetError(UserMessageErrors.NotFound);
+        if (user == null) return result.SetError(UserErrors.NotFound);
 
         if (!string.IsNullOrWhiteSpace(dto.Email) && user.Email != dto.Email && options?.UpdateFromAdmin == true)
         {
             var emailAvailable = unitOfWork.UserRepository.EmailIsAvailable(dto.Email);
-            if (emailAvailable == false) return result.SetError(UserMessageErrors.EmailAlreadyInUse);
+            if (emailAvailable == false) return result.SetError(UserErrors.EmailAlreadyInUse);
 
             user.UpdateEmail(dto.Email);
         }
 
         if (!string.IsNullOrWhiteSpace(dto.Name) && user.Name != dto.Name) user.Name = dto.Name;
 
-        if (!string.IsNullOrEmpty(dto.Timezone)) user.Timezone = dto.Timezone;
+        if (!string.IsNullOrEmpty(dto.Timezone)) user.UpdateTimeZone(dto.Timezone);
 
         var entity = unitOfWork.UserRepository.Update(user);
         unitOfWork.SaveChanges();

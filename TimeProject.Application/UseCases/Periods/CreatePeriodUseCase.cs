@@ -25,7 +25,7 @@ public class CreatePeriodUseCase(
         if (result.HasError) return result;
 
         if (data.Start.CompareTo(data.End) > 0)
-            return result.SetError(PeriodMessageErrors.EndDateIsBiggerThenStartDate);
+            return result.SetError(PeriodErrors.EndDateIsBiggerThenStartDate);
 
         var findTrResult = getRecordByIdUseCase.Handle(data.RecordId, userId);
         if (findTrResult.HasError) return result.SetError(findTrResult.Message);

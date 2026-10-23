@@ -15,7 +15,7 @@ public class DisableUserUseCase(IUnitOfWork unitOfWork) : IDisableUserUseCase
         var user = unitOfWork.UserRepository.FindById(id);
 
         if (user == null)
-            return result.SetError(UserMessageErrors.NotFound);
+            return result.SetError(UserErrors.NotFound);
 
         user.IsActive = dto.IsActive;
         unitOfWork.UserRepository.Update(user);

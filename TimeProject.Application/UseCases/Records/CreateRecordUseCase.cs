@@ -26,14 +26,14 @@ public class CreateRecordUseCase(
             var category = unitOfWork.CategoryRepository.FindById((int)dto.CategoryId, userId);
             if (category == null)
             {
-                return result.SetError(RecordMessageErrors.CategoryNotFound);
+                return result.SetError(RecordErrors.CategoryNotFound);
             }
         }
 
         if (string.IsNullOrEmpty(dto.Code) == false)
         {
             var trByCode = unitOfWork.RecordRepository.FindByCode(dto.Code!, userId);
-            if (trByCode != null) return result.SetError(RecordMessageErrors.CodeAlreadyInUse);
+            if (trByCode != null) return result.SetError(RecordErrors.CodeAlreadyInUse);
         }
 
         var transaction = unitOfWork.Context.Database.BeginTransaction();

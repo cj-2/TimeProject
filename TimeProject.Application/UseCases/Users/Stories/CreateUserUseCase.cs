@@ -2,8 +2,10 @@
 using TimeProject.Application.Interfaces.Shared;
 using TimeProject.Application.Interfaces.Utils;
 using TimeProject.Application.Shared;
+using TimeProject.Application.UseCases.Users.Dtos;
 using TimeProject.Application.UseCases.Users.Stories.Dtos;
 using TimeProject.Application.UseCases.Users.Stories.Interfaces;
+using TimeProject.Domain;
 using TimeProject.Domain.Entities;
 using TimeProject.Domain.Errors;
 using TimeProject.Infrastructure.Interfaces;
@@ -22,7 +24,7 @@ public class CreateUserUseCase(
         var result = new CustomResult<CreateUserOutDto>();
         var emailAvailable = unitOfWork.UserRepository.EmailIsAvailable(dto.Email);
 
-        if (emailAvailable == false) return result.SetError(UserMessageErrors.EmailAlreadyInUse);
+        if (emailAvailable == false) return result.SetError(UserErrors.EmailAlreadyInUse);
 
         User user;
 

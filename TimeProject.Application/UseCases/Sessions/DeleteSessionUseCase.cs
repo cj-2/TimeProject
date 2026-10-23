@@ -19,7 +19,7 @@ public class DeleteSessionUseCase(
         var entity = repository.FindById(id, userId);
 
         if (entity == null)
-            return result.SetError(SessionMessageErrors.NotFound);
+            return result.SetError(SessionErrors.NotFound);
 
         periodRepository.DeleteByList(entity.Periods?.ToList() ?? []);
         repository.Delete(entity);

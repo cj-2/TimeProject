@@ -15,7 +15,7 @@ public class CreateUserByGoogleUserUseCase(IUnitOfWork unitOfWork) : ICreateUser
         var result = new CustomResult<User>();
 
         if (string.IsNullOrEmpty(dto.UserProviderId))
-            return result.SetError(UserMessageErrors.OAuthWithoutProviderId);
+            return result.SetError(UserErrors.OAuthWithoutProviderId);
 
         var userWithEmail = unitOfWork.UserRepository.FindByEmail(email);
 

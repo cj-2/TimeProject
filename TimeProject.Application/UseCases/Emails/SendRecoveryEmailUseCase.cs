@@ -25,12 +25,12 @@ public class SendRecoveryEmailUseCase(
         var result = new CustomResult<bool>();
         
         var user = userRepository.FindByEmail(email);
-        if (user == null) return result.SetError(UserMessageErrors.NotFound);
+        if (user == null) return result.SetError(UserErrors.NotFound);
 
         var createRecoveryCodeResult = createConfirmCodeUseCase.Handle(user.UserId, ConfirmCodeType.Recovery);
 
         var recoveryCode = createRecoveryCodeResult.Data!;
-        if (recoveryCode.WasSent) return result.SetError(ConfirmCodeMessageErrors.CheckYourEmailInbox);
+        if (recoveryCode.WasSent) return result.SetError(ConfirmCodeErrors.CheckYourEmailInbox);
 
         try
         {
@@ -45,7 +45,7 @@ public class SendRecoveryEmailUseCase(
         catch
         {
             hookHandler.SendError($"Não foi possível enviar o e-mail de recuperação para:\n<b>{user.Email}</b>");
-            return result.SetError(AuthMessageErrors.SendEmailError);
+            return result.SetError(AuthErrors.SendEmailError);
         }
 
         return result.SetData(true);

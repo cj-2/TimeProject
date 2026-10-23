@@ -1,6 +1,6 @@
 ﻿namespace TimeProject.Domain.Errors;
 
-public static class ConfirmCodeMessageErrors
+public static class ConfirmCodeErrors
 {
     public const string CheckYourEmailInbox = "bad_request:check_your_email_inbox";
     public const string NotFound = "bad_request:recovery_code_not_found";

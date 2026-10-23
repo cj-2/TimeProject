@@ -15,9 +15,9 @@ public class GetUserByOAuthProviderIdUseCase(IUserRepository repository, IUserPr
         var result = new CustomResult<User>();
 
         var userOAuth = oAuthRepository.FindByUserProviderId(provider, id);
-        if (userOAuth == null) return result.SetError(UserMessageErrors.NotFound);
+        if (userOAuth == null) return result.SetError(UserErrors.NotFound);
 
         var user = repository.FindById(userOAuth.UserId);
-        return user == null ? result.SetError(UserMessageErrors.NotFound) : result.SetData(user);
+        return user == null ? result.SetError(UserErrors.NotFound) : result.SetData(user);
     }
 }

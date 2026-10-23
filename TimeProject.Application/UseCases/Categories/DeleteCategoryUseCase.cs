@@ -13,9 +13,9 @@ public class DeleteCategoryUseCase(ICategoryRepository repository) : IDeleteCate
         var result = new CustomResult<bool>();
         var category = repository.FindById(id);
 
-        if (category == null) return result.SetError(CategoryMessageErrors.NotFound);
+        if (category == null) return result.SetError(CategoryErrors.NotFound);
 
-        if (category.UserId != userId) return result.SetError(GeneralMessageErrors.Unauthorized);
+        if (category.UserId != userId) return result.SetError(GeneralErrors.Unauthorized);
 
         result.Data = repository.Delete(category);
         return result;
