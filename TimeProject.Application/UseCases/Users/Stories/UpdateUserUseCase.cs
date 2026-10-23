@@ -34,7 +34,7 @@ public class UpdateUserUseCase(IUnitOfWork unitOfWork, IUserMapDataUtil mapper) 
             var emailAvailable = unitOfWork.UserRepository.EmailIsAvailable(dto.Email);
             if (emailAvailable == false) return result.SetError(UserMessageErrors.EmailAlreadyInUse);
 
-            user.Email = dto.Email;
+            user.UpdateEmail(dto.Email);
         }
 
         if (!string.IsNullOrWhiteSpace(dto.Name) && user.Name != dto.Name) user.Name = dto.Name;

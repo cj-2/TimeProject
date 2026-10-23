@@ -24,29 +24,40 @@ public class CreateUserUseCase(
 
         if (emailAvailable == false) return result.SetError(UserMessageErrors.EmailAlreadyInUse);
 
-        var entity = unitOfWork.UserRepository.Create(new User
+        User user;
+
+        try
         {
-            Name = dto.Name,
-            Email = dto.Email,
-            Timezone = dto.Timezone
-        });
+            user = new User { Name = dto.Name, Email = dto.Email, Timezone = dto.Timezone };
+        }
+        catch (DomainException ex)
+        {
+            return result.SetError(ex.Message);
+        }
 
-        unitOfWork.SaveChanges();
+        unitOfWork.Context.Database.BeginTransaction();
 
-        createUserPasswordUseCase.Handle(entity.UserId,
-            new CreatePasswordDto { Password = dto.Password },
-            saveChanges: false);
+        try
+        {
+            unitOfWork.UserRepository.Create(user);
+            unitOfWork.SaveChanges();
 
-        unitOfWork.SaveChanges();
-        
+            createUserPasswordUseCase.Handle(user.UserId, new CreatePasswordDto { Password = dto.Password }, false);
+            unitOfWork.SaveChanges();
+        }
+        catch
+        {
+            unitOfWork.Context.Database.RollbackTransaction();
+            return result.SetError(GeneralErrors.TransactionError);
+        }
+
+        unitOfWork.Context.Database.CommitTransaction();
+
         result.Data = new CreateUserOutDto
         {
-            User = mapper.Handle(entity),
-            Jwt = jwtHandler.Generate(entity)
+            User = UserOutDto.Map(user),
+            Jwt = jwtHandler.Generate(user)
         };
-
-        // hookHandler.Send(HookTo.Users,
-        //     $"<b>{dto.Name}</b> acabou de criar uma conta com o email:\n<b>{dto.Email}</b>");
 
         return result;
     }
