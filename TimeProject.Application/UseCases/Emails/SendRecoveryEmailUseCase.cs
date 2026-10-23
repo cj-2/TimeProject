@@ -4,7 +4,7 @@ using TimeProject.Application.Interfaces.Shared;
 using TimeProject.Application.Interfaces.UseCases.Codes;
 using TimeProject.Application.Shared;
 using TimeProject.Application.UseCases.Emails.Interfaces;
-using TimeProject.Application.UseCases.Users.Queries.Interfaces;
+using TimeProject.Application.Modules.Users.Interfaces;
 using TimeProject.Domain.Entities.Enums;
 using TimeProject.Domain.Repositories;
 using TimeProject.Domain.Errors;

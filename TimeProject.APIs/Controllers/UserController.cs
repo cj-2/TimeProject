@@ -3,9 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using TimeProject.APIs.Controllers.Shared;
 using TimeProject.APIs.Controllers.Attributes;
 using TimeProject.Application.UseCases.Users.Dtos;
-using TimeProject.Application.UseCases.Users.Queries.Interfaces;
-using TimeProject.Application.UseCases.Users.Stories.Dtos;
-using TimeProject.Application.UseCases.Users.Stories.Interfaces;
+using TimeProject.Application.Modules.Users.Dtos;
+using TimeProject.Application.Modules.Users.Interfaces;
 using TimeProject.Application.Utils;
 using TimeProject.Domain.Repositories.Shared;
 
