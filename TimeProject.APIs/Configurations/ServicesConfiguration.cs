@@ -39,7 +39,8 @@ namespace TimeProject.APIs.Configurations;
 
 public static class ServicesConfiguration
 {
-    public static IServiceCollection AddServicesConfiguration(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddServicesConfiguration(this IServiceCollection services,
+        IConfiguration configuration)
     {
         #region Settings
 
@@ -56,7 +57,7 @@ public static class ServicesConfiguration
         services.AddSingleton(provider => provider.GetRequiredService<IOptions<TurnstileSettings>>().Value);
 
         services.AddScoped<IUnitOfWork, UnitOfWork>();
-        
+
         #endregion
 
         #region Maps
@@ -90,9 +91,7 @@ public static class ServicesConfiguration
 
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IUserPasswordRepository, UserPasswordRepository>();
-
-        services.AddScoped<IUserMapDataUtil, UserMapDataUtil>();
-
+        
         services.AddScoped<ICreateUserUseCase, CreateUserUseCase>();
         services.AddScoped<IUpdateUserUseCase, UpdateUserUseCase>();
         services.AddScoped<ICreateUserByGhUserUseCase, CreateUserByGhUserUseCase>();

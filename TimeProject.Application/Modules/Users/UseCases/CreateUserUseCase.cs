@@ -4,7 +4,6 @@ using TimeProject.Application.Modules.Users.Dtos;
 using TimeProject.Application.Modules.Users.Interfaces;
 using TimeProject.Application.Shared;
 using TimeProject.Application.Shared.Interfaces;
-using TimeProject.Application.UseCases.Users.Dtos;
 using TimeProject.Domain;
 using TimeProject.Domain.Entities;
 using TimeProject.Domain.Errors;
@@ -14,7 +13,6 @@ namespace TimeProject.Application.Modules.Users.UseCases;
 
 public class CreateUserUseCase(
     IUnitOfWork unitOfWork,
-    IUserMapDataUtil mapper,
     IJwtHandler jwtHandler,
     ICreateOrUpdateUserPasswordUseCase createUserPasswordUseCase
 ) : ICreateUserUseCase

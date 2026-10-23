@@ -5,7 +5,6 @@ using TimeProject.Application.Modules.Periods.Dtos;
 using TimeProject.Application.Modules.Records.Dtos;
 using TimeProject.Application.Modules.Minutes.Dtos;
 using TimeProject.Application.Modules.Sessions.Dtos;
-using TimeProject.Application.UseCases.Users.Dtos;
 using TimeProject.Domain.Entities;
 
 namespace TimeProject.Application.Mapping;
@@ -14,7 +13,6 @@ public class MappingProfile : Profile
 {
     public MappingProfile()
     {
-        CreateMap<User, UserOutDto>();
         CreateMap<Record, RecordOutDto>();
         CreateMap<Period, PeriodOutDto>();
         CreateMap<Category, CategoryOutDto>();

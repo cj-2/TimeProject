@@ -3,14 +3,13 @@ using TimeProject.Application.Modules.Users.Dtos;
 using TimeProject.Application.Modules.Users.Interfaces;
 using TimeProject.Application.Shared;
 using TimeProject.Application.Shared.Interfaces;
-using TimeProject.Application.UseCases.Users.Dtos;
 using TimeProject.Domain.Entities.Enums;
 using TimeProject.Domain.Errors;
 using TimeProject.Infrastructure.Interfaces;
 
 namespace TimeProject.Application.Modules.Users.UseCases;
 
-public class UpdateUserRoleUseCase(IUnitOfWork unitOfWork, IUserMapDataUtil mapper) : IUpdateUserRoleUseCase
+public class UpdateUserRoleUseCase(IUnitOfWork unitOfWork) : IUpdateUserRoleUseCase
 {
     public ICustomResult<UserOutDto> Handle(int id, UpdateRoleDto dto)
     {
@@ -27,7 +26,7 @@ public class UpdateUserRoleUseCase(IUnitOfWork unitOfWork, IUserMapDataUtil mapp
 
         var entity = unitOfWork.User.Update(user);
         unitOfWork.SaveChanges();
-        result.Data = mapper.Handle(entity);
-        return result;
+
+        return result.SetData(UserOutDto.Map(entity));
     }
 }

@@ -4,13 +4,12 @@ using TimeProject.Application.Modules.Users.Interfaces;
 using TimeProject.Application.Modules.Users.Options;
 using TimeProject.Application.Shared;
 using TimeProject.Application.Shared.Interfaces;
-using TimeProject.Application.UseCases.Users.Dtos;
 using TimeProject.Domain.Errors;
 using TimeProject.Infrastructure.Interfaces;
 
 namespace TimeProject.Application.Modules.Users.UseCases;
 
-public class UpdateUserUseCase(IUnitOfWork unitOfWork, IUserMapDataUtil mapper) : IUpdateUserUseCase
+public class UpdateUserUseCase(IUnitOfWork unitOfWork) : IUpdateUserUseCase
 {
     public ICustomResult<UserOutDto> Handle(int id, UpdateUserDto dto)
     {
@@ -44,7 +43,6 @@ public class UpdateUserUseCase(IUnitOfWork unitOfWork, IUserMapDataUtil mapper) 
         var entity = unitOfWork.User.Update(user);
         unitOfWork.SaveChanges();
 
-        result.Data = mapper.Handle(entity);
-        return result;
+        return result.SetData(UserOutDto.Map(entity));
     }
 }
