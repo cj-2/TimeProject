@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using TimeProject.Application.Modules.Categories.Dtos;
 using TimeProject.Application.Modules.Codes.Dtos;
 using TimeProject.Application.Modules.Periods.Dtos;
 using TimeProject.Application.Modules.Records.Dtos;
@@ -15,7 +14,6 @@ public class MappingProfile : Profile
     {
         CreateMap<Record, RecordOutDto>();
         CreateMap<Period, PeriodOutDto>();
-        CreateMap<Category, CategoryOutDto>();
         CreateMap<RecordHistoryDayDto, RecordHistoryDayOutDto>();
         CreateMap<Session, SessionOutDto>();
         CreateMap<Minute, MinuteOutDto>();

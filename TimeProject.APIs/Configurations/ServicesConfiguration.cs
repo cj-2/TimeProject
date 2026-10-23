@@ -162,7 +162,6 @@ public static class ServicesConfiguration
 
         services.AddScoped<IPeriodRepository, PeriodRepository>();
 
-        services.AddScoped<IPeriodMapDataUtil, PeriodMapDataUtil>();
         services.AddScoped<IPeriodCutUtil, PeriodCutUtil>();
         services.AddScoped<IPeriodValidateUtil, PeriodValidateUtil>();
 
@@ -177,7 +176,6 @@ public static class ServicesConfiguration
         #region Category
 
         services.AddScoped<ICategoryRepository, CategoryRepository>();
-        services.AddScoped<ICategoryMapDataUtil, CategoryMapDataUtil>();
 
         services.AddScoped<ICreateCategoryUseCase, CreateCategoryUseCase>();
         services.AddScoped<IDeleteCategoryUseCase, DeleteCategoryUseCase>();
