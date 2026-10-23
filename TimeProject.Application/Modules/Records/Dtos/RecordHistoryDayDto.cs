@@ -1,6 +1,6 @@
 ﻿using TimeProject.Domain.Entities;
 
-namespace TimeProject.Application.Dtos.Records;
+namespace TimeProject.Application.Modules.Records.Dtos;
 
 public class RecordHistoryDayDto
 {

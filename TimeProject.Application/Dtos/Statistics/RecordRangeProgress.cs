@@ -1,4 +1,4 @@
-﻿using TimeProject.Application.Dtos.Records;
+﻿using TimeProject.Application.Modules.Records.Dtos;
 
 namespace TimeProject.Application.Dtos.Statistics;
 

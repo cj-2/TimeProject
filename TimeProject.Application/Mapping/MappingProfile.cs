@@ -3,7 +3,7 @@ using TimeProject.Application.Dtos.Categories;
 using TimeProject.Application.Dtos.Codes;
 using TimeProject.Application.Dtos.Minutes;
 using TimeProject.Application.Dtos.Periods;
-using TimeProject.Application.Dtos.Records;
+using TimeProject.Application.Modules.Records.Dtos;
 using TimeProject.Application.Dtos.Sessions;
 using TimeProject.Application.UseCases.Users.Dtos;
 using TimeProject.Domain.Entities;

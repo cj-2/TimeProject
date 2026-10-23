@@ -1,7 +1,7 @@
-﻿using TimeProject.Application.Dtos.Records;
+﻿using TimeProject.Application.Modules.Records.Dtos;
 using TimeProject.Application.Interfaces.Shared;
 using TimeProject.Application.Interfaces.UseCases.Periods;
-using TimeProject.Application.Interfaces.UseCases.Records;
+using TimeProject.Application.Modules.Records.Interfaces;
 using TimeProject.Application.Interfaces.Utils;
 using TimeProject.Application.Shared;
 using TimeProject.Domain.Entities;

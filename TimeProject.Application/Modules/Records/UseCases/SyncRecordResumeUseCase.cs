@@ -1,8 +1,8 @@
-﻿using TimeProject.Application.Interfaces.UseCases.Records;
+﻿using TimeProject.Application.Modules.Records.Interfaces;
 using TimeProject.Domain.Entities;
 using TimeProject.Domain.Repositories;
 
-namespace TimeProject.Application.UseCases.Records;
+namespace TimeProject.Application.Modules.Records.UseCases;
 
 public class SyncRecordResumeUseCase(IRecordResumeRepository repository) : ISyncRecordResumeUseCase
 {

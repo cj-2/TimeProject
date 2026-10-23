@@ -2,7 +2,7 @@
 using TimeProject.Domain.Repositories.ObjectValues;
 using TimeProject.Domain.Repositories.Shared;
 
-namespace TimeProject.Application.Interfaces.UseCases.Records;
+namespace TimeProject.Application.Modules.Records.Interfaces;
 
 public interface ISearchRecordUseCase
 {

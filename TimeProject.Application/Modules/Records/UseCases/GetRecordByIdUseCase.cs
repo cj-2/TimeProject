@@ -1,11 +1,11 @@
 using TimeProject.Application.Interfaces.Shared;
-using TimeProject.Application.Interfaces.UseCases.Records;
+using TimeProject.Application.Modules.Records.Interfaces;
 using TimeProject.Application.Shared;
 using TimeProject.Domain.Entities;
 using TimeProject.Domain.Repositories;
 using TimeProject.Domain.Errors;
 
-namespace TimeProject.Application.UseCases.Records;
+namespace TimeProject.Application.Modules.Records.UseCases;
 
 public class GetRecordByIdUseCase(IRecordRepository repository) : IGetRecordByIdUseCase
 {

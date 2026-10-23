@@ -2,7 +2,7 @@
 using TimeProject.Application.Dtos.Periods;
 using TimeProject.Domain.Entities.Enums;
 
-namespace TimeProject.Application.Dtos.Records;
+namespace TimeProject.Application.Modules.Records.Dtos;
 
 public class CreateRecordDto
 {

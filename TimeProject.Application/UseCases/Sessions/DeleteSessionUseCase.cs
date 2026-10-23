@@ -1,5 +1,5 @@
 ﻿using TimeProject.Application.Interfaces.Shared;
-using TimeProject.Application.Interfaces.UseCases.Records;
+using TimeProject.Application.Modules.Records.Interfaces;
 using TimeProject.Application.Interfaces.UseCases.Sessions;
 using TimeProject.Application.Shared;
 using TimeProject.Domain.Entities;

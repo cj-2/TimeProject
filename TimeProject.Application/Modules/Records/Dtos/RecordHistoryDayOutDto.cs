@@ -5,7 +5,7 @@ using TimeProject.Application.Utils;
 using TimeProject.Domain.Entities;
 using TimeProject.Infrastructure.Utils;
 
-namespace TimeProject.Application.Dtos.Records;
+namespace TimeProject.Application.Modules.Records.Dtos;
 
 public class RecordHistoryDayOutDto
 {

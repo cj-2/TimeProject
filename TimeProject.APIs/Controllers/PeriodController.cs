@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using TimeProject.APIs.Controllers.Shared;
 using TimeProject.Application.Dtos.Periods;
-using TimeProject.Application.Dtos.Records;
+using TimeProject.Application.Modules.Records.Dtos;
 using TimeProject.Application.Interfaces.UseCases.Periods;
 using TimeProject.Application.Utils;
 using TimeProject.Domain.Entities;
